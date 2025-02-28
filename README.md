@@ -3,8 +3,7 @@
 height="42" />
 </a>
 
-# WordPress Wp-Module-Hosting Module
-
+# WordPress Hosting Module
 A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services via Hiive.
 
 ## Installation
@@ -15,10 +14,9 @@ A Newfold module that manages the Hosting panel on the plugin page and serves as
  composer config repositories.newfold composer https://newfold.github.io/satis
  ```
 
-### 2. Require the `newfold-labs/wp-module-wp-module-hosting` package.
+### 2. Require the `newfold-labs/wp-module-hosting` package.
 
  ```bash
- composer require newfold-labs/wp-module-wp-module-hosting
+ composer require newfold-labs/wp-module-hosting
  ```
-
-[More on NewFold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
+[More on Newfold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
