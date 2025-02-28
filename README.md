@@ -4,7 +4,7 @@ height="42" />
 </a>
 
 # WordPress Hosting Module
-A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services via Hiive.
+A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services.
 
 ## Installation
 

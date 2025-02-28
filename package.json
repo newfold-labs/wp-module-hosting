@@ -1,6 +1,6 @@
 {
   "name": "@newfold-labs/wp-module-hosting",
-  "description": "A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services via Hiive.",
+  "description": "A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services.",
   "license": "GPL-3.0-or-later",
   "private": true,
   "author": {
