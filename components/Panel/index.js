@@ -2,6 +2,7 @@ import { Root, Container, Title, Button } from '@newfold/ui-component-library';
 
 import getPanelText from './getPanelText';
 import ObjectCachingCard from '../ObjectCachingCard';
+import PHPVersionCard from '../PHPVersionCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -87,6 +88,10 @@ const Panel = ( { constants, methods, Components } ) => {
 								'not_setup'
 							}
 							methods={ methods }
+						/>
+						<PHPVersionCard
+							phpVersion={ hostingData[ 'php-version' ] }
+							platformUrl={ platFormUrl }
 						/>
 					</div>
 				</div>
