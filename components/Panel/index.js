@@ -1,8 +1,56 @@
-import { __ } from '@wordpress/i18n';
-
 import { Root, Container, Title, Button } from '@newfold/ui-component-library';
 
+import getPanelText from './getPanelText';
+import ObjectCachingCard from '../ObjectCachingCard';
+
 const Panel = ( { constants, methods, Components } ) => {
+	const [ hostingData, setHostingData ] = methods.useState( null );
+	const [ loading, setLoading ] = methods.useState( true );
+	const [ error, setError ] = methods.useState( null );
+	const text = getPanelText();
+
+	const platFormUrl = methods.addUtmParams(
+		methods.getPlatformPathUrl( 'hosting/details', 'app/#/sites' )
+	);
+
+	methods.useEffect( () => {
+		const fetchHostingData = async () => {
+			try {
+				const apiUrl = methods.NewfoldRuntime.createApiUrl(
+					'/newfold-hosting/v1/panel'
+				);
+				const response = await methods.apiFetch( {
+					url: apiUrl,
+					method: 'GET',
+				} );
+
+				setHostingData( response );
+				setLoading( false );
+			} catch ( err ) {
+				setError( err.message );
+				setLoading( false );
+			}
+		};
+
+		fetchHostingData();
+	}, [ methods ] );
+
+	if ( loading ) {
+		return (
+			<p className="nfd-text-center nfd-text-gray-500">
+				{ text.loading }
+			</p>
+		);
+	}
+
+	if ( error ) {
+		return (
+			<p className="nfd-text-center nfd-text-red-500">
+				{ text.error } { error }
+			</p>
+		);
+	}
+
 	return (
 		<Root context={ { isRtl: false } }>
 			<Container.Header className="nfd-flex nfd-flex-row nfd-justify-between">
@@ -11,19 +59,19 @@ const Panel = ( { constants, methods, Components } ) => {
 						as="h2"
 						className="nfd-text-2xl nfd-font-medium nfd-text-title"
 					>
-						{ __( 'Hosting', 'wp-module-hosting' ) }
+						{ text.title }
 					</Title>
 					<p className="nfd-mt-5 nfd-text-lg">
-						{ __( 'PLAN_NAME', 'wp-module-hosting' ) }
+						{ hostingData?.plan?.plan_name ||
+							text.planNameFallback }
 					</p>
 				</div>
 				<div className="nfd-flex nfd-flex-col nfd-justify-center">
 					<Button
-						onClick={ () => window.open( '#', '_blank' ) }
+						onClick={ () => window.open( platFormUrl, '_blank' ) }
 						variant="secondary"
-						id="staging-create-button"
 					>
-						{ __( 'Manage', 'wp-module-hosting' ) }
+						{ text.manageButton }
 					</Button>
 				</div>
 			</Container.Header>
@@ -32,7 +80,15 @@ const Panel = ( { constants, methods, Components } ) => {
 					{ /* Left Column */ }
 					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4"></div>
 					{ /* Right Column */ }
-					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4"></div>
+					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
+						<ObjectCachingCard
+							objectCachingStatus={
+								hostingData[ 'object-cache' ]?.status ||
+								'not_setup'
+							}
+							methods={ methods }
+						/>
+					</div>
 				</div>
 			</Container.Block>
 		</Root>
