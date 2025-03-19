@@ -5,6 +5,7 @@ namespace NewfoldLabs\WP\Module\Hosting\HostingPanel;
 use WP_Error;
 
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
+use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
@@ -22,8 +23,9 @@ class HostingPanel {
 	 * @var array
 	 */
 	protected $features = array(
-		'object-cache' => ObjectCache::class,
-		'php-version'  => PHPVersion::class,
+		'object-cache'  => ObjectCache::class,
+		'php-version'   => PHPVersion::class,
+		'malware-check' => MalwareCheck::class,
 	);
 
 	/**
