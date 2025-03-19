@@ -3,7 +3,6 @@
 namespace NewfoldLabs\WP\Module\Hosting\HostingPanel;
 
 use WP_Error;
-
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\Permissions;
@@ -16,6 +15,13 @@ use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
  * Manages hosting panel features dynamically.
  */
 class HostingPanel {
+
+	/**
+	 * Dependency container instance.
+	 *
+	 * @var mixed
+	 */
+	protected $container;
 
 	/**
 	 * List of feature class names.
@@ -37,8 +43,11 @@ class HostingPanel {
 
 	/**
 	 * HostingPanel constructor.
+	 *
+	 * @param mixed $container The dependency container instance.
 	 */
-	public function __construct() {
+	public function __construct( $container ) {
+		$this->container = $container;
 		$this->initialize_features();
 		$this->maybe_initialize_rest_api();
 	}
@@ -49,7 +58,7 @@ class HostingPanel {
 	protected function initialize_features() {
 		foreach ( $this->features as $identifier => $class_name ) {
 			if ( class_exists( $class_name ) ) {
-				$this->instances[ $identifier ] = new $class_name();
+				$this->instances[ $identifier ] = new $class_name( $this->container );
 			}
 		}
 	}
@@ -59,7 +68,7 @@ class HostingPanel {
 	 */
 	protected function maybe_initialize_rest_api() {
 		if ( Permissions::rest_is_authorized_admin() ) {
-			new RestApi();
+			new RestApi( $this );
 		}
 	}
 
@@ -78,7 +87,7 @@ class HostingPanel {
 		}
 
 		$this->features[ $identifier ]  = $class_name;
-		$this->instances[ $identifier ] = new $class_name();
+		$this->instances[ $identifier ] = new $class_name( $this->container );
 	}
 
 	/**
