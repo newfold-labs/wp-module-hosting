@@ -8,6 +8,7 @@ use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
+use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
 
 /**
  * Class HostingPanel
@@ -32,6 +33,7 @@ class HostingPanel {
 		'object-cache'  => ObjectCache::class,
 		'php-version'   => PHPVersion::class,
 		'malware-check' => MalwareCheck::class,
+		'nameservers'   => Nameservers::class,
 	);
 
 	/**
