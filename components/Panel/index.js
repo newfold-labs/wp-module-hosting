@@ -5,6 +5,7 @@ import ObjectCachingCard from '../ObjectCachingCard';
 import PHPVersionCard from '../PHPVersionCard';
 import MalwareCheckCard from '../MalwareCheckCard';
 import NameserversCard from '../NameserversCard';
+import SSHLoginInfoCard from '../SSHLoginInfoCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -81,7 +82,14 @@ const Panel = ( { constants, methods, Components } ) => {
 			<Container.Block>
 				<div className="nfd-flex nfd-gap-4">
 					{ /* Left Column */ }
-					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4"></div>
+					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
+						<SSHLoginInfoCard
+							sshLoginInfo={
+								hostingData?.[ 'ssh-info' ]?.ssh_info
+							}
+							methods={ methods }
+						/>
+					</div>
 					{ /* Right Column */ }
 					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
 						<MalwareCheckCard
