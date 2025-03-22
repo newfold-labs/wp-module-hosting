@@ -3,6 +3,7 @@ import { Root, Container, Title, Button } from '@newfold/ui-component-library';
 import getPanelText from './getPanelText';
 import ObjectCachingCard from '../ObjectCachingCard';
 import PHPVersionCard from '../PHPVersionCard';
+import MalwareCheckCard from '../MalwareCheckCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -82,6 +83,10 @@ const Panel = ( { constants, methods, Components } ) => {
 					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4"></div>
 					{ /* Right Column */ }
 					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
+						<MalwareCheckCard
+							data={ hostingData[ 'malware-check' ] }
+							methods={ methods }
+						/>
 						<ObjectCachingCard
 							objectCachingStatus={
 								hostingData[ 'object-cache' ]?.status ||

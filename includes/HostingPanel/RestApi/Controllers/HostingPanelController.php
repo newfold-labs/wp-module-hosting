@@ -36,10 +36,10 @@ class HostingPanelController {
 	/**
 	 * HostingPanelController constructor.
 	 *
-	 * Initializes the HostingPanel instance.
+	 * @param HostingPanel $hosting_panel The HostingPanel instance.
 	 */
-	public function __construct() {
-		$this->hosting_panel = new HostingPanel();
+	public function __construct( HostingPanel $hosting_panel ) {
+		$this->hosting_panel = $hosting_panel;
 	}
 
 	/**
@@ -97,9 +97,9 @@ class HostingPanelController {
 	 *
 	 * @param \WP_REST_Request $request The REST request.
 	 *
-	 * @return \WP_REST_Response
+	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public function update_hosting_settings( $request ) {
+	public function update_hosting_settings( \WP_REST_Request $request ) {
 		$identifier = sanitize_text_field( $request->get_param( 'identifier' ) );
 		$action     = sanitize_text_field( $request->get_param( 'action' ) );
 
