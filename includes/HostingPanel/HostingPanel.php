@@ -10,6 +10,7 @@ use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
 use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
+use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 
 /**
@@ -38,6 +39,7 @@ class HostingPanel {
 		'nameservers'   => Nameservers::class,
 		'ssh-info'      => SSHInfo::class,
 		'cdn-info'      => CDNInfo::class,
+		'plan-info'     => PlanInfo::class,
 	);
 
 	/**

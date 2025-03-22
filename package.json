@@ -12,6 +12,9 @@
     "@newfold/ui-component-library": "^1.1.1",
     "recharts": "^2.15.1"
   },
+  "scripts": {
+    "minify-jsons": "node scripts/minify-jsons.js"
+  },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "tailwindcss": "^3.4.17"
