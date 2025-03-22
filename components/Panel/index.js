@@ -66,10 +66,11 @@ const Panel = ( { constants, methods, Components } ) => {
 					>
 						{ text.title }
 					</Title>
-					<p className="nfd-mt-5 nfd-text-lg">
-						{ hostingData?.plan?.plan_name ||
-							text.planNameFallback }
-					</p>
+					{ hostingData?.[ 'plan-info' ]?.plan_name && (
+						<p className="nfd-mt-5 nfd-text-lg">
+							{ hostingData[ 'plan-info' ].plan_name }
+						</p>
+					) }
 				</div>
 				<div className="nfd-flex nfd-flex-col nfd-justify-center">
 					<Button
