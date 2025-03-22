@@ -2,6 +2,7 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\HostingPanel;
 
+use NewfoldLabs\WP\Module\Hosting\CDNInfo\CDNInfo;
 use WP_Error;
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
@@ -36,6 +37,7 @@ class HostingPanel {
 		'malware-check' => MalwareCheck::class,
 		'nameservers'   => Nameservers::class,
 		'ssh-info'      => SSHInfo::class,
+		'cdn-info'      => CDNInfo::class,
 	);
 
 	/**
