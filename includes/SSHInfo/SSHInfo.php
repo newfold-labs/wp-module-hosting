@@ -26,7 +26,7 @@ class SSHInfo {
 	}
 
 	/**
-	 * Retrieves site URL, fetches the IP, and constructs SSH login info.
+	 * Retrieves SSH login info using the real server hostname and filesystem username.
 	 *
 	 * @return array SSH login data.
 	 */
@@ -38,8 +38,7 @@ class SSHInfo {
 			);
 		}
 
-		$site_url = wp_parse_url( get_site_url(), PHP_URL_HOST );
-		$ip       = $this->get_host_ip( $site_url );
+		$ip       = $this->get_host_ip_from_hostname();
 		$username = $this->get_server_username();
 		$ssh_info = $username && $ip ? "{$username}@{$ip}" : 'SSH info unavailable';
 
@@ -49,31 +48,20 @@ class SSHInfo {
 	}
 
 	/**
-	 * Retrieves the IP address for the given domain, falling back to name server IP if needed.
+	 * Retrieves the IP address based on the server's hostname.
 	 *
-	 * @param string $domain The domain to check.
 	 * @return string|null IP address or null if not found.
 	 */
-	private function get_host_ip( $domain ) {
-		// Try fetching IP from A record
-		$dns_records = dns_get_record( $domain, DNS_A );
-		if ( ! empty( $dns_records ) ) {
-			return $dns_records[0]['ip'];
+	private function get_host_ip_from_hostname() {
+		$hostname = gethostname();
+		$ip       = gethostbyname( $hostname );
+
+		// Fallback in case resolution fails or returns the hostname itself
+		if ( empty( $ip ) || $ip === $hostname ) {
+			return null;
 		}
 
-		// If A record fails, try extracting the IP from the NS record
-		$ns_records = dns_get_record( $domain, DNS_NS );
-		if ( ! empty( $ns_records ) ) {
-			foreach ( $ns_records as $ns ) {
-				$ns_ip = dns_get_record( $ns['target'], DNS_A ); // Get the IP of the name server
-				if ( ! empty( $ns_ip ) ) {
-					return $ns_ip[0]['ip']; // Return first available IP
-				}
-			}
-		}
-
-		// No IP found
-		return null;
+		return $ip;
 	}
 
 	/**
