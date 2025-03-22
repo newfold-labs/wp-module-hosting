@@ -42,7 +42,7 @@ class CDNInfo {
 		$cdn_enabled = $this->cloudflare->isCoudflareEnabled();
 
 		return array(
-			'cdn_enabled' => true,
+			'cdn_enabled' => $cdn_enabled,
 		);
 	}
 
