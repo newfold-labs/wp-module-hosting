@@ -4,6 +4,7 @@ import getPanelText from './getPanelText';
 import ObjectCachingCard from '../ObjectCachingCard';
 import PHPVersionCard from '../PHPVersionCard';
 import MalwareCheckCard from '../MalwareCheckCard';
+import NameserversCard from '../NameserversCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -93,6 +94,9 @@ const Panel = ( { constants, methods, Components } ) => {
 								'not_setup'
 							}
 							methods={ methods }
+						/>
+						<NameserversCard
+							nameservers={ hostingData?.nameservers }
 						/>
 						<PHPVersionCard
 							phpVersion={ hostingData[ 'php-version' ] }
