@@ -1,0 +1,21 @@
+<?php
+
+namespace NewfoldLabs\WP\Module\Hosting\PHPVersion;
+
+/**
+ * Handles PHP version-related functionality.
+ */
+class PHPVersion {
+
+	/**
+	 * Retrieves PHP version data.
+	 *
+	 * @return array PHP version details.
+	 */
+	public function get_data() {
+		return array(
+			'current_version'     => phpversion(),
+			'recommended_version' => '8.3',
+		);
+	}
+}
