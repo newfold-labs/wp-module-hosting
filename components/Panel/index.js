@@ -6,6 +6,7 @@ import PHPVersionCard from '../PHPVersionCard';
 import MalwareCheckCard from '../MalwareCheckCard';
 import NameserversCard from '../NameserversCard';
 import SSHLoginInfoCard from '../SSHLoginInfoCard';
+import CDNCard from '../CDNCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -94,6 +95,10 @@ const Panel = ( { constants, methods, Components } ) => {
 					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
 						<MalwareCheckCard
 							data={ hostingData[ 'malware-check' ] }
+							methods={ methods }
+						/>
+						<CDNCard
+							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
 						/>
 						<ObjectCachingCard
