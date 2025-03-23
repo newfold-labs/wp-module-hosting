@@ -7,6 +7,7 @@ import MalwareCheckCard from '../MalwareCheckCard';
 import NameserversCard from '../NameserversCard';
 import SSHLoginInfoCard from '../SSHLoginInfoCard';
 import CDNCard from '../CDNCard';
+import DataRefreshInfo from '../DataRefreshInfo';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -18,25 +19,29 @@ const Panel = ( { constants, methods, Components } ) => {
 		methods.getPlatformPathUrl( 'hosting/details', 'app/#/sites' )
 	);
 
+	const fetchHostingData = async ( shouldFlush = false ) => {
+		try {
+			const apiUrl = methods.NewfoldRuntime.createApiUrl(
+				'/newfold-hosting/v1/panel'
+			);
+
+			const headers = shouldFlush ? { 'X-NFD-Flush-Cache': 'true' } : {};
+
+			const response = await methods.apiFetch( {
+				url: apiUrl,
+				method: 'GET',
+				headers,
+			} );
+
+			setHostingData( response );
+			setLoading( false );
+		} catch ( err ) {
+			setError( err.message );
+			setLoading( false );
+		}
+	};
+
 	methods.useEffect( () => {
-		const fetchHostingData = async () => {
-			try {
-				const apiUrl = methods.NewfoldRuntime.createApiUrl(
-					'/newfold-hosting/v1/panel'
-				);
-				const response = await methods.apiFetch( {
-					url: apiUrl,
-					method: 'GET',
-				} );
-
-				setHostingData( response );
-				setLoading( false );
-			} catch ( err ) {
-				setError( err.message );
-				setLoading( false );
-			}
-		};
-
 		fetchHostingData();
 	}, [ methods ] );
 
@@ -56,6 +61,14 @@ const Panel = ( { constants, methods, Components } ) => {
 		);
 	}
 
+	const handleRefresh = () => {
+		setLoading( true );
+		setError( null );
+		fetchHostingData( true );
+	};
+
+	const runScan = ! hostingData?.__meta?.from_cache;
+
 	return (
 		<Root context={ { isRtl: false } }>
 			<Container.Header className="nfd-flex nfd-flex-row nfd-justify-between">
@@ -71,6 +84,10 @@ const Panel = ( { constants, methods, Components } ) => {
 							{ hostingData[ 'plan-info' ].plan_name }
 						</p>
 					) }
+					<DataRefreshInfo
+						timestamp={ hostingData?.__meta?.generated }
+						onRefresh={ handleRefresh }
+					/>
 				</div>
 				<div className="nfd-flex nfd-flex-col nfd-justify-center">
 					<Button
@@ -82,22 +99,32 @@ const Panel = ( { constants, methods, Components } ) => {
 				</div>
 			</Container.Header>
 			<Container.Block>
-				<div className="nfd-flex nfd-gap-4">
+				<div className="nfd-grid nfd-grid-cols-1 md:nfd-grid-cols-2 nfd-gap-6">
 					{ /* Left Column */ }
-					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
+					<div className="nfd-flex nfd-flex-col nfd-gap-6">
 						<SSHLoginInfoCard
 							sshLoginInfo={
 								hostingData?.[ 'ssh-info' ]?.ssh_info
 							}
 							methods={ methods }
 						/>
+						<NameserversCard
+							nameservers={ hostingData?.nameservers }
+						/>
+						<PHPVersionCard
+							phpVersion={ hostingData[ 'php-version' ] }
+							platformUrl={ platFormUrl }
+						/>
 					</div>
+
 					{ /* Right Column */ }
-					<div className="nfd-flex-1 nfd-p-4 nfd-space-y-4">
+					<div className="nfd-flex nfd-flex-col nfd-gap-6">
 						<MalwareCheckCard
 							data={ hostingData[ 'malware-check' ] }
 							methods={ methods }
+							runScan={ runScan }
 						/>
+
 						<CDNCard
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
@@ -108,13 +135,6 @@ const Panel = ( { constants, methods, Components } ) => {
 								'not_setup'
 							}
 							methods={ methods }
-						/>
-						<NameserversCard
-							nameservers={ hostingData?.nameservers }
-						/>
-						<PHPVersionCard
-							phpVersion={ hostingData[ 'php-version' ] }
-							platformUrl={ platFormUrl }
 						/>
 					</div>
 				</div>
