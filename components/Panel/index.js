@@ -67,8 +67,6 @@ const Panel = ( { constants, methods, Components } ) => {
 		fetchHostingData( true );
 	};
 
-	const runScan = ! hostingData?.__meta?.from_cache;
-
 	return (
 		<Root context={ { isRtl: false } }>
 			<Container.Header className="nfd-flex nfd-flex-row nfd-justify-between">
@@ -102,6 +100,24 @@ const Panel = ( { constants, methods, Components } ) => {
 				<div className="nfd-grid nfd-grid-cols-1 md:nfd-grid-cols-2 nfd-gap-6">
 					{ /* Left Column */ }
 					<div className="nfd-flex nfd-flex-col nfd-gap-6">
+						<MalwareCheckCard
+							data={ hostingData[ 'malware-check' ] }
+							methods={ methods }
+						/>
+						<CDNCard
+							data={ hostingData[ 'cdn-info' ] }
+							methods={ methods }
+						/>
+						<ObjectCachingCard
+							objectCachingStatus={
+								hostingData[ 'object-cache' ]?.status ||
+								'not_setup'
+							}
+							methods={ methods }
+						/>
+					</div>
+					{ /* Right Column */ }
+					<div className="nfd-flex nfd-flex-col nfd-gap-6">
 						<SSHLoginInfoCard
 							sshLoginInfo={
 								hostingData?.[ 'ssh-info' ]?.ssh_info
@@ -114,27 +130,6 @@ const Panel = ( { constants, methods, Components } ) => {
 						<PHPVersionCard
 							phpVersion={ hostingData[ 'php-version' ] }
 							platformUrl={ platFormUrl }
-						/>
-					</div>
-
-					{ /* Right Column */ }
-					<div className="nfd-flex nfd-flex-col nfd-gap-6">
-						<MalwareCheckCard
-							data={ hostingData[ 'malware-check' ] }
-							methods={ methods }
-							runScan={ runScan }
-						/>
-
-						<CDNCard
-							data={ hostingData[ 'cdn-info' ] }
-							methods={ methods }
-						/>
-						<ObjectCachingCard
-							objectCachingStatus={
-								hostingData[ 'object-cache' ]?.status ||
-								'not_setup'
-							}
-							methods={ methods }
 						/>
 					</div>
 				</div>

@@ -32,7 +32,7 @@ class HostingPanel {
 	 *
 	 * @var string
 	 */
-	protected static $transient_key = 'nfd_hosting_panel_data';
+	public static $transient_key = 'nfd_hosting_panel_data';
 
 	/**
 	 * List of feature class names.
@@ -153,11 +153,12 @@ class HostingPanel {
 	 * Performs an action on a registered feature dynamically.
 	 *
 	 * @param string $identifier The feature identifier.
-	 * @param string $action The public function to call.
+	 * @param string $action     The public function to call.
+	 * @param array  $data       Optional data to pass to the method.
 	 *
 	 * @return mixed|WP_Error The function result or WP_Error.
 	 */
-	public function perform_action( $identifier, $action ) {
+	public function perform_action( $identifier, $action, $data = array() ) {
 		if ( ! isset( $this->instances[ $identifier ] ) ) {
 			return new WP_Error(
 				'invalid_identifier',
@@ -169,6 +170,10 @@ class HostingPanel {
 
 		// Check if the requested action is a valid public method in the class
 		if ( method_exists( $instance, $action ) && is_callable( array( $instance, $action ) ) ) {
+			if ( ! empty( $data ) ) {
+				return call_user_func( array( $instance, $action ), $data );
+			}
+
 			return call_user_func( array( $instance, $action ) );
 		}
 
