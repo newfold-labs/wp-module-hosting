@@ -13,6 +13,7 @@ const NameserversCard = ( { nameservers } ) => {
 			<InfoActionCard
 				title={ text.title }
 				items={ [ { value: text.noRecords } ] }
+				infoText={ text.infoText }
 			/>
 		);
 	}
@@ -26,6 +27,7 @@ const NameserversCard = ( { nameservers } ) => {
 				actionType: 'copy',
 				onAction: () => navigator.clipboard.writeText( ns ),
 			} ) ) }
+			infoText={ text.infoText }
 		/>
 	);
 };

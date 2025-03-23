@@ -28,6 +28,13 @@ class HostingPanel {
 	protected $container;
 
 	/**
+	 * Transient name to cache the full hosting panel response.
+	 *
+	 * @var string
+	 */
+	protected static $transient_key = 'nfd_hosting_panel_data';
+
+	/**
 	 * List of feature class names.
 	 *
 	 * @var array
@@ -104,15 +111,42 @@ class HostingPanel {
 	 * @return array Hosting panel data.
 	 */
 	public function get_data() {
-		$data = array();
+		$cached = get_transient( self::$transient_key );
 
+		if ( false !== $cached ) {
+			$cached['__meta'] = array(
+				'generated'  => $cached['__generated'] ?? time(),
+				'from_cache' => true,
+			);
+			return $cached;
+		}
+
+		$data = array();
 		foreach ( $this->instances as $identifier => $instance ) {
 			if ( method_exists( $instance, 'get_data' ) ) {
 				$data[ $identifier ] = $instance->get_data();
 			}
 		}
 
+		$generated           = time();
+		$data['__generated'] = $generated;
+		$data['__meta']      = array(
+			'generated'  => $generated,
+			'from_cache' => false,
+		);
+
+		set_transient( self::$transient_key, $data, DAY_IN_SECONDS );
+
 		return $data;
+	}
+
+	/**
+	 * Flushes the cached hosting panel transient.
+	 *
+	 * @return bool True if the transient was deleted, false otherwise.
+	 */
+	public static function flush_cache() {
+		return delete_transient( self::$transient_key );
 	}
 
 	/**

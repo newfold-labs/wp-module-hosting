@@ -80,17 +80,26 @@ class HostingPanelController {
 	/**
 	 * Fetches hosting data dynamically.
 	 *
+	 * @param \WP_REST_Request $request The REST request.
 	 * @return \WP_REST_Response
 	 */
-	public function get_hosting_info() {
+	public function get_hosting_info( \WP_REST_Request $request ) {
+		$flush = $request->get_header( 'X-NFD-Flush-Cache' );
+		if ( $flush && filter_var( $flush, FILTER_VALIDATE_BOOLEAN ) ) {
+			$this->hosting_panel->flush_cache();
+		}
 		$data = $this->hosting_panel->get_data();
 
 		if ( empty( $data ) ) {
-			return new \WP_REST_Response( array( 'error' => 'Failed to retrieve hosting info' ), 500 );
+			return new \WP_REST_Response(
+				array( 'error' => __( 'Failed to retrieve hosting info', 'wp-module-hosting' ) ),
+				500
+			);
 		}
 
 		return new \WP_REST_Response( $data, 200 );
 	}
+
 
 	/**
 	 * Updates hosting settings dynamically based on identifier and action.
@@ -102,13 +111,20 @@ class HostingPanelController {
 	public function update_hosting_settings( \WP_REST_Request $request ) {
 		$identifier = sanitize_text_field( $request->get_param( 'identifier' ) );
 		$action     = sanitize_text_field( $request->get_param( 'action' ) );
+		$flush      = $request->get_header( 'X-NFD-Flush-Cache' );
+
+		if ( $flush && filter_var( $flush, FILTER_VALIDATE_BOOLEAN ) ) {
+			$this->hosting_panel->flush_cache();
+		}
 
 		$result = $this->hosting_panel->perform_action( $identifier, $action );
-
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 
-		return new \WP_REST_Response( array( 'message' => 'Action executed successfully' ), 200 );
+		return new \WP_REST_Response(
+			array( 'message' => __( 'Action executed successfully', 'wp-module-hosting' ) ),
+			200
+		);
 	}
 }
