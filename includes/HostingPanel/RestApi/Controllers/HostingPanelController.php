@@ -74,7 +74,7 @@ class HostingPanelController {
 					),
 					'data'       => array(
 						'required' => false,
-						'type'     => 'array',
+						'type'     => 'object',
 						'default'  => array(),
 					),
 				),
