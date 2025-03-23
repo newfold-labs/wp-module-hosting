@@ -72,6 +72,11 @@ class HostingPanelController {
 						'required' => true,
 						'type'     => 'string',
 					),
+					'data'       => array(
+						'required' => false,
+						'type'     => 'array',
+						'default'  => array(),
+					),
 				),
 			)
 		);
@@ -111,13 +116,14 @@ class HostingPanelController {
 	public function update_hosting_settings( \WP_REST_Request $request ) {
 		$identifier = sanitize_text_field( $request->get_param( 'identifier' ) );
 		$action     = sanitize_text_field( $request->get_param( 'action' ) );
+		$data       = $request->get_param( 'data' );
 		$flush      = $request->get_header( 'X-NFD-Flush-Cache' );
 
 		if ( $flush && filter_var( $flush, FILTER_VALIDATE_BOOLEAN ) ) {
 			$this->hosting_panel->flush_cache();
 		}
 
-		$result = $this->hosting_panel->perform_action( $identifier, $action );
+		$result = $this->hosting_panel->perform_action( $identifier, $action, $data );
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
