@@ -13,9 +13,17 @@ class PHPVersion {
 	 * @return array PHP version details.
 	 */
 	public function get_data() {
-		return array(
-			'current_version'     => phpversion(),
-			'recommended_version' => '8.3',
+		$current_version     = phpversion();
+		$recommended_version = '8.3';
+
+		$data = array(
+			'current_version' => $current_version,
 		);
+
+		if ( version_compare( $current_version, $recommended_version, '<' ) ) {
+			$data['recommended_version'] = $recommended_version;
+		}
+
+		return $data;
 	}
 }

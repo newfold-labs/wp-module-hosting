@@ -1,11 +1,17 @@
 import InfoActionCard from '../InfoActionCard';
 import getPHPVersionText from './getPHPVersionText';
 
-const PHPVersionCard = ( { phpVersion, platformUrl } ) => {
-	const text = getPHPVersionText(
-		phpVersion.current_version,
-		phpVersion.recommended_version
-	);
+const PHPVersionCard = ( { phpVersion = {}, platformUrl } ) => {
+	const {
+		current_version: currentVersion,
+		recommended_version: recommendedVersion,
+	} = phpVersion;
+
+	if ( ! currentVersion ) {
+		return null;
+	}
+
+	const text = getPHPVersionText( currentVersion, recommendedVersion );
 
 	return (
 		<InfoActionCard
@@ -13,7 +19,7 @@ const PHPVersionCard = ( { phpVersion, platformUrl } ) => {
 			items={ [
 				{
 					value: text.versionInfo,
-					actionText: text.updateButton,
+					actionText: text.button,
 					actionType: 'redirect',
 					actionUrl: platformUrl,
 				},
