@@ -5,7 +5,7 @@ const getSSHLoginText = () => {
 		title: __( 'SSH Login Info', 'wp-module-hosting' ),
 		sshKeysLabel: __( 'SSH Keys', 'wp-module-hosting' ),
 		sshKeysInfo: __(
-			'Add or remove your SSH access keys',
+			'SSH provides a secure way to access the web server over CLI to run server commands through a terminal.',
 			'wp-module-hosting'
 		),
 		manageKeysAction: __( 'MANAGE KEYS', 'wp-module-hosting' ),

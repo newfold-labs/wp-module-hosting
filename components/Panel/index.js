@@ -114,6 +114,7 @@ const Panel = ( { constants, methods, Components } ) => {
 								'not_setup'
 							}
 							methods={ methods }
+							platformUrl={ platFormUrl }
 						/>
 					</div>
 					{ /* Right Column */ }

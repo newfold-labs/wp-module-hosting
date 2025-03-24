@@ -9,7 +9,7 @@ import { Spinner } from '@newfold/ui-component-library';
 import getObjectCachingText from './getObjectCachingText';
 import SiteStatusCard from '../SiteStatusCard';
 
-const ObjectCachingCard = ( { objectCachingStatus, methods } ) => {
+const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 	const [ status, setStatus ] = useState( objectCachingStatus );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const notify = methods.useNotification();
@@ -56,7 +56,7 @@ const ObjectCachingCard = ( { objectCachingStatus, methods } ) => {
 	};
 
 	const handleRedirectToLearnMorePage = () => {
-		window.open( '#', '_blank' );
+		window.open( platformUrl, '_blank' );
 	};
 
 	let primaryButtonText = null;

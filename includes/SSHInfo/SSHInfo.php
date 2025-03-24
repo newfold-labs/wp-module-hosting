@@ -34,13 +34,13 @@ class SSHInfo {
 		// Use the helper to check if the platform is 'atomic'
 		if ( PlatformHelper::is_atomic() ) {
 			return array(
-				'ssh_info' => 'unavailable',
+				'ssh_info' => '',
 			);
 		}
 
 		$ip       = $this->get_host_ip_from_hostname();
 		$username = $this->get_server_username();
-		$ssh_info = $username && $ip ? "{$username}@{$ip}" : 'SSH info unavailable';
+		$ssh_info = $username && $ip ? "{$username}@{$ip}" : '';
 
 		return array(
 			'ssh_info' => $ssh_info,
