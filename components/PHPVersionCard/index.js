@@ -7,11 +7,16 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl } ) => {
 		recommended_version: recommendedVersion,
 	} = phpVersion;
 
-	if ( ! currentVersion ) {
-		return null;
-	}
-
 	const text = getPHPVersionText( currentVersion, recommendedVersion );
+
+	if ( ! currentVersion ) {
+		return (
+			<InfoActionCard
+				title={ text.title }
+				items={ [ { value: text.noRecords } ] }
+			/>
+		);
+	}
 
 	return (
 		<InfoActionCard
