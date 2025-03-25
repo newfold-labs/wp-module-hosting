@@ -36,7 +36,7 @@ const Panel = ( { constants, methods, Components } ) => {
 			const url = methods.getPlatformPathUrl(
 				siteId
 					? `hosting/details/sites/${ siteId }`
-					: 'hosting/details',
+					: 'hosting/details/sites',
 				'app/#/sites'
 			);
 			setPlatformUrl( url );

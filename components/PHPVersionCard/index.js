@@ -9,6 +9,13 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 
 	const text = getPHPVersionText( currentVersion, recommendedVersion );
 
+	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		const hasSiteId = /\d+$/.test( platformUrl );
+		const baseUrl =
+			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
+		return methods.addUtmParams( baseUrl );
+	};
+
 	if ( ! currentVersion ) {
 		return (
 			<InfoActionCard
@@ -26,9 +33,7 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 					value: text.versionInfo,
 					actionText: text.button,
 					actionType: 'redirect',
-					actionUrl: methods.addUtmParams(
-						`${ platformUrl }/settings`
-					),
+					actionUrl: getDeepLinkedPlatformUrl( 'settings' ),
 				},
 			] }
 		/>

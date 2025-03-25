@@ -4,13 +4,20 @@ import getSSHLoginText from './getSSHLoginText';
 const SSHLoginInfoCard = ( { sshLoginInfo, methods, platformUrl } ) => {
 	const text = getSSHLoginText();
 
+	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		const hasSiteId = /\d+$/.test( platformUrl );
+		const baseUrl =
+			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
+		return methods.addUtmParams( baseUrl );
+	};
+
 	const items = [
 		{
 			label: text.sshKeysLabel,
 			infoText: text.sshKeysInfo,
 			actionText: text.manageKeysAction,
 			actionType: 'redirect',
-			actionUrl: methods.addUtmParams( `${ platformUrl }/advanced` ),
+			actionUrl: getDeepLinkedPlatformUrl( 'advanced' ),
 		},
 		{
 			label: text.sshLoginLabel,

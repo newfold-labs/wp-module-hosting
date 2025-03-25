@@ -17,6 +17,13 @@ const CDNCard = ( { data, methods, platformUrl } ) => {
 
 	const isEnabled = data.cdn_enabled;
 
+	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		const hasSiteId = /\d+$/.test( platformUrl );
+		const baseUrl =
+			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
+		return methods.addUtmParams( baseUrl );
+	};
+
 	const handlePurge = async () => {
 		setIsLoading( true );
 
@@ -67,9 +74,7 @@ const CDNCard = ( { data, methods, platformUrl } ) => {
 					? handlePurge
 					: () =>
 							window.open(
-								methods.addUtmParams(
-									`${ platformUrl }/speed`
-								),
+								getDeepLinkedPlatformUrl( 'speed' ),
 								'_blank'
 							)
 			}
@@ -80,9 +85,7 @@ const CDNCard = ( { data, methods, platformUrl } ) => {
 				isEnabled
 					? () =>
 							window.open(
-								methods.addUtmParams(
-									`${ platformUrl }/speed`
-								),
+								getDeepLinkedPlatformUrl( 'speed' ),
 								'_blank'
 							)
 					: null
