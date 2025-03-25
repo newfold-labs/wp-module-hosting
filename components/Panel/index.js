@@ -14,6 +14,7 @@ const Panel = ( { constants, methods, Components } ) => {
 	const [ loading, setLoading ] = methods.useState( true );
 	const [ error, setError ] = methods.useState( null );
 	const [ platFormUrl, setPlatformUrl ] = methods.useState( '' );
+	const [ isAtomic, setIsAtomic ] = methods.useState( false );
 	const text = getPanelText();
 
 	const fetchHostingData = async ( shouldFlush = false ) => {
@@ -40,6 +41,9 @@ const Panel = ( { constants, methods, Components } ) => {
 				'app/#/sites'
 			);
 			setPlatformUrl( url );
+
+			const isAtomicPlan = response?.[ 'plan-info' ]?.is_atomic;
+			setIsAtomic( isAtomicPlan );
 
 			setLoading( false );
 		} catch ( err ) {
@@ -113,6 +117,7 @@ const Panel = ( { constants, methods, Components } ) => {
 						/>
 						<CDNCard
 							platformUrl={ platFormUrl }
+							isAtomic={ isAtomic }
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
 						/>
@@ -123,6 +128,7 @@ const Panel = ( { constants, methods, Components } ) => {
 							}
 							methods={ methods }
 							platformUrl={ platFormUrl }
+							isAtomic={ isAtomic }
 						/>
 					</div>
 					{ /* Right Column */ }
@@ -133,6 +139,7 @@ const Panel = ( { constants, methods, Components } ) => {
 							}
 							methods={ methods }
 							platformUrl={ platFormUrl }
+							isAtomic={ isAtomic }
 						/>
 						<NameserversCard
 							nameservers={ hostingData?.nameservers }
