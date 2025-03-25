@@ -15,6 +15,13 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 	const notify = methods.useNotification();
 	const text = getObjectCachingText();
 
+	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		const hasSiteId = /\d+$/.test( platformUrl );
+		const baseUrl =
+			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
+		return methods.addUtmParams( baseUrl );
+	};
+
 	const handleObjectCachingAction = async () => {
 		setIsLoading( true );
 
@@ -56,7 +63,7 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 	};
 
 	const handleRedirectToLearnMorePage = () => {
-		window.open( platformUrl, '_blank' );
+		window.open( getDeepLinkedPlatformUrl( 'speed' ), '_blank' );
 	};
 
 	let primaryButtonText = null;

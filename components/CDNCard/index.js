@@ -10,16 +10,19 @@ import SiteStatusCard from '../SiteStatusCard';
 
 import getCDNText from './getCDNText';
 
-const CDNCard = ( { data, methods } ) => {
+const CDNCard = ( { data, methods, platformUrl } ) => {
 	const text = getCDNText();
 	const [ isLoading, setIsLoading ] = useState( false );
 	const notify = methods.useNotification();
 
 	const isEnabled = data.cdn_enabled;
 
-	const platformUrl = methods.addUtmParams(
-		methods.getPlatformPathUrl( 'hosting/details', 'app/#/sites' )
-	);
+	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		const hasSiteId = /\d+$/.test( platformUrl );
+		const baseUrl =
+			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
+		return methods.addUtmParams( baseUrl );
+	};
 
 	const handlePurge = async () => {
 		setIsLoading( true );
@@ -69,13 +72,23 @@ const CDNCard = ( { data, methods } ) => {
 			primaryButtonAction={
 				isEnabled
 					? handlePurge
-					: () => window.open( platformUrl, '_blank' )
+					: () =>
+							window.open(
+								getDeepLinkedPlatformUrl( 'speed' ),
+								'_blank'
+							)
 			}
 			primaryButtonDisabled={ isLoading }
 			primaryButtonContent={ isLoading ? <Spinner /> : null }
 			secondaryButtonText={ isEnabled ? text.disableCDNButton : null }
 			secondaryButtonAction={
-				isEnabled ? () => window.open( platformUrl, '_blank' ) : null
+				isEnabled
+					? () =>
+							window.open(
+								getDeepLinkedPlatformUrl( 'speed' ),
+								'_blank'
+							)
+					: null
 			}
 			Illustration={ () =>
 				isEnabled ? (
