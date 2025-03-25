@@ -56,7 +56,10 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 	};
 
 	const handleRedirectToLearnMorePage = () => {
-		window.open( platformUrl, '_blank' );
+		window.open(
+			methods.addUtmParams( `${ platformUrl }/speed` ),
+			'_blank'
+		);
 	};
 
 	let primaryButtonText = null;

@@ -1,13 +1,8 @@
 import InfoActionCard from '../InfoActionCard';
 import getSSHLoginText from './getSSHLoginText';
 
-const SSHLoginInfoCard = ( { sshLoginInfo, methods } ) => {
+const SSHLoginInfoCard = ( { sshLoginInfo, methods, platformUrl } ) => {
 	const text = getSSHLoginText();
-
-	// Generate platform URL dynamically
-	const platformUrl = methods.addUtmParams(
-		methods.getPlatformPathUrl( 'hosting/details', 'app/#/sites' )
-	);
 
 	const items = [
 		{
@@ -15,7 +10,7 @@ const SSHLoginInfoCard = ( { sshLoginInfo, methods } ) => {
 			infoText: text.sshKeysInfo,
 			actionText: text.manageKeysAction,
 			actionType: 'redirect',
-			actionUrl: platformUrl,
+			actionUrl: methods.addUtmParams( `${ platformUrl }/advanced` ),
 		},
 		{
 			label: text.sshLoginLabel,

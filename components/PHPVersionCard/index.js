@@ -1,7 +1,7 @@
 import InfoActionCard from '../InfoActionCard';
 import getPHPVersionText from './getPHPVersionText';
 
-const PHPVersionCard = ( { phpVersion = {}, platformUrl } ) => {
+const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 	const {
 		current_version: currentVersion,
 		recommended_version: recommendedVersion,
@@ -26,7 +26,9 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl } ) => {
 					value: text.versionInfo,
 					actionText: text.button,
 					actionType: 'redirect',
-					actionUrl: platformUrl,
+					actionUrl: methods.addUtmParams(
+						`${ platformUrl }/settings`
+					),
 				},
 			] }
 		/>

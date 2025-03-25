@@ -13,11 +13,8 @@ const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
 	const [ loading, setLoading ] = methods.useState( true );
 	const [ error, setError ] = methods.useState( null );
+	const [ platFormUrl, setPlatformUrl ] = methods.useState( '' );
 	const text = getPanelText();
-
-	const platFormUrl = methods.addUtmParams(
-		methods.getPlatformPathUrl( 'hosting/details', 'app/#/sites' )
-	);
 
 	const fetchHostingData = async ( shouldFlush = false ) => {
 		try {
@@ -34,6 +31,16 @@ const Panel = ( { constants, methods, Components } ) => {
 			} );
 
 			setHostingData( response );
+
+			const siteId = response?.[ 'plan-info' ]?.site_id;
+			const url = methods.getPlatformPathUrl(
+				siteId
+					? `hosting/details/sites/${ siteId }`
+					: 'hosting/details',
+				'app/#/sites'
+			);
+			setPlatformUrl( url );
+
 			setLoading( false );
 		} catch ( err ) {
 			setError( err.message );
@@ -105,6 +112,7 @@ const Panel = ( { constants, methods, Components } ) => {
 							methods={ methods }
 						/>
 						<CDNCard
+							platformUrl={ platFormUrl }
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
 						/>
@@ -124,12 +132,14 @@ const Panel = ( { constants, methods, Components } ) => {
 								hostingData?.[ 'ssh-info' ]?.ssh_info
 							}
 							methods={ methods }
+							platformUrl={ platFormUrl }
 						/>
 						<NameserversCard
 							nameservers={ hostingData?.nameservers }
 						/>
 						<PHPVersionCard
 							phpVersion={ hostingData[ 'php-version' ] }
+							methods={ methods }
 							platformUrl={ platFormUrl }
 						/>
 					</div>
