@@ -10,7 +10,7 @@ import SiteStatusCard from '../SiteStatusCard';
 
 import getCDNText from './getCDNText';
 
-const CDNCard = ( { data, methods, platformUrl } ) => {
+const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 	const text = getCDNText();
 	const [ isLoading, setIsLoading ] = useState( false );
 	const notify = methods.useNotification();
@@ -18,6 +18,9 @@ const CDNCard = ( { data, methods, platformUrl } ) => {
 	const isEnabled = data.cdn_enabled;
 
 	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		if ( isAtomic ) {
+			return methods.addUtmParams( platformUrl );
+		}
 		const hasSiteId = /\d+$/.test( platformUrl );
 		const baseUrl =
 			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;

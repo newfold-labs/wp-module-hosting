@@ -3,6 +3,7 @@
 namespace NewfoldLabs\WP\Module\Hosting\PlanInfo;
 
 use NewfoldLabs\WP\Module\Hosting\Helpers\HiiveHelper;
+use NewfoldLabs\WP\Module\Hosting\Helpers\PlatformHelper;
 
 /**
  * Handles Plan information retrieval from Hiive and maps it to display-friendly plan names.
@@ -34,13 +35,17 @@ class PlanInfo {
 		$response = $hiive->send_request();
 
 		if ( is_wp_error( $response ) ) {
-			return array();
+			return array(
+				'is_atomic' => PlatformHelper::is_atomic(),
+			);
 		}
 
 		$data = json_decode( $response, true );
 
 		if ( empty( $data ) || ! is_array( $data ) ) {
-			return array();
+			return array(
+				'is_atomic' => PlatformHelper::is_atomic(),
+			);
 		}
 
 		$plan_type    = $data['plan_type'] ?? '';
@@ -52,6 +57,12 @@ class PlanInfo {
 			$plan_name = $map[ $plan_subtype ] ?? null;
 		}
 
-		return array_merge( $data, array( 'plan_name' => $plan_name ) );
+		return array_merge(
+			$data,
+			array(
+				'plan_name' => $plan_name,
+				'is_atomic' => PlatformHelper::is_atomic(),
+			)
+		);
 	}
 }

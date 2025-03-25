@@ -9,13 +9,21 @@ import { Spinner } from '@newfold/ui-component-library';
 import getObjectCachingText from './getObjectCachingText';
 import SiteStatusCard from '../SiteStatusCard';
 
-const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
+const ObjectCachingCard = ( {
+	objectCachingStatus,
+	platformUrl,
+	methods,
+	isAtomic,
+} ) => {
 	const [ status, setStatus ] = useState( objectCachingStatus );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const notify = methods.useNotification();
 	const text = getObjectCachingText();
 
 	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		if ( isAtomic ) {
+			path = 'performance';
+		}
 		const hasSiteId = /\d+$/.test( platformUrl );
 		const baseUrl =
 			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
@@ -69,6 +77,7 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 
 	const handleRedirectToLearnMorePage = () => {
 		window.open( getDeepLinkedPlatformUrl( 'speed' ), '_blank' );
+		getDeepLinkedPlatformUrl( 'performance' );
 	};
 
 	let primaryButtonText = null;

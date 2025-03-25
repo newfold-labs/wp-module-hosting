@@ -1,10 +1,18 @@
 import InfoActionCard from '../InfoActionCard';
 import getSSHLoginText from './getSSHLoginText';
 
-const SSHLoginInfoCard = ( { sshLoginInfo, methods, platformUrl } ) => {
+const SSHLoginInfoCard = ( {
+	sshLoginInfo,
+	methods,
+	platformUrl,
+	isAtomic,
+} ) => {
 	const text = getSSHLoginText();
 
 	const getDeepLinkedPlatformUrl = ( path = '' ) => {
+		if ( isAtomic ) {
+			path = 'ssh/users';
+		}
 		const hasSiteId = /\d+$/.test( platformUrl );
 		const baseUrl =
 			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
