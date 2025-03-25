@@ -13,15 +13,15 @@ const getObjectCachingText = () => {
 		},
 		description: {
 			enabled: __(
-				"Your site's data is being cached.",
+				"Your site's data is being cached for better performance.",
 				'wp-module-hosting'
 			),
 			disabled: __(
-				"Your site's data is NOT being cached.",
+				"Your site's data is not being cached, which may slow things down.",
 				'wp-module-hosting'
 			),
 			not_setup: __(
-				"Your site's data is NOT being cached.",
+				'Object Caching is not set up on your site. Learn more about enabling it.',
 				'wp-module-hosting'
 			),
 		},
@@ -39,6 +39,13 @@ const getObjectCachingText = () => {
 				),
 				description: __(
 					'There was an error updating the object caching settings. Please try again.',
+					'wp-module-hosting'
+				),
+			},
+			clearSuccess: {
+				title: __( 'Object Cache Cleared', 'wp-module-hosting' ),
+				description: __(
+					'The object cache was successfully cleared.',
 					'wp-module-hosting'
 				),
 			},

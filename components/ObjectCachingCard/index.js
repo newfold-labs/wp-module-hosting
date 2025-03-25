@@ -22,18 +22,8 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 		return methods.addUtmParams( baseUrl );
 	};
 
-	const handleObjectCachingAction = async () => {
+	const handleObjectCachingAction = async ( action ) => {
 		setIsLoading( true );
-
-		let action;
-		if ( status === 'enabled' ) {
-			action = 'disable';
-		} else if ( status === 'disabled' ) {
-			action = 'enable';
-		} else {
-			setIsLoading( false );
-			return;
-		}
 
 		const apiUrl = methods.NewfoldRuntime.createApiUrl(
 			'/newfold-hosting/v1/panel/update'
@@ -49,7 +39,22 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 				},
 			} );
 
-			setStatus( status === 'enabled' ? 'disabled' : 'enabled' );
+			if ( action === 'enable' ) {
+				setStatus( 'enabled' );
+			} else if ( action === 'disable' ) {
+				setStatus( 'disabled' );
+			} else if ( action === 'clear' ) {
+				notify.push( 'object-caching-clear-success', {
+					title:
+						text.notifications.clearSuccess?.title ||
+						'Cache cleared',
+					description:
+						text.notifications.clearSuccess?.description ||
+						'Object cache was successfully cleared.',
+					variant: 'success',
+					autoDismiss: 5000,
+				} );
+			}
 		} catch ( error ) {
 			notify.push( 'object-caching-update-error', {
 				title: text.notifications.updateError.title,
@@ -73,12 +78,12 @@ const ObjectCachingCard = ( { objectCachingStatus, platformUrl, methods } ) => {
 
 	if ( status === 'enabled' ) {
 		primaryButtonText = text.buttons.clearCache;
-		primaryButtonAction = handleObjectCachingAction;
+		primaryButtonAction = () => handleObjectCachingAction( 'clear' );
 		secondaryButtonText = text.buttons.disable;
-		secondaryButtonAction = handleObjectCachingAction;
+		secondaryButtonAction = () => handleObjectCachingAction( 'disable' );
 	} else if ( status === 'disabled' ) {
 		primaryButtonText = text.buttons.enable;
-		primaryButtonAction = handleObjectCachingAction;
+		primaryButtonAction = () => handleObjectCachingAction( 'enable' );
 	} else if ( status === 'not_setup' ) {
 		secondaryButtonAction = handleRedirectToLearnMorePage;
 		secondaryButtonText = text.buttons.learnMore;
