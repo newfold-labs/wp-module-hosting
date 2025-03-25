@@ -100,7 +100,12 @@ const Panel = ( { constants, methods, Components } ) => {
 				</div>
 				<div className="nfd-flex nfd-flex-col nfd-justify-center">
 					<Button
-						onClick={ () => window.open( platFormUrl, '_blank' ) }
+						onClick={ () =>
+							window.open(
+								methods.addUtmParams( platFormUrl ),
+								'_blank'
+							)
+						}
 						variant="secondary"
 					>
 						{ text.manageButton }
