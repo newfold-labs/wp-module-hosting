@@ -6,7 +6,6 @@ use NewfoldLabs\WP\Module\Hosting\CDNInfo\CDNInfo;
 use WP_Error;
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
-use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
 use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
@@ -64,7 +63,8 @@ class HostingPanel {
 	public function __construct( $container ) {
 		$this->container = $container;
 		$this->initialize_features();
-		$this->maybe_initialize_rest_api();
+		$this->initialize_rest_api();
+		$this->initialize_hooks();
 	}
 
 	/**
@@ -79,12 +79,19 @@ class HostingPanel {
 	}
 
 	/**
-	 * Initializes the REST API routes if accessed via REST and user is an admin.
+	 * Initializes the REST API routes.
 	 */
-	protected function maybe_initialize_rest_api() {
-		if ( Permissions::rest_is_authorized_admin() ) {
-			new RestApi( $this );
-		}
+	protected function initialize_rest_api() {
+		new RestApi( $this );
+	}
+
+	/**
+	 * Registers WordPress hooks used by the Hosting Panel module.
+	 *
+	 * @return void
+	 */
+	protected function initialize_hooks() {
+		add_filter( 'nfd_plugin_subnav', array( $this, 'add_nfd_subnav' ) );
 	}
 
 	/**
@@ -181,5 +188,23 @@ class HostingPanel {
 			'invalid_action',
 			__( 'Action not supported.', 'wp-module-hosting' )
 		);
+	}
+
+	/**
+	 * Adds the Hosting panel entry to the Newfold Brand Plugin sub-navigation.
+	 *
+	 * @param array $subnav The existing sub-navigation array.
+	 * @return array Modified sub-navigation array with Hosting panel entry appended.
+	 */
+	public function add_nfd_subnav( $subnav ) {
+		$brand   = $this->container->plugin()->id;
+		$hosting = array(
+			'route'    => $brand . '#/hosting',
+			'title'    => __( 'Hosting', 'wp-module-hosting' ),
+			'priority' => 20,
+		);
+		array_push( $subnav, $hosting );
+
+		return $subnav;
 	}
 }
