@@ -1,4 +1,10 @@
-import { Root, Container, Title, Button } from '@newfold/ui-component-library';
+import {
+	Root,
+	Container,
+	Title,
+	Button,
+	Spinner,
+} from '@newfold/ui-component-library';
 
 import getPanelText from './getPanelText';
 import ObjectCachingCard from '../ObjectCachingCard';
@@ -58,8 +64,9 @@ const Panel = ( { constants, methods, Components } ) => {
 
 	if ( loading ) {
 		return (
-			<div className="nfd-flex nfd-items-center nfd-justify-center nfd-h-96">
-				<div className="nfd-animate-spin nfd-rounded-full nfd-h-12 nfd-w-12 nfd-border-t-4 nfd-border-blue-500 nfd-border-solid" />
+			<div className="nfd-flex nfd-flex-col nfd-text-primary nfd-items-center nfd-justify-center nfd-h-[630px]">
+				<Spinner />
+				<p className="nfd-mt-4 nfd-text-gray-600">{ text.loading }</p>
 			</div>
 		);
 	}
