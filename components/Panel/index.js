@@ -58,9 +58,9 @@ const Panel = ( { constants, methods, Components } ) => {
 
 	if ( loading ) {
 		return (
-			<p className="nfd-text-center nfd-text-gray-500">
-				{ text.loading }
-			</p>
+			<div className="nfd-flex nfd-items-center nfd-justify-center nfd-h-96">
+				<div className="nfd-animate-spin nfd-rounded-full nfd-h-12 nfd-w-12 nfd-border-t-4 nfd-border-blue-500 nfd-border-solid" />
+			</div>
 		);
 	}
 
@@ -126,15 +126,18 @@ const Panel = ( { constants, methods, Components } ) => {
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
 						/>
-						<ObjectCachingCard
-							objectCachingStatus={
-								hostingData[ 'object-cache' ]?.status ||
-								'not_setup'
-							}
-							methods={ methods }
-							platformUrl={ platFormUrl }
-							isAtomic={ isAtomic }
-						/>
+						{ hostingData[ 'object-cache' ]?.status &&
+							hostingData[ 'object-cache' ].status !==
+								'not_setup' && (
+								<ObjectCachingCard
+									objectCachingStatus={
+										hostingData[ 'object-cache' ].status
+									}
+									methods={ methods }
+									platformUrl={ platFormUrl }
+									isAtomic={ isAtomic }
+								/>
+							) }
 					</div>
 					{ /* Right Column */ }
 					<div className="nfd-flex nfd-flex-col nfd-gap-6">
