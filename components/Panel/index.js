@@ -1,4 +1,10 @@
-import { Root, Container, Title, Button } from '@newfold/ui-component-library';
+import {
+	Root,
+	Container,
+	Title,
+	Button,
+	Spinner,
+} from '@newfold/ui-component-library';
 
 import getPanelText from './getPanelText';
 import ObjectCachingCard from '../ObjectCachingCard';
@@ -58,9 +64,10 @@ const Panel = ( { constants, methods, Components } ) => {
 
 	if ( loading ) {
 		return (
-			<p className="nfd-text-center nfd-text-gray-500">
-				{ text.loading }
-			</p>
+			<div className="nfd-flex nfd-flex-col nfd-text-primary nfd-items-center nfd-justify-center nfd-h-[630px]">
+				<Spinner />
+				<p className="nfd-mt-4 nfd-text-gray-600">{ text.loading }</p>
+			</div>
 		);
 	}
 
@@ -126,15 +133,18 @@ const Panel = ( { constants, methods, Components } ) => {
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
 						/>
-						<ObjectCachingCard
-							objectCachingStatus={
-								hostingData[ 'object-cache' ]?.status ||
-								'not_setup'
-							}
-							methods={ methods }
-							platformUrl={ platFormUrl }
-							isAtomic={ isAtomic }
-						/>
+						{ hostingData[ 'object-cache' ]?.status &&
+							hostingData[ 'object-cache' ].status !==
+								'not_setup' && (
+								<ObjectCachingCard
+									objectCachingStatus={
+										hostingData[ 'object-cache' ].status
+									}
+									methods={ methods }
+									platformUrl={ platFormUrl }
+									isAtomic={ isAtomic }
+								/>
+							) }
 					</div>
 					{ /* Right Column */ }
 					<div className="nfd-flex nfd-flex-col nfd-gap-6">
