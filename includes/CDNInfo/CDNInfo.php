@@ -52,6 +52,6 @@ class CDNInfo {
 	 * @return bool True if purge was successful, false otherwise.
 	 */
 	public function purge() {
-		return $this->cloudflare->purgeAll();
+		return $this->cloudflare->purge_all();
 	}
 }
