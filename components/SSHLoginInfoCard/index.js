@@ -6,6 +6,7 @@ const SSHLoginInfoCard = ( {
 	methods,
 	platformUrl,
 	isAtomic,
+	customClass
 } ) => {
 	const text = getSSHLoginText();
 
@@ -26,6 +27,8 @@ const SSHLoginInfoCard = ( {
 			actionText: text.manageKeysAction,
 			actionType: 'redirect',
 			actionUrl: getDeepLinkedPlatformUrl( 'advanced' ),
+			id: 'nfd-hosting-manage-keys',
+			cyIsValid : true,
 		},
 		{
 			label: text.sshLoginLabel,
@@ -35,10 +38,12 @@ const SSHLoginInfoCard = ( {
 			onAction: sshLoginInfo
 				? () => navigator.clipboard.writeText( sshLoginInfo )
 				: null,
+			id: 'nfd-hosting-copy-ssh-login',
+			cyIsValid : !!sshLoginInfo,
 		},
 	];
 
-	return <InfoActionCard title={ text.title } items={ items } />;
+	return <InfoActionCard title={ text.title } items={ items } customClass={customClass} cyIsValid={ items.length > 0 }/>;
 };
 
 export default SSHLoginInfoCard;

@@ -1,7 +1,7 @@
 import InfoActionCard from '../InfoActionCard';
 import getNameserversText from './getNameserversText';
 
-const NameserversCard = ( { nameservers } ) => {
+const NameserversCard = ( { nameservers, customClass } ) => {
 	const text = getNameserversText();
 
 	if (
@@ -14,6 +14,9 @@ const NameserversCard = ( { nameservers } ) => {
 				title={ text.title }
 				items={ [ { value: text.noRecords } ] }
 				infoText={ text.infoText }
+				customClass={customClass}
+				dataRecord = {0}
+				cyIsValid = {false}
 			/>
 		);
 	}
@@ -26,8 +29,10 @@ const NameserversCard = ( { nameservers } ) => {
 				actionText: text.copyButton,
 				actionType: 'copy',
 				onAction: () => navigator.clipboard.writeText( ns ),
+				cyIsValid : true
 			} ) ) }
 			infoText={ text.infoText }
+			cyIsValid = { !! nameservers.records.length }
 		/>
 	);
 };

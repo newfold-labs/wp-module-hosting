@@ -126,12 +126,14 @@ const Panel = ( { constants, methods, Components } ) => {
 						<MalwareCheckCard
 							data={ hostingData[ 'malware-check' ] }
 							methods={ methods }
+							customClass='nfd-malware-check-card'
 						/>
 						<CDNCard
 							platformUrl={ platFormUrl }
 							isAtomic={ isAtomic }
 							data={ hostingData[ 'cdn-info' ] }
 							methods={ methods }
+							customClass='nfd-cdn-card'
 						/>
 						{ hostingData[ 'object-cache' ]?.status &&
 							hostingData[ 'object-cache' ].status !==
@@ -143,6 +145,7 @@ const Panel = ( { constants, methods, Components } ) => {
 									methods={ methods }
 									platformUrl={ platFormUrl }
 									isAtomic={ isAtomic }
+									customClass='nfd-object-caching-card'
 								/>
 							) }
 					</div>
@@ -155,14 +158,17 @@ const Panel = ( { constants, methods, Components } ) => {
 							methods={ methods }
 							platformUrl={ platFormUrl }
 							isAtomic={ isAtomic }
+							customClass = "nfd-sshlogininfo-card"
 						/>
 						<NameserversCard
 							nameservers={ hostingData?.nameservers }
+							customClass="nfd-nameserver-card"
 						/>
 						<PHPVersionCard
 							phpVersion={ hostingData[ 'php-version' ] }
 							methods={ methods }
 							platformUrl={ platFormUrl }
+							customClass="nfd-phpversion-card"
 						/>
 					</div>
 				</div>

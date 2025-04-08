@@ -1,8 +1,10 @@
 import { Card, Button, Link } from '@newfold/ui-component-library';
 
 const SiteStatusCard = ( {
+	customClass,
 	title,
-	status,
+	statusText,
+	statusValue,
 	description,
 	primaryButtonText,
 	primaryButtonAction,
@@ -15,7 +17,7 @@ const SiteStatusCard = ( {
 	Illustration,
 } ) => {
 	return (
-		<Card className="nfd-min-h-[208px] nfd-p-4 nfd-border nfd-border-gray-200 nfd-rounded-lg">
+		<Card className={"nfd-min-h-[208px] nfd-p-4 nfd-border nfd-border-gray-200 nfd-rounded-lg " + customClass} data-status={statusValue}>
 			<div className="nfd-flex nfd-justify-between nfd-items-center">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
 				{ linkHref && (
@@ -41,7 +43,7 @@ const SiteStatusCard = ( {
 					</div>
 				) }
 				<div>
-					<p className="nfd-font-semibold">{ status }</p>
+					<p className="nfd-font-semibold">{ statusText }</p>
 					<p className="nfd-text-sm nfd-text-gray-500">
 						{ description }
 					</p>
@@ -52,7 +54,7 @@ const SiteStatusCard = ( {
 				{ primaryButtonText && (
 					<Button
 						variant="primary"
-						className="nfd-w-fit"
+						className="primary-button nfd-w-fit"
 						onClick={ primaryButtonAction }
 						disabled={ primaryButtonDisabled }
 					>

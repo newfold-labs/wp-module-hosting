@@ -5,7 +5,7 @@ import { Card } from '@newfold/ui-component-library';
 
 import InformationTooltip from '../InformationTooltip';
 
-const InfoActionCard = ( { title, infoText, items } ) => {
+const InfoActionCard = ( { title, infoText, items, customClass, cyIsValid } ) => {
 	const [ copiedIndex, setCopiedIndex ] = useState( null );
 
 	const handleAction = ( value, index, actionType, actionUrl ) => {
@@ -22,7 +22,7 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 	};
 
 	return (
-		<Card className="nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg">
+		<Card className={"nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg " + customClass} data-cyIsValid={cyIsValid}>
 			<div className="nfd-flex nfd-items-center nfd-space-x-2">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
 				{ infoText && <InformationTooltip text={ infoText } /> }
@@ -38,12 +38,15 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 							infoText: itemInfotext,
 							actionType,
 							actionUrl,
+							id,
+							cyIsValid
 						},
 						index
 					) => (
 						<div
 							key={ index }
-							className="nfd-flex nfd-items-center nfd-justify-between nfd-mb-2"
+							className={"nfd-flex nfd-items-center nfd-justify-between nfd-mb-2 " + id}
+							data-cyIsValid = {cyIsValid}
 						>
 							<div className="nfd-flex nfd-items-center nfd-space-x-2">
 								{ label && (
@@ -52,7 +55,7 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 								{ itemInfotext && (
 									<InformationTooltip text={ itemInfotext } />
 								) }
-								<p className="nfd-text-gray-700 nfd-mr-2">
+								<p className="nfd-text-gray-700 nfd-mr-2 nfd-text">
 									{ value }
 								</p>
 								{ actionText && (

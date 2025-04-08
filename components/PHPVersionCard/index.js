@@ -1,7 +1,7 @@
 import InfoActionCard from '../InfoActionCard';
 import getPHPVersionText from './getPHPVersionText';
 
-const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
+const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods, customClass } ) => {
 	const {
 		current_version: currentVersion,
 		recommended_version: recommendedVersion,
@@ -21,6 +21,8 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 			<InfoActionCard
 				title={ text.title }
 				items={ [ { value: text.noRecords } ] }
+				customClass={customClass}
+				cyIsValid = {false}
 			/>
 		);
 	}
@@ -36,6 +38,8 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 					actionUrl: getDeepLinkedPlatformUrl( 'settings' ),
 				},
 			] }
+			customClass={customClass}
+			cyIsValid = {true}
 		/>
 	);
 };

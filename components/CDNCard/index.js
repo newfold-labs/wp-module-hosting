@@ -10,7 +10,7 @@ import SiteStatusCard from '../SiteStatusCard';
 
 import getCDNText from './getCDNText';
 
-const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
+const CDNCard = ( { data, methods, platformUrl, isAtomic, customClass } ) => {
 	const text = getCDNText();
 	const [ isLoading, setIsLoading ] = useState( false );
 	const notify = methods.useNotification();
@@ -64,8 +64,10 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 
 	return (
 		<SiteStatusCard
+			customClass={ customClass }
 			title={ text.title }
-			status={ isEnabled ? text.statusEnabled : text.statusDisabled }
+			statusText ={ isEnabled ? text.statusEnabled : text.statusDisabled }
+			statusValue = { isEnabled }
 			description={
 				isEnabled ? text.descriptionEnabled : text.descriptionDisabled
 			}

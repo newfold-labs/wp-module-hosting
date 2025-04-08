@@ -14,6 +14,7 @@ const ObjectCachingCard = ( {
 	platformUrl,
 	methods,
 	isAtomic,
+	customClass
 } ) => {
 	const [ status, setStatus ] = useState( objectCachingStatus );
 	const [ isLoading, setIsLoading ] = useState( false );
@@ -100,8 +101,10 @@ const ObjectCachingCard = ( {
 
 	return (
 		<SiteStatusCard
+			customClass={customClass}
 			title={ text.title }
-			status={ text.status[ status ] || text.status.not_setup }
+			statusText={ text.status[ status ] || text.status.not_setup }
+			statusValue={ status }
 			description={
 				text.description[ status ] || text.description.not_setup
 			}
