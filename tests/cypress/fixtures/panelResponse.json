@@ -1,0 +1,56 @@
+{
+    "object-cache": {
+      "status": "not_setup",
+      "message": "Object cache is not set up."
+    },
+    "php-version": {
+      "current_version": "8.2.18",
+      "recommended_version": "8.3"
+    },
+    "malware-check": {
+      "registration_nonce": "dummy-nonce",
+      "install_token": "dummy-token",
+      "plugin": "jetpack-protect",
+      "api": {
+        "jetpackRegister": "{{siteUrl}}/wp-json/?rest_route=/jetpack/v4/connection/register",
+        "scanStatus": "{{siteUrl}}/wp-json/?rest_route=%2Fjetpack-protect%2Fv1%2Fstatus&hard_refresh=true&_locale=user",
+        "pluginInstall": "{{siteUrl}}/wp-json/?rest_route=/newfold-installer/v1/plugins/install"
+      },
+      "urls": {
+        "scanPage": "{{siteUrl}}/wp-admin/admin.php?page=jetpack-protect#/scan",
+        "supportPage": "{{siteUrl}}/wp-admin/admin.php?page=bluehost#/help"
+      },
+      "scan_status": "unknown"
+    },
+    "nameservers": {
+      "records": [
+        "ns1.bluehost.com",
+        "ns2.bluehost.com"
+      ]
+    },
+    "ssh-info": {
+      "ssh_info": "user@127.0.0.1"
+    },
+    "cdn-info": {
+      "cdn_enabled": false
+    },
+    "plan-info": {
+      "customer_id": "WN.HP.123456789",
+      "site_id": "12345678",
+      "affiliate": null,
+      "provider": "bluehost",
+      "signup_date": null,
+      "plan_term": null,
+      "plan_type": null,
+      "plan_subtype": null,
+      "username": null,
+      "plan_name": "Bluehost Basic",
+      "is_atomic": false
+    },
+    "__generated": 1744109597,
+    "__meta": {
+      "generated": 1744109597,
+      "from_cache": false
+    }
+  }
+  
