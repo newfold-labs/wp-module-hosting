@@ -2,7 +2,7 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\CDNInfo;
 
-use NewfoldLabs\WP\Module\Performance\CacheTypes\Cloudflare;
+use NewfoldLabs\WP\Module\Performance\Cache\Types\Cloudflare;
 
 /**
  * Handles CDN information retrieval.
