@@ -25,8 +25,6 @@ class Hosting {
 		// We're trying to avoid adding more stuff to this.
 		$this->container = $container;
 
-		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
-			new HostingPanel( $container );
-		}
+		new HostingPanel( $container );
 	}
 }
