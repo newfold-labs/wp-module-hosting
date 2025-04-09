@@ -14,6 +14,7 @@ const NameserversCard = ( { nameservers } ) => {
 				title={ text.title }
 				items={ [ { value: text.noRecords } ] }
 				infoText={ text.infoText }
+				testId={'nameservers-card-no-records' }
 			/>
 		);
 	}
@@ -28,6 +29,7 @@ const NameserversCard = ( { nameservers } ) => {
 				onAction: () => navigator.clipboard.writeText( ns ),
 			} ) ) }
 			infoText={ text.infoText }
+			testId={'nameservers-card' }
 		/>
 	);
 };
