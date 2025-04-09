@@ -21,6 +21,8 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 			<InfoActionCard
 				title={ text.title }
 				items={ [ { value: text.noRecords } ] }
+				testId='php-version-card'
+				dataAttributes={{ version: false }}
 			/>
 		);
 	}
@@ -36,6 +38,8 @@ const PHPVersionCard = ( { phpVersion = {}, platformUrl, methods } ) => {
 					actionUrl: getDeepLinkedPlatformUrl( 'settings' ),
 				},
 			] }
+			testId='php-version-card'
+			dataAttributes={{ version: currentVersion }}
 		/>
 	);
 };

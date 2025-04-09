@@ -5,7 +5,7 @@ import { Card } from '@newfold/ui-component-library';
 
 import InformationTooltip from '../InformationTooltip';
 
-const InfoActionCard = ( { title, infoText, items, testId } ) => {
+const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} } ) => {
 	const [ copiedIndex, setCopiedIndex ] = useState( null );
 
 	const handleAction = ( value, index, actionType, actionUrl ) => {
@@ -21,8 +21,20 @@ const InfoActionCard = ( { title, infoText, items, testId } ) => {
 		}
 	};
 
+	const dynamicDataAttributes = Object.entries(dataAttributes).reduce(
+		(acc, [key, value]) => {
+			acc[`data-${key}`] = value;
+			return acc;
+		},
+		{}
+	);
+
 	return (
-		<Card className="nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg" data-testid={ testId }>
+		<Card
+			className="nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+			data-testid={ testId }
+			{ ...dynamicDataAttributes }
+		>
 			<div className="nfd-flex nfd-items-center nfd-space-x-2">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
 				{ infoText && <InformationTooltip text={ infoText } /> }
