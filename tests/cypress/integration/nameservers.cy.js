@@ -27,7 +27,7 @@ describe( 'Nameservers Card', () => {
 								.and('have.attr', 'data-action', 'copy')
 								.click();
 	
-							cy.get('.copied')
+							cy.get('.nfd-button-copied')
 								.should('exist')
 								.and('be.visible');
 						});

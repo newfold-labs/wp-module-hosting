@@ -73,7 +73,7 @@ const InfoActionCard = ( { title, infoText, items, testId } ) => {
 										</button>
 										{ actionType === 'copy' &&
 											copiedIndex === index && (
-												<div className="nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md copied">
+												<div className="nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md nfd-button-copied">
 													{ __(
 														'Copied!',
 														'wp-module-hosting'
