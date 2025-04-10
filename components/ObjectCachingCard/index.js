@@ -100,6 +100,7 @@ const ObjectCachingCard = ( {
 
 	return (
 		<SiteStatusCard
+			testId="object-cache-card"
 			title={ text.title }
 			status={ text.status[ status ] || text.status.not_setup }
 			description={
