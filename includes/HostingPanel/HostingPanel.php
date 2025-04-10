@@ -9,6 +9,7 @@ use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
 use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
+use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 
@@ -32,6 +33,13 @@ class HostingPanel {
 	 * @var string
 	 */
 	public static $transient_key = 'nfd_hosting_panel_data';
+
+	/**
+	 * Transient key used to flag that the hosting panel cache needs to be refreshed.
+	 *
+	 * @var string
+	 */
+	public static $refresh_flag_key = 'nfd_hosting_panel_needs_refresh';
 
 	/**
 	 * List of feature class names.
@@ -62,9 +70,13 @@ class HostingPanel {
 	 */
 	public function __construct( $container ) {
 		$this->container = $container;
-		$this->initialize_features();
-		$this->initialize_rest_api();
+
 		$this->initialize_hooks();
+
+		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
+			$this->initialize_features();
+			$this->initialize_rest_api();
+		}
 	}
 
 	/**
@@ -92,6 +104,8 @@ class HostingPanel {
 	 */
 	protected function initialize_hooks() {
 		add_filter( 'nfd_plugin_subnav', array( $this, 'add_nfd_subnav' ) );
+		add_action( 'wp_login', array( $this, 'handle_wp_login' ), 10, 2 );
+		add_action( 'newfold_sso_success', array( $this, 'handle_sso_login' ), 10, 2 );
 	}
 
 	/**
@@ -118,33 +132,39 @@ class HostingPanel {
 	 * @return array Hosting panel data.
 	 */
 	public function get_data() {
-		$cached = get_transient( self::$transient_key );
+		$needs_refresh = get_transient( self::$refresh_flag_key );
+		$cached        = get_transient( self::$transient_key );
 
-		if ( false !== $cached ) {
-			$cached['__meta'] = array(
-				'generated'  => $cached['__generated'] ?? time(),
-				'from_cache' => true,
-			);
-			return $cached;
-		}
+		// If refresh flag is set, ignore cache and rebuild
+		if ( $needs_refresh || false === $cached ) {
+			$data = array();
 
-		$data = array();
-		foreach ( $this->instances as $identifier => $instance ) {
-			if ( method_exists( $instance, 'get_data' ) ) {
-				$data[ $identifier ] = $instance->get_data();
+			foreach ( $this->instances as $identifier => $instance ) {
+				if ( method_exists( $instance, 'get_data' ) ) {
+					$data[ $identifier ] = $instance->get_data();
+				}
 			}
+
+			$generated           = time();
+			$data['__generated'] = $generated;
+			$data['__meta']      = array(
+				'generated'  => $generated,
+				'from_cache' => false,
+			);
+
+			set_transient( self::$transient_key, $data, DAY_IN_SECONDS );
+			delete_transient( self::$refresh_flag_key );
+
+			return $data;
 		}
 
-		$generated           = time();
-		$data['__generated'] = $generated;
-		$data['__meta']      = array(
-			'generated'  => $generated,
-			'from_cache' => false,
+		// Cache is valid and no refresh needed
+		$cached['__meta'] = array(
+			'generated'  => $cached['__generated'] ?? time(),
+			'from_cache' => true,
 		);
 
-		set_transient( self::$transient_key, $data, DAY_IN_SECONDS );
-
-		return $data;
+		return $cached;
 	}
 
 	/**
@@ -206,5 +226,43 @@ class HostingPanel {
 		array_push( $subnav, $hosting );
 
 		return $subnav;
+	}
+
+	/**
+	 * Callback for the 'wp_login' action hook.
+	 *
+	 * @param string  $user_login The username of the user logging in.
+	 * @param WP_User $user       The logged-in user object.
+	 *
+	 * @return void
+	 */
+	public function handle_wp_login( $user_login, $user ) {
+		if ( $user instanceof \WP_User && user_can( $user, 'manage_options' ) ) {
+			self::mark_cache_for_refresh();
+		}
+	}
+
+	/**
+	 * Callback for the 'newfold_sso_success' action hook.
+	 *
+	 * Marks the hosting panel cache for refresh if the SSO-authenticated user is an admin.
+	 *
+	 * @param WP_User $user     The logged-in user object.
+	 *
+	 * @return void
+	 */
+	public function handle_sso_login( $user ) {
+		if ( $user instanceof \WP_User && user_can( $user, 'manage_options' ) ) {
+			self::mark_cache_for_refresh();
+		}
+	}
+
+	/**
+	 * Marks the hosting panel cache to be refreshed on next get_data() call.
+	 *
+	 * @return void
+	 */
+	public static function mark_cache_for_refresh() {
+		set_transient( self::$refresh_flag_key, true, DAY_IN_SECONDS );
 	}
 }

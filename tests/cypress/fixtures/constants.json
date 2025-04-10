@@ -1,6 +1,7 @@
 {
   "transients": {
-    "hostingPanelData": "nfd_hosting_panel_data"
+    "hostingPanelData": "nfd_hosting_panel_data",
+    "refreshFlag": "nfd_hosting_panel_needs_refresh"
   },
   "options": {
     "cdn": "endurance_cloudflare_enabled"
