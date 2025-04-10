@@ -13,9 +13,13 @@ const SiteStatusCard = ( {
 	linkHref,
 	linkText,
 	Illustration,
+	testId, // <-- added
 } ) => {
 	return (
-		<Card className="nfd-min-h-[208px] nfd-p-4 nfd-border nfd-border-gray-200 nfd-rounded-lg">
+		<Card
+			className="nfd-min-h-[208px] nfd-p-4 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+			data-testid={ testId }
+		>
 			<div className="nfd-flex nfd-justify-between nfd-items-center">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
 				{ linkHref && (
@@ -34,9 +38,13 @@ const SiteStatusCard = ( {
 				{ Illustration && (
 					<div className="nfd-w-[48px] nfd-h-[48px]">
 						{ typeof Illustration === 'function' ? (
-							<Illustration />
+							<span data-testid={ `${ testId }-status-icon` }>
+								<Illustration />
+							</span>
 						) : (
-							<Illustration width={ 48 } height={ 48 } />
+							<span data-testid={ `${ testId }-status-icon` }>
+								<Illustration width={ 48 } height={ 48 } />
+							</span>
 						) }
 					</div>
 				) }
@@ -55,6 +63,7 @@ const SiteStatusCard = ( {
 						className="nfd-w-fit"
 						onClick={ primaryButtonAction }
 						disabled={ primaryButtonDisabled }
+						data-testid={ `${ testId }-scan-button` }
 					>
 						{ primaryButtonContent || primaryButtonText }
 					</Button>
@@ -65,6 +74,7 @@ const SiteStatusCard = ( {
 						variant="secondary"
 						className="nfd-w-fit"
 						onClick={ secondaryButtonAction }
+						data-testid={ `${ testId }-support-button` }
 					>
 						{ secondaryButtonText }
 					</Button>

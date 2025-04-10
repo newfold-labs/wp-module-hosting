@@ -64,6 +64,7 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 
 	return (
 		<SiteStatusCard
+			testId="cdn-info-card"
 			title={ text.title }
 			status={ isEnabled ? text.statusEnabled : text.statusDisabled }
 			description={

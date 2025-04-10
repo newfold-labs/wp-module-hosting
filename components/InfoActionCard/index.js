@@ -5,7 +5,7 @@ import { Card } from '@newfold/ui-component-library';
 
 import InformationTooltip from '../InformationTooltip';
 
-const InfoActionCard = ( { title, infoText, items } ) => {
+const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} } ) => {
 	const [ copiedIndex, setCopiedIndex ] = useState( null );
 
 	const handleAction = ( value, index, actionType, actionUrl ) => {
@@ -21,8 +21,20 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 		}
 	};
 
+	const dynamicDataAttributes = Object.entries(dataAttributes).reduce(
+		(acc, [key, value]) => {
+			acc[`data-${key}`] = value;
+			return acc;
+		},
+		{}
+	);
+
 	return (
-		<Card className="nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg">
+		<Card
+			className="nfd-relative nfd-overflow-visible nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+			data-testid={ testId }
+			{ ...dynamicDataAttributes }
+		>
 			<div className="nfd-flex nfd-items-center nfd-space-x-2">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
 				{ infoText && <InformationTooltip text={ infoText } /> }
@@ -38,12 +50,14 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 							infoText: itemInfotext,
 							actionType,
 							actionUrl,
+							id,
 						},
 						index
 					) => (
 						<div
 							key={ index }
-							className="nfd-flex nfd-items-center nfd-justify-between nfd-mb-2"
+							id={id}
+							className="info-item nfd-flex nfd-items-center nfd-justify-between nfd-mb-2"
 						>
 							<div className="nfd-flex nfd-items-center nfd-space-x-2">
 								{ label && (
@@ -52,13 +66,14 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 								{ itemInfotext && (
 									<InformationTooltip text={ itemInfotext } />
 								) }
-								<p className="nfd-text-gray-700 nfd-mr-2">
+								<p className="nfd-info-action-card-value nfd-text-gray-700 nfd-mr-2">
 									{ value }
 								</p>
 								{ actionText && (
 									<div className="nfd-relative">
 										<button
 											className="nfd-text-[#0E3E80] nfd-font-bold nfd-text-sm nfd-no-underline"
+											data-action={actionType}
 											onClick={ () =>
 												handleAction(
 													value,
@@ -72,7 +87,7 @@ const InfoActionCard = ( { title, infoText, items } ) => {
 										</button>
 										{ actionType === 'copy' &&
 											copiedIndex === index && (
-												<div className="nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md">
+												<div className="nfd-button-copied nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md">
 													{ __(
 														'Copied!',
 														'wp-module-hosting'
