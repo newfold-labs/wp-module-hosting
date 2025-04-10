@@ -1,8 +1,5 @@
-import { cleanupVisitHomePage, wpLogin } from '../support/utils';
-import {
-	interceptPanelAndReplaceKey,
-	spyOnHostingPanelApi,
-} from '../support/intercepts';
+import { wpLogin, cleanupVisitHomePage } from '../support/utils';
+import { interceptPanelAndReplaceKey } from '../support/intercepts';
 import { testEnabledForPlugin } from '../support/utils';
 
 describe( 'Refreshing Data', () => {
@@ -20,10 +17,10 @@ describe( 'Refreshing Data', () => {
 		} );
 
 		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
-		cy.wait( '@getPanelData' ); // First call is overridden
+		cy.wait( '@getPanelData' );
 	} );
 
-	it( 'shows initial refresh time and updates it on refresh click', () => {
+	it( 'shows an old refresh time and updates it after refresh button click', () => {
 		cy.get( '[data-testid="nfd-data-refresh-time"]' )
 			.should( 'exist' )
 			.and( 'not.be.empty' )
@@ -35,39 +32,18 @@ describe( 'Refreshing Data', () => {
 			.and( 'not.be.disabled' )
 			.as( 'refreshButton' );
 
-		spyOnHostingPanelApi(); // Reattach before click
 		cy.get( '@refreshButton' ).click();
 		cy.wait( '@getPanelData' );
 
-		cy.get( '@initialTime' ).then( ( initialText ) => {
+		cy.get( '@initialTime' ).then( ( initial ) => {
 			cy.get( '[data-testid="nfd-data-refresh-time"]' )
 				.should( 'exist' )
 				.and( 'not.be.empty' )
 				.invoke( 'text' )
-				.should( 'not.equal', initialText );
+				.should( 'not.equal', initial );
 		} );
 	} );
 
-	it('Check refresh time text and Refresh button click', () => {
-		cy.get('[data-testid="nfd-data-refresh-time"]')
-		.should('exist')
-        .invoke('text') // Get start text
-        .then((initialText) => {
-			cy.get('[data-testid="nfd-data-refresh-button"]')
-			.should('exist')
-			.then(($button) => {
-				spyOnHostingPanelApi();
-				cy.wrap($button).click();
-				cy.wait( '@getPanelData' )
-				// Check if the start text is different from the end text
-				cy.get('[data-testid="nfd-data-refresh-time"]')
-					.invoke('text')
-					.should('not.equal', initialText);
-			});
-        });
-	});
-
-	// After all tests in the suite, visit the home page to reset the environment
 	after( () => {
 		cleanupVisitHomePage();
 	} );
