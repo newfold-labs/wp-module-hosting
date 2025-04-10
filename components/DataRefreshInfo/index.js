@@ -42,7 +42,7 @@ const DataRefreshInfo = ( { timestamp, onRefresh } ) => {
 
 	return (
 		<div className="nfd-flex nfd-items-center nfd-gap-2 nfd-text-sm nfd-text-gray-500 nfd-mt-2">
-			<span>
+			<span data-testid="nfd-data-refresh-time">
 				{ sprintf(
 					/* translators: %s is the relative time since last refresh, like "5 minutes ago" */
 					__( 'Last updated %s', 'wp-module-hosting' ),
@@ -51,6 +51,7 @@ const DataRefreshInfo = ( { timestamp, onRefresh } ) => {
 			</span>
 			<button
 				className="nfd-text-[#0E3E80] nfd-font-medium hover:nfd-underline"
+				data-testid="nfd-data-refresh-button"
 				onClick={ onRefresh }
 			>
 				{ __( 'Refresh', 'wp-module-hosting' ) }
