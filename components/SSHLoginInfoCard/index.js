@@ -26,6 +26,7 @@ const SSHLoginInfoCard = ( {
 			actionText: text.manageKeysAction,
 			actionType: 'redirect',
 			actionUrl: getDeepLinkedPlatformUrl( 'advanced' ),
+			id: 'nfd-hosting-manage-keys',
 		},
 		{
 			label: text.sshLoginLabel,
@@ -35,10 +36,13 @@ const SSHLoginInfoCard = ( {
 			onAction: sshLoginInfo
 				? () => navigator.clipboard.writeText( sshLoginInfo )
 				: null,
+			id: 'nfd-hosting-ssh-login-info',
 		},
 	];
 
-	return <InfoActionCard title={ text.title } items={ items } />;
+
+
+	return <InfoActionCard title={ text.title } items={ items } testId="ssh-login-info-card" testSSHLoginInfoAvailable={ items.length > 0 } />;
 };
 
 export default SSHLoginInfoCard;

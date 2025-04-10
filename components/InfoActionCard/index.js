@@ -38,11 +38,13 @@ const InfoActionCard = ( { title, infoText, items, testId } ) => {
 							infoText: itemInfotext,
 							actionType,
 							actionUrl,
+							id,
 						},
 						index
 					) => (
 						<div
 							key={ index }
+							id={id}
 							className="info-item nfd-flex nfd-items-center nfd-justify-between nfd-mb-2"
 						>
 							<div className="nfd-flex nfd-items-center nfd-space-x-2">
@@ -52,7 +54,7 @@ const InfoActionCard = ( { title, infoText, items, testId } ) => {
 								{ itemInfotext && (
 									<InformationTooltip text={ itemInfotext } />
 								) }
-								<p className="nfd-text-gray-700 nfd-mr-2">
+								<p className="nfd-info-action-card-value nfd-text-gray-700 nfd-mr-2">
 									{ value }
 								</p>
 								{ actionText && (
@@ -73,7 +75,7 @@ const InfoActionCard = ( { title, infoText, items, testId } ) => {
 										</button>
 										{ actionType === 'copy' &&
 											copiedIndex === index && (
-												<div className="nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md nfd-button-copied">
+												<div className="nfd-button-copied nfd-absolute nfd-bottom-full nfd-left-1/2 nfd-transform -nfd-translate-x-1/2 nfd-mb-2 nfd-bg-[#0E3E80] nfd-text-white nfd-text-xs nfd-font-semibold nfd-py-1 nfd-px-2 nfd-rounded-md nfd-shadow-md">
 													{ __(
 														'Copied!',
 														'wp-module-hosting'
