@@ -1,5 +1,3 @@
-// tests/cypress/support/utils.js
-
 export const wpLogin = () => {
 	cy.login( Cypress.env( 'wpUsername' ), Cypress.env( 'wpPassword' ) );
 };
@@ -15,4 +13,9 @@ export const testEnabledForPlugin = ( expectedPluginId ) => {
 
 export const cleanupVisitHomePage = () => {
 	cy.visit( '/wp-admin/index.php' );
+};
+
+export const forceWpLogin = () => {
+	cy.logout();
+	wpLogin();
 };
