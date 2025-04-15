@@ -1,36 +1,49 @@
-import { cleanupVisitHomePage, wpLogin } from '../support/utils';
-import { spyOnHostingPanelApi } from '../support/intercepts';
+import { wpLogin, cleanupVisitHomePage } from '../support/utils';
+import { interceptPanelAndReplaceKey } from '../support/intercepts';
 import { testEnabledForPlugin } from '../support/utils';
 
 describe( 'Refreshing Data', () => {
-	before( function () {
+	before( () => {
 		testEnabledForPlugin( 'bluehost' );
 		wpLogin();
+
+		const fiveMinutesAgo = Math.floor( Date.now() / 1000 ) - 5 * 60;
+
+		interceptPanelAndReplaceKey( 'object-cache', {}, ( body ) => {
+			body.__generated = fiveMinutesAgo;
+			if ( body.__meta ) {
+				body.__meta.generated = fiveMinutesAgo;
+			}
+		} );
+
 		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
-		spyOnHostingPanelApi();
 		cy.wait( '@getPanelData' );
 	} );
 
-	it('Check refresh time text and Refresh button click', () => {
-		cy.get('[data-testid="nfd-data-refresh-time"]')
-		.should('exist')
-        .invoke('text') // Get start text
-        .then((initialText) => {
-			cy.get('[data-testid="nfd-data-refresh-button"]')
-			.should('exist')
-			.then(($button) => {
-				spyOnHostingPanelApi();
-				cy.wrap($button).click();
-				cy.wait( '@getPanelData' )
-				// Check if the start text is different from the end text
-				cy.get('[data-testid="nfd-data-refresh-time"]')
-					.invoke('text')
-					.should('not.equal', initialText);
-			});
-        });
-	});
+	it( 'shows an old refresh time and updates it after refresh button click', () => {
+		cy.get( '[data-testid="nfd-data-refresh-time"]' )
+			.should( 'exist' )
+			.and( 'not.be.empty' )
+			.invoke( 'text' )
+			.as( 'initialTime' );
 
-	// After all tests in the suite, visit the home page to reset the environment
+		cy.get( '[data-testid="nfd-data-refresh-button"]' )
+			.should( 'exist' )
+			.and( 'not.be.disabled' )
+			.as( 'refreshButton' );
+
+		cy.get( '@refreshButton' ).click();
+		cy.wait( '@getPanelData' );
+
+		cy.get( '@initialTime' ).then( ( initial ) => {
+			cy.get( '[data-testid="nfd-data-refresh-time"]' )
+				.should( 'exist' )
+				.and( 'not.be.empty' )
+				.invoke( 'text' )
+				.should( 'not.equal', initial );
+		} );
+	} );
+
 	after( () => {
 		cleanupVisitHomePage();
 	} );

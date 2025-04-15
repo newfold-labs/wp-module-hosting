@@ -9,21 +9,31 @@ export const spyOnHostingPanelApi = () => {
 };
 
 /**
- * Intercepts the panel API and replaces a specific key in the response.
- * The request must be triggered by visiting the hosting page.
+ * Intercepts the panel API, replaces a specific key in the first response only,
+ * and optionally mutates the full response with a modifier function.
  *
- * @param {string} key   - The top-level key in the API response to override
- * @param {Object} value - The value to replace it with
+ * @param {string}   key        - Top-level key to override (e.g. 'object-cache')
+ * @param {Object}   value      - Value to assign for that key
+ * @param {Function} [modifier] - Optional modifier for the full response body
  */
-export const interceptPanelAndReplaceKey = ( key, value ) => {
+export const interceptPanelAndReplaceKey = ( key, value, modifier = null ) => {
+	let callCount = 0;
+
 	cy.intercept(
 		'GET',
 		'**/index.php?rest_route=%2Fnewfold-hosting%2Fv1%2Fpanel**',
 		( req ) => {
 			req.continue( ( res ) => {
-				if ( res.body ) {
+				callCount++;
+
+				if ( callCount === 1 && res.body ) {
 					res.body[ key ] = value;
+
+					if ( typeof modifier === 'function' ) {
+						modifier( res.body );
+					}
 				}
+
 				res.send();
 			} );
 		}

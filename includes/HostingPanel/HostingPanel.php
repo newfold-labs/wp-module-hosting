@@ -79,8 +79,6 @@ class HostingPanel {
 	public function __construct( $container ) {
 		$this->container = $container;
 
-		new Constants( $container );
-
 		$this->initialize_hooks();
 
 		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
@@ -149,8 +147,8 @@ class HostingPanel {
 
 		// If refresh flag is set, ignore cache and rebuild
 		if ( $needs_refresh || false === $cached ) {
-
 			$data = array();
+
 			foreach ( $this->instances as $identifier => $instance ) {
 				if ( method_exists( $instance, 'get_data' ) ) {
 					$data[ $identifier ] = $instance->get_data();

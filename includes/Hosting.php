@@ -24,7 +24,7 @@ class Hosting {
 	public function __construct( Container $container ) {
 		// We're trying to avoid adding more stuff to this.
 		$this->container = $container;
-		
+
 		new HostingPanel( $container );
 	}
 }
