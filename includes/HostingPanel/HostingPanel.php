@@ -79,6 +79,8 @@ class HostingPanel {
 	public function __construct( $container ) {
 		$this->container = $container;
 
+		new Constants( $container );
+
 		$this->initialize_hooks();
 
 		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
