@@ -4,11 +4,13 @@ namespace NewfoldLabs\WP\Module\Hosting\HostingPanel;
 
 use NewfoldLabs\WP\Module\Hosting\CDNInfo\CDNInfo;
 use WP_Error;
+use NewfoldLabs\WP\Module\Hosting\Data\Constants;
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
 use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
+use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 
@@ -32,6 +34,20 @@ class HostingPanel {
 	 * @var string
 	 */
 	public static $transient_key = 'nfd_hosting_panel_data';
+
+	/**
+	 * Transient key used to flag that the hosting panel cache needs to be refreshed.
+	 *
+	 * @var string
+	 */
+	public static $refresh_flag_key = 'nfd_hosting_panel_needs_refresh';
+
+	/**
+	* Slug used for the hosting module's admin page.
+	*
+	* @var string
+	*/
+	const PAGE_SLUG = 'nfd-hosting';
 
 	/**
 	 * List of feature class names.
@@ -62,9 +78,16 @@ class HostingPanel {
 	 */
 	public function __construct( $container ) {
 		$this->container = $container;
-		$this->initialize_features();
-		$this->initialize_rest_api();
+		
+		new Constants( $container );
+
 		$this->initialize_hooks();
+
+		if ( Permissions::is_authorized_admin() || Permissions::rest_is_authorized_admin() ) {
+			$this->initialize_features();
+			$this->initialize_rest_api();
+		}
+
 	}
 
 	/**
@@ -91,7 +114,11 @@ class HostingPanel {
 	 * @return void
 	 */
 	protected function initialize_hooks() {
+		add_action( 'admin_menu', array( $this, 'add_management_page' ) );
+		add_action( 'load-tools_page_' . self::PAGE_SLUG, array( __CLASS__, 'initialize_hosting_app' ) );
 		add_filter( 'nfd_plugin_subnav', array( $this, 'add_nfd_subnav' ) );
+		add_action( 'wp_login', array( $this, 'handle_wp_login' ), 10, 2 );
+		add_action( 'newfold_sso_success', array( $this, 'handle_sso_login' ), 10, 2 );
 	}
 
 	/**
@@ -118,33 +145,39 @@ class HostingPanel {
 	 * @return array Hosting panel data.
 	 */
 	public function get_data() {
-		$cached = get_transient( self::$transient_key );
+		$needs_refresh = get_transient( self::$refresh_flag_key );
+		$cached        = get_transient( self::$transient_key );
 
-		if ( false !== $cached ) {
-			$cached['__meta'] = array(
-				'generated'  => $cached['__generated'] ?? time(),
-				'from_cache' => true,
-			);
-			return $cached;
-		}
+		// If refresh flag is set, ignore cache and rebuild
+		if ( $needs_refresh || false === $cached ) {
 
-		$data = array();
-		foreach ( $this->instances as $identifier => $instance ) {
-			if ( method_exists( $instance, 'get_data' ) ) {
-				$data[ $identifier ] = $instance->get_data();
+			$data = array();
+			foreach ( $this->instances as $identifier => $instance ) {
+				if ( method_exists( $instance, 'get_data' ) ) {
+					$data[ $identifier ] = $instance->get_data();
+				}
 			}
+
+			$generated           = time();
+			$data['__generated'] = $generated;
+			$data['__meta']      = array(
+				'generated'  => $generated,
+				'from_cache' => false,
+			);
+
+			set_transient( self::$transient_key, $data, DAY_IN_SECONDS );
+			delete_transient( self::$refresh_flag_key );
+
+			return $data;
 		}
 
-		$generated           = time();
-		$data['__generated'] = $generated;
-		$data['__meta']      = array(
-			'generated'  => $generated,
-			'from_cache' => false,
+		// Cache is valid and no refresh needed
+		$cached['__meta'] = array(
+			'generated'  => $cached['__generated'] ?? time(),
+			'from_cache' => true,
 		);
 
-		set_transient( self::$transient_key, $data, DAY_IN_SECONDS );
-
-		return $data;
+		return $cached;
 	}
 
 	/**
@@ -197,14 +230,123 @@ class HostingPanel {
 	 * @return array Modified sub-navigation array with Hosting panel entry appended.
 	 */
 	public function add_nfd_subnav( $subnav ) {
-		$brand   = $this->container->plugin()->id;
 		$hosting = array(
-			'route'    => $brand . '#/hosting',
+			'route'    => self::PAGE_SLUG,
 			'title'    => __( 'Hosting', 'wp-module-hosting' ),
 			'priority' => 20,
 		);
 		array_push( $subnav, $hosting );
 
 		return $subnav;
+	}
+
+/**
+	 * Callback for the 'wp_login' action hook.
+	 *
+	 * @param string  $user_login The username of the user logging in.
+	 * @param WP_User $user       The logged-in user object.
+	 *
+	 * @return void
+	 */
+	public function handle_wp_login( $user_login, $user ) {
+		if ( $user instanceof \WP_User && user_can( $user, 'manage_options' ) ) {
+			self::mark_cache_for_refresh();
+		}
+	}
+
+	/**
+	 * Callback for the 'newfold_sso_success' action hook.
+	 *
+	 * Marks the hosting panel cache for refresh if the SSO-authenticated user is an admin.
+	 *
+	 * @param WP_User $user     The logged-in user object.
+	 *
+	 * @return void
+	 */
+	public function handle_sso_login( $user ) {
+		if ( $user instanceof \WP_User && user_can( $user, 'manage_options' ) ) {
+			self::mark_cache_for_refresh();
+		}
+	}
+
+	/**
+	 * Marks the hosting panel cache to be refreshed on next get_data() call.
+	 *
+	 * @return void
+	 */
+	public static function mark_cache_for_refresh() {
+		set_transient( self::$refresh_flag_key, true, DAY_IN_SECONDS );
+	}
+
+	/**
+	 * Adds the Hosting module to the WordPress Tools > Site Health menu.
+	 *
+	 * @return void
+	 */
+	public function add_management_page() {
+		add_management_page(
+			__( 'Hosting', 'wp-module-hosting' ),
+			'',
+			'manage_options',
+			self::PAGE_SLUG,
+			array( __CLASS__, 'render_hosting_app' )
+		);
+	}
+
+	/**
+	 * Outputs the HTML container for the Hosting module's React application.
+	 *
+	 * @return void
+	 */
+	public static function render_hosting_app() {
+		echo PHP_EOL;
+		echo '<!-- NFD:HOSTING -->';
+		echo PHP_EOL;
+		echo '<div id="' . esc_attr( self::PAGE_SLUG ) . '" class="' . esc_attr( self::PAGE_SLUG ) . '-container"></div>';
+		echo PHP_EOL;
+		echo '<!-- /NFD:HOSTING -->';
+		echo PHP_EOL;
+	}
+
+	/**
+	 * Initializes the Hosting module by registering and enqueuing its assets.
+	 *
+	 * @return void
+	 */
+	public static function initialize_hosting_app() {
+		self::register_hosting_assets();
+	}
+
+	/**
+	 * Registers and enqueues the JavaScript and CSS assets for the Hosting module.
+	 *
+	 * @return void
+	 */
+	public static function register_hosting_assets() {
+		$build_dir  = NFD_HOSTING_BUILD_DIR;
+		$build_url  = NFD_HOSTING_BUILD_URL;
+		$asset_file = $build_dir . '/hosting/hosting.min.asset.php';
+
+		if ( is_readable( $asset_file ) ) {
+			$asset = include_once $asset_file;
+
+			wp_register_script(
+				self::PAGE_SLUG,
+				$build_url . '/hosting/hosting.min.js',
+				$asset['dependencies'],
+				$asset['version'],
+				true
+			);
+
+			wp_register_style(
+				self::PAGE_SLUG,
+				$build_url . '/hosting/hosting.css',
+				array(),
+				$asset['version']
+			);
+
+			wp_enqueue_script( self::PAGE_SLUG );
+			wp_enqueue_style( self::PAGE_SLUG );
+		}
 	}
 }

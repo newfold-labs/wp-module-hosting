@@ -6,6 +6,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { Spinner } from '@newfold/ui-component-library';
 
+import { useDispatch } from '@wordpress/data';
+import { STORE_NAME } from '../../data/constants';
+
 import SiteStatusCard from '../SiteStatusCard';
 
 import getCDNText from './getCDNText';
@@ -13,7 +16,7 @@ import getCDNText from './getCDNText';
 const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 	const text = getCDNText();
 	const [ isLoading, setIsLoading ] = useState( false );
-	const notify = methods.useNotification();
+	const { pushNotification } = useDispatch( STORE_NAME );
 
 	const isEnabled = data.cdn_enabled;
 
@@ -44,14 +47,14 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 				},
 			} );
 
-			notify.push( 'cdn-purge-success', {
+			pushNotification( 'cdn-purge-success', {
 				title: text.purgeSuccessTitle,
 				description: text.purgeSuccessDescription,
 				variant: 'success',
-				autoDismiss: 4000,
+				autoDismiss: 5000,
 			} );
 		} catch ( error ) {
-			notify.push( 'cdn-purge-error', {
+			pushNotification( 'cdn-purge-error', {
 				title: text.purgeErrorTitle,
 				description: text.purgeErrorDescription,
 				variant: 'error',

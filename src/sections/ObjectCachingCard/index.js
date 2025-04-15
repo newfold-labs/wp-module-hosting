@@ -6,6 +6,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { Spinner } from '@newfold/ui-component-library';
 
+import { useDispatch } from '@wordpress/data';
+import { STORE_NAME } from '../../data/constants';
+
 import getObjectCachingText from './getObjectCachingText';
 import SiteStatusCard from '../SiteStatusCard';
 
@@ -17,7 +20,7 @@ const ObjectCachingCard = ( {
 } ) => {
 	const [ status, setStatus ] = useState( objectCachingStatus );
 	const [ isLoading, setIsLoading ] = useState( false );
-	const notify = methods.useNotification();
+	const { pushNotification } = useDispatch( STORE_NAME );
 	const text = getObjectCachingText();
 
 	const getDeepLinkedPlatformUrl = ( path = '' ) => {
@@ -52,7 +55,7 @@ const ObjectCachingCard = ( {
 			} else if ( action === 'disable' ) {
 				setStatus( 'disabled' );
 			} else if ( action === 'clear' ) {
-				notify.push( 'object-caching-clear-success', {
+				pushNotification( 'object-caching-clear-success', {
 					title:
 						text.notifications.clearSuccess?.title ||
 						'Cache cleared',
@@ -64,7 +67,7 @@ const ObjectCachingCard = ( {
 				} );
 			}
 		} catch ( error ) {
-			notify.push( 'object-caching-update-error', {
+			pushNotification( 'object-caching-update-error', {
 				title: text.notifications.updateError.title,
 				description: text.notifications.updateError.description,
 				variant: 'error',
