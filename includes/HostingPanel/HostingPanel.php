@@ -78,7 +78,7 @@ class HostingPanel {
 	 */
 	public function __construct( $container ) {
 		$this->container = $container;
-		
+
 		new Constants( $container );
 
 		$this->initialize_hooks();
@@ -87,7 +87,6 @@ class HostingPanel {
 			$this->initialize_features();
 			$this->initialize_rest_api();
 		}
-
 	}
 
 	/**
@@ -240,7 +239,7 @@ class HostingPanel {
 		return $subnav;
 	}
 
-/**
+	/**
 	 * Callback for the 'wp_login' action hook.
 	 *
 	 * @param string  $user_login The username of the user logging in.
