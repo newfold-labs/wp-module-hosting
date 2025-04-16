@@ -113,7 +113,6 @@ class HostingPanel {
 	 * @return void
 	 */
 	protected function initialize_hooks() {
-		add_action( 'admin_menu', array( $this, 'add_management_page' ) );
 		add_action( 'load-tools_page_' . self::PAGE_SLUG, array( __CLASS__, 'initialize_hosting_app' ) );
 		add_filter( 'nfd_plugin_subnav', array( $this, 'add_nfd_subnav' ) );
 		add_action( 'wp_login', array( $this, 'handle_wp_login' ), 10, 2 );
@@ -233,6 +232,7 @@ class HostingPanel {
 			'route'    => self::PAGE_SLUG,
 			'title'    => __( 'Hosting', 'wp-module-hosting' ),
 			'priority' => 20,
+			'callback' => array( __CLASS__, 'render_hosting_app' ),
 		);
 		array_push( $subnav, $hosting );
 
@@ -275,21 +275,6 @@ class HostingPanel {
 	 */
 	public static function mark_cache_for_refresh() {
 		set_transient( self::$refresh_flag_key, true, DAY_IN_SECONDS );
-	}
-
-	/**
-	 * Adds the Hosting module to the WordPress Tools > Site Health menu.
-	 *
-	 * @return void
-	 */
-	public function add_management_page() {
-		add_management_page(
-			__( 'Hosting', 'wp-module-hosting' ),
-			'',
-			'manage_options',
-			self::PAGE_SLUG,
-			array( __CLASS__, 'render_hosting_app' )
-		);
 	}
 
 	/**
