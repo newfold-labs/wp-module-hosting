@@ -113,8 +113,8 @@ class HostingPanel {
 	 * @return void
 	 */
 	protected function initialize_hooks() {
-		add_action( 'load-tools_page_' . self::PAGE_SLUG, array( __CLASS__, 'initialize_hosting_app' ) );
 		add_filter( 'nfd_plugin_subnav', array( $this, 'add_nfd_subnav' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'initialize_hosting_app' ) );
 		add_action( 'wp_login', array( $this, 'handle_wp_login' ), 10, 2 );
 		add_action( 'newfold_sso_success', array( $this, 'handle_sso_login' ), 10, 2 );
 	}
@@ -328,9 +328,12 @@ class HostingPanel {
 				array(),
 				$asset['version']
 			);
-
-			wp_enqueue_script( self::PAGE_SLUG );
-			wp_enqueue_style( self::PAGE_SLUG );
+			// Only enqueue on hosting page
+			$screen = get_current_screen();
+			if ( isset( $screen->id ) && false !== strpos( $screen->id, 'hosting' ) ) {
+				wp_enqueue_script( self::PAGE_SLUG );
+				wp_enqueue_style( self::PAGE_SLUG );
+			}
 		}
 	}
 }
