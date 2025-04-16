@@ -14,6 +14,7 @@ import NameserversCard from '../NameserversCard';
 import SSHLoginInfoCard from '../SSHLoginInfoCard';
 import CDNCard from '../CDNCard';
 import DataRefreshInfo from '../DataRefreshInfo';
+import reactStringReplace from 'react-string-replace';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -65,7 +66,7 @@ const Panel = ( { constants, methods, Components } ) => {
 	if ( loading ) {
 		return (
 			<div className="nfd-flex nfd-flex-col nfd-text-primary nfd-items-center nfd-justify-center nfd-h-[630px]">
-				<Spinner />
+				<Spinner/>
 				<p className="nfd-mt-4 nfd-text-gray-600">{ text.loading }</p>
 			</div>
 		);
@@ -86,26 +87,31 @@ const Panel = ( { constants, methods, Components } ) => {
 	};
 
 	return (
-		<Root context={ { isRtl: false } }>
-			<Container.Header className="nfd-flex nfd-flex-row nfd-justify-between">
-				<div className="nfd-flex nfd-flex-col">
-					<Title
-						as="h2"
-						className="nfd-text-2xl nfd-font-medium nfd-text-title"
-					>
-						{ text.title }
-					</Title>
-					{ hostingData?.[ 'plan-info' ]?.plan_name && (
-						<p className="nfd-mt-5 nfd-text-lg">
-							{ hostingData[ 'plan-info' ].plan_name }
-						</p>
-					) }
-					<DataRefreshInfo
-						timestamp={ hostingData?.__meta?.generated }
-						onRefresh={ handleRefresh }
-					/>
-				</div>
-				<div className="nfd-flex nfd-flex-col nfd-justify-center">
+		<Root context={ { isRtl: false } } className="nfd-border-0">
+			<Container.Header className="nfd-flex nfd-flex-col nfd-px-0 nfd-border-0 nfd-items-end">
+				<div className="nfd-flex nfd-flex-row nfd-justify-between nfd-items-center nfd-w-full">
+					<div className="nfd-flex nfd-flex-col">
+						<Title
+							as="h2"
+							className="nfd-text-2xl nfd-font-medium nfd-text-title"
+						>
+							{ text.title }
+						</Title>
+						{ (
+							<p className="nfd-mt-5 nfd-text-lg">
+								{
+									hostingData?.[ 'plan-info' ]?.plan_name ?
+										reactStringReplace(
+											text.descriptionWithPlan,
+											'%s',
+											() => <i>{ hostingData[ 'plan-info' ].plan_name }</i>
+										)
+										:
+										text.description
+								}
+							</p>
+						) }
+					</div>
 					<Button
 						onClick={ () =>
 							window.open(
@@ -114,12 +120,17 @@ const Panel = ( { constants, methods, Components } ) => {
 							)
 						}
 						variant="secondary"
+						className="nfd-bg-transparent nfd-duration-200 nfd-text-[#196bde] hover:nfd-bg-[#196bde] hover:nfd-text-white"
 					>
 						{ text.manageButton }
 					</Button>
 				</div>
+				<DataRefreshInfo
+					timestamp={ hostingData?.__meta?.generated }
+					onRefresh={ handleRefresh }
+				/>
 			</Container.Header>
-			<Container.Block>
+			<Container.Block className="nfd-p-0">
 				<div className="nfd-grid nfd-grid-cols-1 md:nfd-grid-cols-2 nfd-gap-6">
 					{ /* Left Column */ }
 					<div className="nfd-flex nfd-flex-col nfd-gap-6">
@@ -135,7 +146,7 @@ const Panel = ( { constants, methods, Components } ) => {
 						/>
 						{ hostingData[ 'object-cache' ]?.status &&
 							hostingData[ 'object-cache' ].status !==
-								'not_setup' && (
+							'not_setup' && (
 								<ObjectCachingCard
 									objectCachingStatus={
 										hostingData[ 'object-cache' ].status

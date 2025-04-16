@@ -21,9 +21,9 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 		}
 	};
 
-	const dynamicDataAttributes = Object.entries(dataAttributes).reduce(
-		(acc, [key, value]) => {
-			acc[`data-${key}`] = value;
+	const dynamicDataAttributes = Object.entries( dataAttributes ).reduce(
+		( acc, [ key, value ] ) => {
+			acc[ `data-${ key }` ] = value;
 			return acc;
 		},
 		{}
@@ -37,7 +37,7 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 		>
 			<div className="nfd-flex nfd-items-center nfd-space-x-2">
 				<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
-				{ infoText && <InformationTooltip text={ infoText } /> }
+				{ infoText && <InformationTooltip text={ infoText }/> }
 			</div>
 
 			<div className="nfd-mt-3">
@@ -46,6 +46,7 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 						{
 							label,
 							value,
+							actionIcon: ActionIcon,
 							actionText,
 							infoText: itemInfotext,
 							actionType,
@@ -56,7 +57,7 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 					) => (
 						<div
 							key={ index }
-							id={id}
+							id={ id }
 							className="info-item nfd-flex nfd-items-center nfd-justify-between nfd-mb-2"
 						>
 							<div className="nfd-flex nfd-items-center nfd-space-x-2">
@@ -64,16 +65,16 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 									<p className="nfd-font-bold">{ label }</p>
 								) }
 								{ itemInfotext && (
-									<InformationTooltip text={ itemInfotext } />
+									<InformationTooltip text={ itemInfotext }/>
 								) }
 								<p className="nfd-info-action-card-value nfd-text-gray-700 nfd-mr-2">
 									{ value }
 								</p>
-								{ actionText && (
+								{ (actionText || ActionIcon) && (
 									<div className="nfd-relative">
 										<button
-											className="nfd-text-[#0E3E80] nfd-font-bold nfd-text-sm nfd-no-underline"
-											data-action={actionType}
+											className="nfd-text-[#196bde] nfd-flex nfd-items-center nfd-gap-2 nfd-text-sm nfd-no-underline hover:nfd-text[#1a4884]"
+											data-action={ actionType }
 											onClick={ () =>
 												handleAction(
 													value,
@@ -83,6 +84,7 @@ const InfoActionCard = ( { title, infoText, items, testId, dataAttributes = {} }
 												)
 											}
 										>
+											{ !! ActionIcon && <ActionIcon className="nfd-w-[20px] nfd-stroke-[1.25]"/> }
 											{ actionText }
 										</button>
 										{ actionType === 'copy' &&

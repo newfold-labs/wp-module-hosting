@@ -18,8 +18,8 @@ const getPHPVersionText = ( currentVersion, recommendedVersion ) => {
 			  )
 			: currentVersion,
 		button: hasRecommendation
-			? __( 'UPDATE', 'wp-module-hosting' )
-			: __( 'MANAGE', 'wp-module-hosting' ),
+			? __( 'Update', 'wp-module-hosting' )
+			: __( 'Manage', 'wp-module-hosting' ),
 	};
 };
 

@@ -1,5 +1,6 @@
 import InfoActionCard from '../InfoActionCard';
 import getSSHLoginText from './getSSHLoginText';
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
 const SSHLoginInfoCard = ( {
 	sshLoginInfo,
@@ -31,7 +32,7 @@ const SSHLoginInfoCard = ( {
 		{
 			label: text.sshLoginLabel,
 			value: sshLoginInfo || text.sshUnavailable,
-			actionText: sshLoginInfo ? text.copyButton : '',
+			actionIcon: sshLoginInfo ? DocumentDuplicateIcon : null,
 			actionType: sshLoginInfo ? 'copy' : '',
 			onAction: sshLoginInfo
 				? () => navigator.clipboard.writeText( sshLoginInfo )
