@@ -317,53 +317,53 @@ msgstr "Informations SSH indisponibles"
 
 #: includes/ObjectCache/ObjectCache.php:63
 msgid "Failed to clear object cache."
-msgstr ""
+msgstr "Échec de la suppression du cache d'objets."
 
 #: includes/ObjectCache/ObjectCache.php:80
 #: includes/ObjectCache/ObjectCache.php:117
 msgid "Failed to initialize filesystem."
-msgstr ""
+msgstr "Échec de l'initialisation du système de fichiers."
 
 #: includes/ObjectCache/ObjectCache.php:94
 msgid "Failed to disable object cache."
-msgstr ""
+msgstr "Échec de la désactivation du cache d'objets."
 
 #: includes/ObjectCache/ObjectCache.php:100
 msgid "Object cache is already disabled."
-msgstr ""
+msgstr "Le cache d'objets est déjà désactivé."
 
 #: includes/ObjectCache/ObjectCache.php:137
 msgid "Failed to restore object cache."
-msgstr ""
+msgstr "Échec de la restauration du cache d'objets."
 
 #: includes/ObjectCache/ObjectCache.php:148
 msgid "Failed to install object cache."
-msgstr ""
+msgstr "Échec de l'installation du cache d'objets."
 
 #: includes/ObjectCache/ObjectCache.php:154
 msgid "Could not enable object caching."
-msgstr ""
+msgstr "Impossible d'activer le cache d'objets."
 
 #: components/MalwareCheckCard/getMalwareCheckText.js:15
-msgid "Your site’s safe from malware!"
-msgstr ""
+msgid "Your site's safe from malware!"
+msgstr "Votre site est protégé contre les malwares !"
 
 #: components/PHPVersionCard/getPHPVersionText.js:21
 msgid "Update"
-msgstr ""
+msgstr "Mettre à jour"
 
 #: components/PHPVersionCard/getPHPVersionText.js:22
 msgid "Manage"
-msgstr ""
+msgstr "Gérer"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:11
 msgid "Manage keys"
-msgstr ""
+msgstr "Gérer les clés"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:14
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: bootstrap.php:15
 msgid "wp-module-hosting"
-msgstr ""
+msgstr "wp-module-hosting"

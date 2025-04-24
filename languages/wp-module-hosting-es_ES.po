@@ -317,53 +317,53 @@ msgstr "Información SSH no disponible"
 
 #: includes/ObjectCache/ObjectCache.php:63
 msgid "Failed to clear object cache."
-msgstr ""
+msgstr "Error al limpiar la caché de objetos."
 
 #: includes/ObjectCache/ObjectCache.php:80
 #: includes/ObjectCache/ObjectCache.php:117
 msgid "Failed to initialize filesystem."
-msgstr ""
+msgstr "Error al inicializar el sistema de archivos."
 
 #: includes/ObjectCache/ObjectCache.php:94
 msgid "Failed to disable object cache."
-msgstr ""
+msgstr "Error al deshabilitar la caché de objetos."
 
 #: includes/ObjectCache/ObjectCache.php:100
 msgid "Object cache is already disabled."
-msgstr ""
+msgstr "La caché de objetos ya está deshabilitada."
 
 #: includes/ObjectCache/ObjectCache.php:137
 msgid "Failed to restore object cache."
-msgstr ""
+msgstr "Error al restaurar la caché de objetos."
 
 #: includes/ObjectCache/ObjectCache.php:148
 msgid "Failed to install object cache."
-msgstr ""
+msgstr "Error al instalar la caché de objetos."
 
 #: includes/ObjectCache/ObjectCache.php:154
 msgid "Could not enable object caching."
-msgstr ""
+msgstr "No se pudo habilitar la caché de objetos."
 
 #: components/MalwareCheckCard/getMalwareCheckText.js:15
-msgid "Your site’s safe from malware!"
-msgstr ""
+msgid "Your site's safe from malware!"
+msgstr "¡Su sitio está libre de malware!"
 
 #: components/PHPVersionCard/getPHPVersionText.js:21
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 #: components/PHPVersionCard/getPHPVersionText.js:22
 msgid "Manage"
-msgstr ""
+msgstr "Gestionar"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:11
 msgid "Manage keys"
-msgstr ""
+msgstr "Gestionar claves"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:14
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: bootstrap.php:15
 msgid "wp-module-hosting"
-msgstr ""
+msgstr "wp-module-hosting"

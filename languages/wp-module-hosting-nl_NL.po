@@ -317,53 +317,53 @@ msgstr "SSH-informatie niet beschikbaar"
 
 #: includes/ObjectCache/ObjectCache.php:63
 msgid "Failed to clear object cache."
-msgstr ""
+msgstr "Kan objectcache niet wissen."
 
 #: includes/ObjectCache/ObjectCache.php:80
 #: includes/ObjectCache/ObjectCache.php:117
 msgid "Failed to initialize filesystem."
-msgstr ""
+msgstr "Kan bestandssysteem niet initialiseren."
 
 #: includes/ObjectCache/ObjectCache.php:94
 msgid "Failed to disable object cache."
-msgstr ""
+msgstr "Kan objectcache niet uitschakelen."
 
 #: includes/ObjectCache/ObjectCache.php:100
 msgid "Object cache is already disabled."
-msgstr ""
+msgstr "Objectcache is al uitgeschakeld."
 
 #: includes/ObjectCache/ObjectCache.php:137
 msgid "Failed to restore object cache."
-msgstr ""
+msgstr "Kan objectcache niet herstellen."
 
 #: includes/ObjectCache/ObjectCache.php:148
 msgid "Failed to install object cache."
-msgstr ""
+msgstr "Kan objectcache niet installeren."
 
 #: includes/ObjectCache/ObjectCache.php:154
 msgid "Could not enable object caching."
-msgstr ""
+msgstr "Kan objectcaching niet inschakelen."
 
 #: components/MalwareCheckCard/getMalwareCheckText.js:15
-msgid "Your site’s safe from malware!"
-msgstr ""
+msgid "Your site's safe from malware!"
+msgstr "Uw site is veilig voor malware!"
 
 #: components/PHPVersionCard/getPHPVersionText.js:21
 msgid "Update"
-msgstr ""
+msgstr "Bijwerken"
 
 #: components/PHPVersionCard/getPHPVersionText.js:22
 msgid "Manage"
-msgstr ""
+msgstr "Beheren"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:11
 msgid "Manage keys"
-msgstr ""
+msgstr "Sleutels beheren"
 
 #: components/SSHLoginInfoCard/getSSHLoginText.js:14
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 #: bootstrap.php:15
 msgid "wp-module-hosting"
-msgstr ""
+msgstr "wp-module-hosting"
