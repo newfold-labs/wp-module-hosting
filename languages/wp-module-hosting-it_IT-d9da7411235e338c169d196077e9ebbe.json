@@ -43,8 +43,8 @@
             "Scan status API failed": [
                 "API stato scansione fallita"
             ],
-            "Your site\u2019s safe from malware!": [
-                ""
+            "Your site's safe from malware!": [
+                "Il tuo sito \u00e8 al sicuro dai malware!"
             ]
         }
     }

@@ -43,8 +43,8 @@
             "Scan status API failed": [
                 "\u00c9chec de l'API d'\u00e9tat de l'analyse"
             ],
-            "Your site\u2019s safe from malware!": [
-                ""
+            "Your site's safe from malware!": [
+                "Votre site est prot\u00e9g\u00e9 contre les malwares !"
             ]
         }
     }

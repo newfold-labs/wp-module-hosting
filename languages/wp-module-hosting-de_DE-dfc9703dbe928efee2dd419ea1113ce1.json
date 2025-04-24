@@ -14,49 +14,49 @@
                 "Aktion erfolgreich ausgef\u00fchrt"
             ],
             "Object Caching": [
-                ""
+                "Objekt-Caching"
             ],
             "Object Caching is enabled": [
-                ""
+                "Objekt-Caching ist aktiviert"
             ],
             "Object Caching is NOT enabled": [
-                ""
+                "Objekt-Caching ist NICHT aktiviert"
             ],
             "Object Caching is NOT setup": [
-                ""
+                "Objekt-Caching ist NICHT eingerichtet"
             ],
             "Your site's data is being cached for better performance.": [
-                ""
+                "Die Daten Ihrer Website werden f\u00fcr bessere Leistung zwischengespeichert."
             ],
             "Your site's data is not being cached, which may slow things down.": [
-                ""
+                "Die Daten Ihrer Website werden nicht zwischengespeichert, was die Leistung beeintr\u00e4chtigen kann."
             ],
             "Object Caching is not set up on your site. Learn more about enabling it.": [
-                ""
+                "Objekt-Caching ist auf Ihrer Website nicht eingerichtet. Erfahren Sie mehr \u00fcber die Aktivierung."
             ],
             "Clear Object Cache": [
-                ""
+                "Objekt-Cache leeren"
             ],
             "Enable Object Caching": [
-                ""
+                "Objekt-Caching aktivieren"
             ],
             "Disable Object Cache": [
-                ""
+                "Objekt-Cache deaktivieren"
             ],
             "Learn more": [
-                ""
+                "Mehr erfahren"
             ],
             "Object Caching Update Failed": [
-                ""
+                "Objekt-Caching-Aktualisierung fehlgeschlagen"
             ],
             "There was an error updating the object caching settings. Please try again.": [
-                ""
+                "Beim Aktualisieren der Objekt-Caching-Einstellungen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
             ],
             "Object Cache Cleared": [
-                ""
+                "Objekt-Cache geleert"
             ],
             "The object cache was successfully cleared.": [
-                ""
+                "Der Objekt-Cache wurde erfolgreich geleert."
             ]
         }
     }

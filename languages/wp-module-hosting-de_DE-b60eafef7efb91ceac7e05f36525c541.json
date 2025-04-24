@@ -23,28 +23,28 @@
                 "Die statischen Inhalte Ihrer Website werden zwischengespeichert."
             ],
             "Your site's static content is NOT being cached.": [
-                ""
+                "Die statischen Inhalte Ihrer Website werden NICHT zwischengespeichert."
             ],
             "Clear Cache": [
-                ""
+                "Cache leeren"
             ],
             "Disable Cache": [
-                ""
+                "Cache deaktivieren"
             ],
             "Enable CDN": [
-                ""
+                "CDN aktivieren"
             ],
             "CDN Cache Cleared": [
-                ""
+                "CDN-Cache geleert"
             ],
             "Static content cache has been successfully cleared.": [
-                ""
+                "Der Cache f\u00fcr statische Inhalte wurde erfolgreich geleert."
             ],
             "CDN Purge Failed": [
-                ""
+                "CDN-Cache konnte nicht geleert werden"
             ],
             "We were unable to clear the CDN cache. Please try again.": [
-                ""
+                "Der CDN-Cache konnte nicht geleert werden. Bitte versuchen Sie es erneut."
             ]
         }
     }

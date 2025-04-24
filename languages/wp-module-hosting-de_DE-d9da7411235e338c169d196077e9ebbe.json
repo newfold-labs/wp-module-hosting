@@ -11,40 +11,40 @@
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Malware Check": [
-                ""
+                "Malware-Pr\u00fcfung"
             ],
             "Partial Scan Completed": [
-                ""
+                "Teilscan abgeschlossen"
             ],
             "Scan Status Unknown": [
-                ""
+                "Scan-Status unbekannt"
             ],
-            "Your site\u2019s safe from malware!": [
-                ""
+            "Your site's safe from malware!": [
+                "Ihre Website ist frei von Malware!"
             ],
             "Possible malware detected. Contact support for help resolving potential issues.": [
-                ""
+                "M\u00f6gliche Malware erkannt. Kontaktieren Sie den Support f\u00fcr Hilfe bei der L\u00f6sung potenzieller Probleme."
             ],
             "The current malware scan status could not be determined.": [
-                ""
+                "Der aktuelle Malware-Scan-Status konnte nicht ermittelt werden."
             ],
             "Run a Full Scan": [
-                ""
+                "Vollst\u00e4ndigen Scan durchf\u00fchren"
             ],
             "see details": [
-                ""
+                "Details anzeigen"
             ],
             "Scanning for malware\u2026": [
-                ""
+                "Suche nach Malware\u2026"
             ],
             "Contact Support": [
-                ""
+                "Support kontaktieren"
             ],
             "Could not determine scan status. Please try again.": [
-                ""
+                "Scan-Status konnte nicht ermittelt werden. Bitte versuchen Sie es erneut."
             ],
             "Scan status API failed": [
-                ""
+                "Scan-Status-API fehlgeschlagen"
             ]
         }
     }

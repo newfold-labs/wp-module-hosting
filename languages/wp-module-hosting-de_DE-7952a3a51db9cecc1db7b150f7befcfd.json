@@ -11,19 +11,19 @@
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "PHP Version": [
-                ""
+                "PHP-Version"
             ],
             "Could not determine the PHP version": [
-                ""
+                "PHP-Version konnte nicht ermittelt werden"
             ],
             "%1$s (%2$s Recommended)": [
-                ""
+                "%1$s (%2$s empfohlen)"
             ],
             "Update": [
-                ""
+                "Aktualisieren"
             ],
             "Manage": [
-                ""
+                "Verwalten"
             ]
         }
     }

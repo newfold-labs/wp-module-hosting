@@ -11,16 +11,16 @@
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Nameservers": [
-                ""
+                "Nameserver"
             ],
             "No name servers found": [
-                ""
+                "Keine Nameserver gefunden"
             ],
             "COPY": [
-                ""
+                "KOPIEREN"
             ],
             "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services.": [
-                ""
+                "Nameserver fungieren als Verzeichnis, das Domainnamen in IP-Adressen \u00fcbersetzt. Sie helfen Ihnen, Ihre Website mit verschiedenen Diensten zu verbinden."
             ]
         }
     }
