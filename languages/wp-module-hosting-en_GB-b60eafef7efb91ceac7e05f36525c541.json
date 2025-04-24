@@ -1,0 +1,51 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/CDNCard\/getCDNText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "en_GB",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "CDN": [
+                "CDN"
+            ],
+            "CDN is enabled": [
+                "CDN is enabled"
+            ],
+            "CDN is NOT enabled": [
+                "CDN is NOT enabled"
+            ],
+            "Your site's static content is being cached.": [
+                "Your site's static content is being cached."
+            ],
+            "Your site's static content is NOT being cached.": [
+                "Your site's static content is NOT being cached."
+            ],
+            "Clear Cache": [
+                "Clear Cache"
+            ],
+            "Disable Cache": [
+                "Disable Cache"
+            ],
+            "Enable CDN": [
+                "Enable CDN"
+            ],
+            "CDN Cache Cleared": [
+                "CDN Cache Cleared"
+            ],
+            "Static content cache has been successfully cleared.": [
+                "Static content cache has been successfully cleared."
+            ],
+            "CDN Purge Failed": [
+                "CDN Purge Failed"
+            ],
+            "We were unable to clear the CDN cache. Please try again.": [
+                "We were unable to clear the CDN cache. Please try again."
+            ]
+        }
+    }
+}

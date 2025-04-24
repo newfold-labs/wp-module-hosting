@@ -1,0 +1,369 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Module Hosting\n"
+"Report-Msgid-Bugs-To: https://github.com/newfold-labs/wp-module-pls/issues\n"
+"Last-Translator: Newfold Digital\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-13T09:55:55+00:00\n"
+"PO-Revision-Date: 2024-03-19 12:00+0100\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Manual\n"
+"X-Domain: wp-module-hosting\n"
+
+#: includes/Helpers/HiiveHelper.php:66
+msgid "Failed to connect to Hiive API."
+msgstr "Impossibile connettersi all'API Hiive."
+
+#: includes/HostingPanel/HostingPanel.php:121
+msgid "Feature class does not exist."
+msgstr "La classe della funzionalità non esiste."
+
+#: includes/HostingPanel/HostingPanel.php:192
+msgid "Invalid feature identifier."
+msgstr "Identificatore della funzionalità non valido."
+
+#: includes/HostingPanel/HostingPanel.php:209
+msgid "Action not supported."
+msgstr "Azione non supportata."
+
+#: includes/HostingPanel/HostingPanel.php:223
+#: components/Panel/getPanelText.js:10
+msgid "Hosting"
+msgstr "Hosting"
+
+#: includes/HostingPanel/RestApi/Controllers/HostingPanelController.php:100
+msgid "Failed to retrieve hosting info"
+msgstr "Impossibile recuperare le informazioni di hosting"
+
+#: includes/HostingPanel/RestApi/Controllers/HostingPanelController.php:132
+#: components/ObjectCachingCard/getObjectCachingText.js:52
+msgid "Action executed successfully"
+msgstr "Azione eseguita con successo"
+
+#: includes/ObjectCache/ObjectCache.php:21
+msgid "Object cache is not set up."
+msgstr "La cache degli oggetti non è configurata."
+
+#: includes/ObjectCache/ObjectCache.php:30
+msgid "Object cache is installed but disabled."
+msgstr "La cache degli oggetti è installata ma disabilitata."
+
+#: includes/ObjectCache/ObjectCache.php:36
+msgid "Object cache is enabled and functioning."
+msgstr "La cache degli oggetti è abilitata e funzionante."
+
+#: components/CDNCard/getCDNText.js:5
+msgid "CDN"
+msgstr "CDN"
+
+#: components/CDNCard/getCDNText.js:6
+msgid "CDN is enabled"
+msgstr "CDN è abilitato"
+
+#: components/CDNCard/getCDNText.js:7
+msgid "CDN is NOT enabled"
+msgstr "CDN NON è abilitato"
+
+#: components/CDNCard/getCDNText.js:8
+msgid "Your site's static content is being cached."
+msgstr "Il contenuto statico del tuo sito è in cache."
+
+#: components/CDNCard/getCDNText.js:12
+msgid "Your site's static content is NOT being cached."
+msgstr "Il contenuto statico del tuo sito NON è in cache."
+
+#: components/CDNCard/getCDNText.js:16
+msgid "Clear Cache"
+msgstr "Svuota Cache"
+
+#: components/CDNCard/getCDNText.js:17
+msgid "Disable Cache"
+msgstr "Disabilita Cache"
+
+#: components/CDNCard/getCDNText.js:18
+msgid "Enable CDN"
+msgstr "Abilita CDN"
+
+#: components/CDNCard/getCDNText.js:19
+msgid "CDN Cache Cleared"
+msgstr "Cache CDN svuotata"
+
+#: components/CDNCard/getCDNText.js:20
+msgid "Static content cache has been successfully cleared."
+msgstr "La cache del contenuto statico è stata svuotata con successo."
+
+#: components/CDNCard/getCDNText.js:24
+msgid "CDN Purge Failed"
+msgstr "Pulizia CDN fallita"
+
+#: components/CDNCard/getCDNText.js:25
+msgid "We were unable to clear the CDN cache. Please try again."
+msgstr "Non è stato possibile svuotare la cache CDN. Riprova."
+
+#: components/DataRefreshInfo/index.js:13
+msgid "just now"
+msgstr "proprio ora"
+
+#. translators: %d is the number of minutes ago
+#: components/DataRefreshInfo/index.js:18
+msgid "%d minute(s) ago"
+msgstr "%d minuto/i fa"
+
+#. translators: %d is the number of hours ago
+#: components/DataRefreshInfo/index.js:26
+msgid "%d hour(s) ago"
+msgstr "%d ora/e fa"
+
+#. translators: %d is the number of days ago
+#: components/DataRefreshInfo/index.js:35
+msgid "%d day(s) ago"
+msgstr "%d giorno/i fa"
+
+#. translators: %s is the relative time since last refresh, like "5 minutes ago"
+#: components/DataRefreshInfo/index.js:52
+msgid "Last updated: %s"
+msgstr "Ultimo aggiornamento: %s"
+
+#: components/DataRefreshInfo/index.js:64
+msgid "Refresh"
+msgstr "Aggiorna"
+
+#: components/InfoActionCard/index.js:93
+msgid "Copied!"
+msgstr "Copiato!"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:5
+msgid "Malware Check"
+msgstr "Controllo Malware"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:7
+#: components/MalwareCheckCard/getMalwareCheckText.js:8
+msgid "Partial Scan Completed"
+msgstr "Scansione parziale completata"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:12
+msgid "Scan Status Unknown"
+msgstr "Stato scansione sconosciuto"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:19
+msgid "Possible malware detected. Contact support for help resolving potential issues."
+msgstr "Possibile malware rilevato. Contatta il supporto per risolvere potenziali problemi."
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:23
+msgid "The current malware scan status could not be determined."
+msgstr "Non è stato possibile determinare lo stato attuale della scansione malware."
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:29
+msgid "Run a Full Scan"
+msgstr "Esegui una scansione completa"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:30
+msgid "see details"
+msgstr "vedi dettagli"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:31
+#: components/MalwareCheckCard/getMalwareCheckText.js:35
+msgid "Scanning for malware…"
+msgstr "Scansione malware in corso…"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:32
+msgid "Contact Support"
+msgstr "Contatta il supporto"
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:36
+msgid "Could not determine scan status. Please try again."
+msgstr "Impossibile determinare lo stato della scansione. Riprova."
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:40
+msgid "Scan status API failed"
+msgstr "API stato scansione fallita"
+
+#: components/NameserversCard/getNameserversText.js:5
+msgid "Nameservers"
+msgstr "Nameserver"
+
+#: components/NameserversCard/getNameserversText.js:6
+msgid "No name servers found"
+msgstr "Nessun nameserver trovato"
+
+#: components/NameserversCard/getNameserversText.js:7
+msgid "COPY"
+msgstr "COPIA"
+
+#: components/NameserversCard/getNameserversText.js:8
+msgid "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services."
+msgstr "I nameserver funzionano come una directory che traduce i nomi di dominio in indirizzi IP. Ti aiutano a connettere il tuo sito web a diversi servizi."
+
+#: components/ObjectCachingCard/getObjectCachingText.js:5
+msgid "Object Caching"
+msgstr "Cache degli oggetti"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:7
+msgid "Object Caching is enabled"
+msgstr "La cache degli oggetti è abilitata"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:8
+msgid "Object Caching is NOT enabled"
+msgstr "La cache degli oggetti NON è abilitata"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:12
+msgid "Object Caching is NOT setup"
+msgstr "La cache degli oggetti NON è configurata"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:15
+msgid "Your site's data is being cached for better performance."
+msgstr "I dati del tuo sito sono in cache per prestazioni migliori."
+
+#: components/ObjectCachingCard/getObjectCachingText.js:19
+msgid "Your site's data is not being cached, which may slow things down."
+msgstr "I dati del tuo sito non sono in cache, il che potrebbe rallentare le cose."
+
+#: components/ObjectCachingCard/getObjectCachingText.js:23
+msgid "Object Caching is not set up on your site. Learn more about enabling it."
+msgstr "La cache degli oggetti non è configurata sul tuo sito. Scopri di più su come abilitarla."
+
+#: components/ObjectCachingCard/getObjectCachingText.js:29
+msgid "Clear Object Cache"
+msgstr "Svuota cache degli oggetti"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:30
+msgid "Enable Object Caching"
+msgstr "Abilita cache degli oggetti"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:31
+msgid "Disable Object Cache"
+msgstr "Disabilita cache degli oggetti"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:32
+msgid "Learn more"
+msgstr "Scopri di più"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:36
+msgid "Object Caching Update Failed"
+msgstr "Aggiornamento cache degli oggetti fallito"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:40
+msgid "There was an error updating the object caching settings. Please try again."
+msgstr "Si è verificato un errore durante l'aggiornamento delle impostazioni della cache degli oggetti. Riprova."
+
+#: components/ObjectCachingCard/getObjectCachingText.js:46
+msgid "Object Cache Cleared"
+msgstr "Cache degli oggetti svuotata"
+
+#: components/ObjectCachingCard/getObjectCachingText.js:47
+msgid "The object cache was successfully cleared."
+msgstr "La cache degli oggetti è stata svuotata con successo."
+
+#: components/Panel/getPanelText.js:5
+msgid "Hang tight, we're gathering the latest info…"
+msgstr "Un momento, stiamo raccogliendo le ultime informazioni…"
+
+#: components/Panel/getPanelText.js:9
+msgid "Error:"
+msgstr "Errore:"
+
+#: components/Panel/getPanelText.js:11
+msgid "A general overview of your %s hosting plan and your site's performance."
+msgstr "Una panoramica generale del tuo piano di hosting %s e delle prestazioni del tuo sito."
+
+#: components/Panel/getPanelText.js:12
+msgid "A general overview of your hosting and your site's performance."
+msgstr "Una panoramica generale del tuo hosting e delle prestazioni del tuo sito."
+
+#: components/Panel/getPanelText.js:13
+msgid "PLAN_NAME"
+msgstr "NOME_PIANO"
+
+#: components/Panel/getPanelText.js:14
+msgid "Manage Hosting"
+msgstr "Gestisci Hosting"
+
+#: components/PHPVersionCard/getPHPVersionText.js:7
+msgid "PHP Version"
+msgstr "Versione PHP"
+
+#: components/PHPVersionCard/getPHPVersionText.js:8
+msgid "Could not determine the PHP version"
+msgstr "Impossibile determinare la versione PHP"
+
+#. translators: 1: Current PHP version, 2: Recommended PHP version
+#: components/PHPVersionCard/getPHPVersionText.js:15
+msgid "%1$s (%2$s Recommended)"
+msgstr "%1$s (%2$s Raccomandata)"
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:5
+msgid "SSH Login Info"
+msgstr "Informazioni accesso SSH"
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:6
+msgid "SSH Keys"
+msgstr "Chiavi SSH"
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:7
+msgid "SSH provides a secure way to access the web server over CLI to run server commands through a terminal."
+msgstr "SSH fornisce un modo sicuro per accedere al server web tramite CLI per eseguire comandi server attraverso un terminale."
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:12
+msgid "SSH Login:"
+msgstr "Accesso SSH:"
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:13
+msgid "SSH info unavailable"
+msgstr "Informazioni SSH non disponibili"
+
+#: includes/ObjectCache/ObjectCache.php:63
+msgid "Failed to clear object cache."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:80
+#: includes/ObjectCache/ObjectCache.php:117
+msgid "Failed to initialize filesystem."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:94
+msgid "Failed to disable object cache."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:100
+msgid "Object cache is already disabled."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:137
+msgid "Failed to restore object cache."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:148
+msgid "Failed to install object cache."
+msgstr ""
+
+#: includes/ObjectCache/ObjectCache.php:154
+msgid "Could not enable object caching."
+msgstr ""
+
+#: components/MalwareCheckCard/getMalwareCheckText.js:15
+msgid "Your site’s safe from malware!"
+msgstr ""
+
+#: components/PHPVersionCard/getPHPVersionText.js:21
+msgid "Update"
+msgstr ""
+
+#: components/PHPVersionCard/getPHPVersionText.js:22
+msgid "Manage"
+msgstr ""
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:11
+msgid "Manage keys"
+msgstr ""
+
+#: components/SSHLoginInfoCard/getSSHLoginText.js:14
+msgid "Copy"
+msgstr ""
+
+#: bootstrap.php:15
+msgid "wp-module-hosting"
+msgstr ""

@@ -1,0 +1,27 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/NameserversCard\/getNameserversText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "nl_NL",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Nameservers": [
+                "Nameservers"
+            ],
+            "No name servers found": [
+                "Geen nameservers gevonden"
+            ],
+            "COPY": [
+                "KOPI\u00cbREN"
+            ],
+            "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services.": [
+                "Nameservers werken als een directory die domeinnamen vertaalt naar IP-adressen. Helpt u om uw website te verbinden met verschillende diensten."
+            ]
+        }
+    }
+}

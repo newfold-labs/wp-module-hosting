@@ -1,0 +1,30 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/PHPVersionCard\/getPHPVersionText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "en_GB",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "PHP Version": [
+                "PHP Version"
+            ],
+            "Could not determine the PHP version": [
+                "Could not determine the PHP version"
+            ],
+            "%1$s (%2$s Recommended)": [
+                "%1$s (%2$s Recommended)"
+            ],
+            "Update": [
+                ""
+            ],
+            "Manage": [
+                ""
+            ]
+        }
+    }
+}
