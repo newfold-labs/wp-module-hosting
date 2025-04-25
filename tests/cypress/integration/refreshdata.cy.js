@@ -16,7 +16,7 @@ describe( 'Refreshing Data', () => {
 			}
 		} );
 
-		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+		cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 		cy.wait( '@getPanelData' );
 	} );
 

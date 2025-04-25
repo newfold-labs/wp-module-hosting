@@ -22,7 +22,7 @@ describe( 'HostingPanel wp_login hook', () => {
 		} );
 
 		spyOnHostingPanelApi();
-		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+		cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 		cy.wait( '@getPanelData' );
 
 		cy.get( '.nfd-container__block' ).should( 'exist' );
@@ -44,7 +44,7 @@ describe( 'HostingPanel wp_login hook', () => {
 				} );
 
 				spyOnHostingPanelApi();
-				cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+				cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 				cy.wait( '@getPanelData' );
 
 				cy.get( '.nfd-container__block' ).should( 'exist' );
