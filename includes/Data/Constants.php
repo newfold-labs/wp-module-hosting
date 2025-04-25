@@ -21,5 +21,9 @@ class Constants {
 		if ( ! defined( 'NFD_HOSTING_BUILD_URL' ) ) {
 			define( 'NFD_HOSTING_BUILD_URL', $container->plugin()->url . 'vendor/newfold-labs/wp-module-hosting/build' );
 		}
+
+		if ( ! defined( 'NFD_HOSTING_LANG_DIR' ) ) {
+			define( 'NFD_HOSTING_BUILD_DIR', dirname( __DIR__, 2 ) . '/language' );
+		}
 	}
 }
