@@ -42,8 +42,8 @@ class I18nService {
 			NFD_HOSTING_LANG_DIR
 		);
 		// Load the PHP translations from .l10n.php files in the languages dir.
-		load_textdomain( 
-			'wp-module-hosting', 
+		load_textdomain(
+			'wp-module-hosting',
 			NFD_HOSTING_LANG_DIR . '/wp-module-hosting-' . get_locale() . '.l10n.php'
 		);
 	}
@@ -76,12 +76,11 @@ class I18nService {
 	 * @return string Modified file path for the translation JSON.
 	 */
 	public function load_script_translation_file( $file, $handle, $domain ) {
-		if ( $handle === self::PAGE_SLUG ) {
+		if ( self::PAGE_SLUG === $handle ) {
 			$file_base = $domain . '-' . determine_locale();
 			// Build the file path using the languages directory and the hash of the script.
 			$file = NFD_HOSTING_LANG_DIR . '/' . $file_base . '-' . md5( 'build/hosting/hosting.js' ) . '.json';
 		}
 		return $file;
 	}
-
 }
