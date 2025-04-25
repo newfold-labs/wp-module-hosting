@@ -1,0 +1,51 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/MalwareCheckCard\/getMalwareCheckText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fr_FR",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "Malware Check": [
+                "V\u00e9rification des malwares"
+            ],
+            "Partial Scan Completed": [
+                "Analyse partielle termin\u00e9e"
+            ],
+            "Scan Status Unknown": [
+                "\u00c9tat de l'analyse inconnu"
+            ],
+            "Possible malware detected. Contact support for help resolving potential issues.": [
+                "Malware potentiel d\u00e9tect\u00e9. Contactez le support pour r\u00e9soudre les probl\u00e8mes potentiels."
+            ],
+            "The current malware scan status could not be determined.": [
+                "L'\u00e9tat actuel de l'analyse des malwares n'a pas pu \u00eatre d\u00e9termin\u00e9."
+            ],
+            "Run a Full Scan": [
+                "Lancer une analyse compl\u00e8te"
+            ],
+            "see details": [
+                "voir les d\u00e9tails"
+            ],
+            "Scanning for malware\u2026": [
+                "Recherche de malwares\u2026"
+            ],
+            "Contact Support": [
+                "Contacter le support"
+            ],
+            "Could not determine scan status. Please try again.": [
+                "Impossible de d\u00e9terminer l'\u00e9tat de l'analyse. Veuillez r\u00e9essayer."
+            ],
+            "Scan status API failed": [
+                "\u00c9chec de l'API d'\u00e9tat de l'analyse"
+            ],
+            "Your site's safe from malware!": [
+                "Votre site est prot\u00e9g\u00e9 contre les malwares !"
+            ]
+        }
+    }
+}

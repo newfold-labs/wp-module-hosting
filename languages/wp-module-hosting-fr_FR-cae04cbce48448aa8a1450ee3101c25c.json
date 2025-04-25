@@ -1,0 +1,27 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/NameserversCard\/getNameserversText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fr_FR",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "Nameservers": [
+                "Serveurs de noms"
+            ],
+            "No name servers found": [
+                "Aucun serveur de noms trouv\u00e9"
+            ],
+            "COPY": [
+                "COPIER"
+            ],
+            "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services.": [
+                "Les serveurs de noms fonctionnent comme un annuaire qui traduit les noms de domaine en adresses IP. Ils vous aident \u00e0 connecter votre site web \u00e0 diff\u00e9rents services."
+            ]
+        }
+    }
+}

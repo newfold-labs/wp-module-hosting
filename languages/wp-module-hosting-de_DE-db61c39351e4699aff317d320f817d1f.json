@@ -1,0 +1,33 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/DataRefreshInfo\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "de_DE",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "just now": [
+                "gerade eben"
+            ],
+            "%d minute(s) ago": [
+                "vor %d Minute(n)"
+            ],
+            "%d hour(s) ago": [
+                "vor %d Stunde(n)"
+            ],
+            "%d day(s) ago": [
+                "vor %d Tag(en)"
+            ],
+            "Last updated: %s": [
+                "Zuletzt aktualisiert: %s"
+            ],
+            "Refresh": [
+                "Aktualisieren"
+            ]
+        }
+    }
+}
