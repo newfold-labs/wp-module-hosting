@@ -181,7 +181,7 @@ msgid "Scan Status Unknown"
 msgstr ""
 
 #: build/hosting/hosting.min.js:2
-msgid "Your site’s safe from malware!"
+msgid "Your site's safe from malware!"
 msgstr ""
 
 #: build/hosting/hosting.min.js:2
