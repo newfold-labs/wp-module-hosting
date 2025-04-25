@@ -90,7 +90,7 @@ const Panel = ( { constants, methods, Components } ) => {
 	return (
 		<Root context={ { isRtl: false } }>
 			<NotificationFeed />
-				<Page title={ text.title }>
+			<Page title={ text.title }>
 				<Container>
 					<Container.Header className="nfd-flex nfd-flex-row nfd-justify-between">
 						<div className="nfd-flex nfd-flex-col">
@@ -143,7 +143,8 @@ const Panel = ( { constants, methods, Components } ) => {
 										'not_setup' && (
 										<ObjectCachingCard
 											objectCachingStatus={
-												hostingData[ 'object-cache' ].status
+												hostingData[ 'object-cache' ]
+													.status
 											}
 											methods={ methods }
 											platformUrl={ platFormUrl }

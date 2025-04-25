@@ -17,7 +17,7 @@ const SiteStatusCard = ( {
 } ) => {
 	return (
 		<Card
-			className="nfd-min-h-[208px] nfd-p-4 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+			className="nfd-min-h-[208px] nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg"
 			data-testid={ testId }
 		>
 			<div className="nfd-flex nfd-justify-between nfd-items-center">

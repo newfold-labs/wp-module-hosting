@@ -1,0 +1,63 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/ObjectCachingCard\/getObjectCachingText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "it_IT",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Action executed successfully": [
+                "Azione eseguita con successo"
+            ],
+            "Object Caching": [
+                "Cache degli oggetti"
+            ],
+            "Object Caching is enabled": [
+                "La cache degli oggetti \u00e8 abilitata"
+            ],
+            "Object Caching is NOT enabled": [
+                "La cache degli oggetti NON \u00e8 abilitata"
+            ],
+            "Object Caching is NOT setup": [
+                "La cache degli oggetti NON \u00e8 configurata"
+            ],
+            "Your site's data is being cached for better performance.": [
+                "I dati del tuo sito sono in cache per prestazioni migliori."
+            ],
+            "Your site's data is not being cached, which may slow things down.": [
+                "I dati del tuo sito non sono in cache, il che potrebbe rallentare le cose."
+            ],
+            "Object Caching is not set up on your site. Learn more about enabling it.": [
+                "La cache degli oggetti non \u00e8 configurata sul tuo sito. Scopri di pi\u00f9 su come abilitarla."
+            ],
+            "Clear Object Cache": [
+                "Svuota cache degli oggetti"
+            ],
+            "Enable Object Caching": [
+                "Abilita cache degli oggetti"
+            ],
+            "Disable Object Cache": [
+                "Disabilita cache degli oggetti"
+            ],
+            "Learn more": [
+                "Scopri di pi\u00f9"
+            ],
+            "Object Caching Update Failed": [
+                "Aggiornamento cache degli oggetti fallito"
+            ],
+            "There was an error updating the object caching settings. Please try again.": [
+                "Si \u00e8 verificato un errore durante l'aggiornamento delle impostazioni della cache degli oggetti. Riprova."
+            ],
+            "Object Cache Cleared": [
+                "Cache degli oggetti svuotata"
+            ],
+            "The object cache was successfully cleared.": [
+                "La cache degli oggetti \u00e8 stata svuotata con successo."
+            ]
+        }
+    }
+}

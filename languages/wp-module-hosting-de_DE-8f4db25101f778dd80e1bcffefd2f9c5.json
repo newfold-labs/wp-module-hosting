@@ -1,0 +1,36 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/SSHLoginInfoCard\/getSSHLoginText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "de_DE",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "SSH Login Info": [
+                "SSH-Login-Informationen"
+            ],
+            "SSH Keys": [
+                "SSH-Schl\u00fcssel"
+            ],
+            "SSH provides a secure way to access the web server over CLI to run server commands through a terminal.": [
+                "SSH bietet eine sichere M\u00f6glichkeit, \u00fcber CLI auf den Webserver zuzugreifen, um Serverbefehle \u00fcber ein Terminal auszuf\u00fchren."
+            ],
+            "Manage keys": [
+                "Schl\u00fcssel verwalten"
+            ],
+            "SSH Login:": [
+                "SSH-Login:"
+            ],
+            "SSH info unavailable": [
+                "SSH-Informationen nicht verf\u00fcgbar"
+            ],
+            "Copy": [
+                "Kopieren"
+            ]
+        }
+    }
+}

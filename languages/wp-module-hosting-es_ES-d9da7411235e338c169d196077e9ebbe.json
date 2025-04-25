@@ -1,0 +1,51 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/MalwareCheckCard\/getMalwareCheckText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "es_ES",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Malware Check": [
+                "Comprobaci\u00f3n de malware"
+            ],
+            "Partial Scan Completed": [
+                "Escaneo parcial completado"
+            ],
+            "Scan Status Unknown": [
+                "Estado de escaneo desconocido"
+            ],
+            "Possible malware detected. Contact support for help resolving potential issues.": [
+                "Posible malware detectado. Contacte con soporte para ayuda con posibles problemas."
+            ],
+            "The current malware scan status could not be determined.": [
+                "No se pudo determinar el estado actual del escaneo de malware."
+            ],
+            "Run a Full Scan": [
+                "Ejecutar un escaneo completo"
+            ],
+            "see details": [
+                "ver detalles"
+            ],
+            "Scanning for malware\u2026": [
+                "Escaneando en busca de malware\u2026"
+            ],
+            "Contact Support": [
+                "Contactar con soporte"
+            ],
+            "Could not determine scan status. Please try again.": [
+                "No se pudo determinar el estado del escaneo. Por favor, int\u00e9ntelo de nuevo."
+            ],
+            "Scan status API failed": [
+                "Error en la API de estado de escaneo"
+            ],
+            "Your site's safe from malware!": [
+                "\u00a1Su sitio est\u00e1 libre de malware!"
+            ]
+        }
+    }
+}

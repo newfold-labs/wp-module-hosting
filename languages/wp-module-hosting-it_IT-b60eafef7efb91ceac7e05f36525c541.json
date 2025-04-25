@@ -1,0 +1,51 @@
+{
+    "translation-revision-date": "2024-03-19 12:00+0100",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "components\/CDNCard\/getCDNText.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "it_IT",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "CDN": [
+                "CDN"
+            ],
+            "CDN is enabled": [
+                "CDN \u00e8 abilitato"
+            ],
+            "CDN is NOT enabled": [
+                "CDN NON \u00e8 abilitato"
+            ],
+            "Your site's static content is being cached.": [
+                "Il contenuto statico del tuo sito \u00e8 in cache."
+            ],
+            "Your site's static content is NOT being cached.": [
+                "Il contenuto statico del tuo sito NON \u00e8 in cache."
+            ],
+            "Clear Cache": [
+                "Svuota Cache"
+            ],
+            "Disable Cache": [
+                "Disabilita Cache"
+            ],
+            "Enable CDN": [
+                "Abilita CDN"
+            ],
+            "CDN Cache Cleared": [
+                "Cache CDN svuotata"
+            ],
+            "Static content cache has been successfully cleared.": [
+                "La cache del contenuto statico \u00e8 stata svuotata con successo."
+            ],
+            "CDN Purge Failed": [
+                "Pulizia CDN fallita"
+            ],
+            "We were unable to clear the CDN cache. Please try again.": [
+                "Non \u00e8 stato possibile svuotare la cache CDN. Riprova."
+            ]
+        }
+    }
+}
