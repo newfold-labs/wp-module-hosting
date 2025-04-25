@@ -23,7 +23,8 @@ class Constants {
 		}
 
 		if ( ! defined( 'NFD_HOSTING_LANG_DIR' ) ) {
-			define( 'NFD_HOSTING_LANG_DIR', dirname( __DIR__, 2 ) . '/language' );
-		}
+			define( 'NFD_HOSTING_LANG_DIR', dirname( $container->plugin()->file ) . '/vendor/newfold-labs/wp-module-hosting/languages' );
+		} 
+
 	}
 }

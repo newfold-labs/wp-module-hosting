@@ -13,6 +13,7 @@ use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
 use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
+use NewfoldLabs\WP\Module\Hosting\Services\I18nService;
 
 /**
  * Class HostingPanel
@@ -87,6 +88,8 @@ class HostingPanel {
 			$this->initialize_features();
 			$this->initialize_rest_api();
 		}
+
+		new I18nService( $container );
 	}
 
 	/**
@@ -330,7 +333,7 @@ class HostingPanel {
 			);
 			// Only enqueue on hosting page
 			$screen = get_current_screen();
-			if ( isset( $screen->id ) && false !== strpos( $screen->id, 'hosting' ) ) {
+			if ( isset( $screen->id ) && false !== strpos( $screen->id, self::PAGE_SLUG ) ) {
 				wp_enqueue_script( self::PAGE_SLUG );
 				wp_enqueue_style( self::PAGE_SLUG );
 			}

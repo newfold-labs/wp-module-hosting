@@ -6,12 +6,13 @@ namespace NewfoldLabs\WP\Module\Hosting\Services;
  * Class for handling internationalization.
  */
 class I18nService {
+
 	/**
-	 * Version of plugin for versioning the scripts.
-	 *
-	 * @var version
-	 */
-	protected $version;
+	* Slug used for the hosting module's admin page.
+	*
+	* @var string
+	*/
+	const PAGE_SLUG = 'nfd-hosting';
 
 	/**
 	 * Init the i18n service
@@ -19,9 +20,14 @@ class I18nService {
 	 * @param Container $container the container
 	 */
 	public function __construct( $container ) {
-		$this->version = $container->plugin()->version;
-		add_action( 'load-toplevel_page_nfd-hosting', array( $this, 'prepare_and_load_js_translations' ), 1 );
-		add_action( 'init', array( $this, 'load_text_domain' ) );
+		add_action( 'init', array( $this, 'add_php_i18n' ), 100 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_js_i18n' ), 100 );
+		add_filter(
+			'load_script_translation_file',
+			array( $this, 'load_script_translation_file' ),
+			10,
+			3
+		);
 	}
 
 	/**
@@ -29,70 +35,53 @@ class I18nService {
 	 *
 	 * @return void
 	 */
-	public function load_text_domain() {
-		$this::load_php_translations(
+	public function add_php_i18n() {
+		load_plugin_textdomain(
 			'wp-module-hosting',
-			NFD_HOSTING_LANG_DIR
-		);
-	}
-
-	/**
-	 * Enqueue script for translations of the hosting panel settings
-	 */
-	public function prepare_and_load_js_translations() {
-		wp_register_script(
-			'wp-module-hosting-translations',
-			NFD_HOSTING_DIR . '/translations.min.js',
-			array( 'lodash', 'react', 'react-dom', 'wp-data', 'wp-dom-ready', 'wp-element', 'wp-html-entities', 'wp-i18n' ),
-			$this->version,
-			true
-		);
-
-		$this::load_js_translations(
-			'wp-module-hosting',
-			'wp-module-hosting-translations',
-			NFD_HOSTING_LANG_DIR
-		);
-
-		wp_enqueue_script( 'wp-module-hosting-translations' );
-	}
-
-	/**
-	 * Loads the PHP translations from .mo files in the languages dir.
-	 * The .mo file must be named $domain-$locale.mo
-	 *
-	 * @param [string] $domain The text domain.
-	 * @param [string] $languages_dir The directory containing the .mo files.
-	 * @return boolean
-	 */
-	public static function load_php_translations( $domain, $languages_dir ) {
-		$loaded_ptd = load_plugin_textdomain(
-			$domain,
 			false,
-			$languages_dir
+			NFD_HOSTING_LANG_DIR
 		);
-
-		$current_language = get_locale();
-		$loaded_td        = load_textdomain( 'wp-module-hosting', $languages_dir . '/' . $domain . '-' . $current_language . '.mo' );
-
-		return $loaded_ptd && $loaded_td;
+		// Load the PHP translations from .l10n.php files in the languages dir.
+		load_textdomain( 
+			'wp-module-hosting', 
+			NFD_HOSTING_LANG_DIR . '/wp-module-hosting-' . get_locale() . '.l10n.php'
+		);
 	}
 
 	/**
-	 * Localizes a particular script using a JSON file present in the languages dir.
-	 * The JSON file must be named $domain-$locale-$script_slug.json.
-	 * Note: The script must be registered before this function is called.
-	 *
-	 * @param [string] $domain The text domain.
-	 * @param [string] $script_slug The slug of the registered script.
-	 * @param [string] $languages_dir The directory containing the .json file for the script.
-	 * @return boolean
+	 * Enqueue js/script for translations of the hosting app
 	 */
-	public static function load_js_translations( $domain, $script_slug, $languages_dir ) {
-		return wp_set_script_translations(
-			$script_slug,
-			$domain,
-			$languages_dir
+	public function add_js_i18n() {
+		wp_set_script_translations(
+			self::PAGE_SLUG,
+			'wp-module-hosting',
+			NFD_HOSTING_LANG_DIR
+		);
+		load_script_textdomain(
+			self::PAGE_SLUG,
+			'wp-module-hosting',
+			NFD_HOSTING_LANG_DIR
 		);
 	}
+
+	/**
+	 * Filters the file path for the JS translation JSON.
+	 *
+	 * If the script handle matches the module's handle, builds a custom path using
+	 * the languages directory, current locale, text domain, and a hash of the script.
+	 *
+	 * @param string $file   Default translation file path.
+	 * @param string $handle Script handle.
+	 * @param string $domain Text domain.
+	 * @return string Modified file path for the translation JSON.
+	 */
+	public function load_script_translation_file( $file, $handle, $domain ) {
+		if ( $handle === self::PAGE_SLUG ) {
+			$file_base = $domain . '-' . determine_locale();
+			// Build the file path using the languages directory and the hash of the script.
+			$file = NFD_HOSTING_LANG_DIR . '/' . $file_base . '-' . md5( 'build/hosting/hosting.js' ) . '.json';
+		}
+		return $file;
+	}
+
 }

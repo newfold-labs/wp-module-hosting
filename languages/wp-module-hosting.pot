@@ -16,19 +16,19 @@ msgstr ""
 msgid "Failed to connect to Hiive API."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:132
+#: includes/HostingPanel/HostingPanel.php:135
 msgid "Feature class does not exist."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:203
+#: includes/HostingPanel/HostingPanel.php:206
 msgid "Invalid feature identifier."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:220
+#: includes/HostingPanel/HostingPanel.php:223
 msgid "Action not supported."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:233
+#: includes/HostingPanel/HostingPanel.php:236
 #: build/hosting/hosting.min.js:12
 msgid "Hosting"
 msgstr ""

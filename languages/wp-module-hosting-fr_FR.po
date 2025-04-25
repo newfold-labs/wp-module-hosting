@@ -18,19 +18,19 @@ msgstr ""
 msgid "Failed to connect to Hiive API."
 msgstr "Échec de la connexion à l'API Hiive."
 
-#: includes/HostingPanel/HostingPanel.php:132
+#: includes/HostingPanel/HostingPanel.php:135
 msgid "Feature class does not exist."
 msgstr "La classe de fonctionnalité n'existe pas."
 
-#: includes/HostingPanel/HostingPanel.php:203
+#: includes/HostingPanel/HostingPanel.php:206
 msgid "Invalid feature identifier."
 msgstr "Identifiant de fonctionnalité invalide."
 
-#: includes/HostingPanel/HostingPanel.php:220
+#: includes/HostingPanel/HostingPanel.php:223
 msgid "Action not supported."
 msgstr "Action non prise en charge."
 
-#: includes/HostingPanel/HostingPanel.php:233
+#: includes/HostingPanel/HostingPanel.php:236
 #: build/hosting/hosting.min.js:12
 msgid "Hosting"
 msgstr "Hébergement"
