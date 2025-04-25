@@ -22,7 +22,8 @@ const NameserversCard = ( { nameservers } ) => {
 	return (
 		<InfoActionCard
 			title={ text.title }
-			items={ nameservers.records.map( ( ns ) => ( {
+			items={ nameservers.records.map( ( ns, i ) => ( {
+				key: `ns-${ i }`,
 				value: ns,
 				actionText: text.copyButton,
 				actionType: 'copy',
