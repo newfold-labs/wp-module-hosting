@@ -16,7 +16,7 @@ describe( 'CDN Card', () => {
 		testEnabledForPlugin( 'bluehost' );
 		wpLogin();
 		// First-time visit to allow hard reloads later
-		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+		cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 	} );
 
 	context( 'when CDN is enabled', () => {

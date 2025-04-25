@@ -11,7 +11,7 @@ describe( 'Object Caching Card', () => {
 		testEnabledForPlugin( 'bluehost' );
 		wpLogin();
 		// Visit once at the start (SPA behavior)
-		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+		cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 	} );
 
 	beforeEach( () => {

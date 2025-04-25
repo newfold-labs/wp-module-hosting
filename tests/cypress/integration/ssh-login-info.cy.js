@@ -12,7 +12,7 @@ describe('Login to Bluehost Panel, Hosting section', () => {
         testEnabledForPlugin('bluehost');
         wpLogin();
         // First-time visit to allow hard reloads later.
-        cy.visit('/wp-admin/admin.php?page=bluehost#/hosting');
+        cy.visit('/wp-admin/admin.php?page=nfd-hosting');
     });
 
     beforeEach(() => {

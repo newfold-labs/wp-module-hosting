@@ -6,7 +6,7 @@ describe( 'Nameservers Card', () => {
 	before( function () {
 		testEnabledForPlugin( 'bluehost' );
 		wpLogin();
-		cy.visit( '/wp-admin/admin.php?page=bluehost#/hosting' );
+		cy.visit( '/wp-admin/admin.php?page=nfd-hosting' );
 		spyOnHostingPanelApi();
 		cy.wait( '@getPanelData' );
 	} );

@@ -12,7 +12,7 @@ if ( function_exists( 'add_action' ) ) {
 			register(
 				array(
 					'name'     => 'wp-module-hosting',
-					'label'    => __( 'wp-module-hosting', 'wp-module-hosting' ),
+					'label'    => __( 'Hosting', 'wp-module-hosting' ),
 					'callback' => function ( Container $container ) {
 						if ( ! defined( 'NFD_HOSTING_DIR' ) ) {
 							define( 'NFD_HOSTING_DIR', __DIR__ );
