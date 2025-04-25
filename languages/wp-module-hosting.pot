@@ -12,28 +12,24 @@ msgstr ""
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-module-hosting\n"
 
-#: bootstrap.php:15
-msgid "wp-module-hosting"
-msgstr ""
-
 #: includes/Helpers/HiiveHelper.php:66
 msgid "Failed to connect to Hiive API."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:121
+#: includes/HostingPanel/HostingPanel.php:132
 msgid "Feature class does not exist."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:192
+#: includes/HostingPanel/HostingPanel.php:203
 msgid "Invalid feature identifier."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:209
+#: includes/HostingPanel/HostingPanel.php:220
 msgid "Action not supported."
 msgstr ""
 
-#: includes/HostingPanel/HostingPanel.php:223
-#: components/Panel/getPanelText.js:10
+#: includes/HostingPanel/HostingPanel.php:233
+#: build/hosting/hosting.min.js:12
 msgid "Hosting"
 msgstr ""
 
@@ -42,7 +38,7 @@ msgid "Failed to retrieve hosting info"
 msgstr ""
 
 #: includes/HostingPanel/RestApi/Controllers/HostingPanelController.php:132
-#: components/ObjectCachingCard/getObjectCachingText.js:52
+#: build/hosting/hosting.min.js:1
 msgid "Action executed successfully"
 msgstr ""
 
@@ -87,281 +83,280 @@ msgstr ""
 msgid "Could not enable object caching."
 msgstr ""
 
-#: components/CDNCard/getCDNText.js:5
-msgid "CDN"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:6
-msgid "CDN is enabled"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:7
-msgid "CDN is NOT enabled"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:8
-msgid "Your site's static content is being cached."
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:12
-msgid "Your site's static content is NOT being cached."
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:16
-msgid "Clear Cache"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:17
-msgid "Disable Cache"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:18
-msgid "Enable CDN"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:19
-msgid "CDN Cache Cleared"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:20
-msgid "Static content cache has been successfully cleared."
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:24
-msgid "CDN Purge Failed"
-msgstr ""
-
-#: components/CDNCard/getCDNText.js:25
-msgid "We were unable to clear the CDN cache. Please try again."
-msgstr ""
-
-#: components/DataRefreshInfo/index.js:13
-msgid "just now"
-msgstr ""
-
-#. translators: %d is the number of minutes ago
-#: components/DataRefreshInfo/index.js:18
-msgid "%d minute(s) ago"
-msgstr ""
-
-#. translators: %d is the number of hours ago
-#: components/DataRefreshInfo/index.js:26
-msgid "%d hour(s) ago"
-msgstr ""
-
-#. translators: %d is the number of days ago
-#: components/DataRefreshInfo/index.js:35
-msgid "%d day(s) ago"
-msgstr ""
-
-#. translators: %s is the relative time since last refresh, like "5 minutes ago"
-#: components/DataRefreshInfo/index.js:52
-msgid "Last updated: %s"
-msgstr ""
-
-#: components/DataRefreshInfo/index.js:64
-msgid "Refresh"
-msgstr ""
-
-#: components/InfoActionCard/index.js:93
-msgid "Copied!"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:5
-msgid "Malware Check"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:7
-#: components/MalwareCheckCard/getMalwareCheckText.js:8
-msgid "Partial Scan Completed"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:12
-msgid "Scan Status Unknown"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:15
-msgid "Your site’s safe from malware!"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:19
-msgid "Possible malware detected. Contact support for help resolving potential issues."
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:23
-msgid "The current malware scan status could not be determined."
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:29
-msgid "Run a Full Scan"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:30
-msgid "see details"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:31
-#: components/MalwareCheckCard/getMalwareCheckText.js:35
-msgid "Scanning for malware…"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:32
-msgid "Contact Support"
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:36
-msgid "Could not determine scan status. Please try again."
-msgstr ""
-
-#: components/MalwareCheckCard/getMalwareCheckText.js:40
-msgid "Scan status API failed"
-msgstr ""
-
-#: components/NameserversCard/getNameserversText.js:5
-msgid "Nameservers"
-msgstr ""
-
-#: components/NameserversCard/getNameserversText.js:6
-msgid "No name servers found"
-msgstr ""
-
-#: components/NameserversCard/getNameserversText.js:7
-msgid "COPY"
-msgstr ""
-
-#: components/NameserversCard/getNameserversText.js:8
-msgid "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services."
-msgstr ""
-
-#: components/ObjectCachingCard/getObjectCachingText.js:5
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:7
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching is enabled"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:8
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching is NOT enabled"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:12
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching is NOT setup"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:15
+#: build/hosting/hosting.min.js:1
 msgid "Your site's data is being cached for better performance."
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:19
+#: build/hosting/hosting.min.js:1
 msgid "Your site's data is not being cached, which may slow things down."
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:23
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching is not set up on your site. Learn more about enabling it."
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:29
+#: build/hosting/hosting.min.js:1
 msgid "Clear Object Cache"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:30
+#: build/hosting/hosting.min.js:1
 msgid "Enable Object Caching"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:31
+#: build/hosting/hosting.min.js:1
 msgid "Disable Object Cache"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:32
+#: build/hosting/hosting.min.js:1
 msgid "Learn more"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:36
+#: build/hosting/hosting.min.js:1
 msgid "Object Caching Update Failed"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:40
+#: build/hosting/hosting.min.js:1
 msgid "There was an error updating the object caching settings. Please try again."
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:46
+#: build/hosting/hosting.min.js:1
 msgid "Object Cache Cleared"
 msgstr ""
 
-#: components/ObjectCachingCard/getObjectCachingText.js:47
+#: build/hosting/hosting.min.js:1
 msgid "The object cache was successfully cleared."
 msgstr ""
 
-#: components/Panel/getPanelText.js:5
-msgid "Hang tight, we're gathering the latest info…"
+#: build/hosting/hosting.min.js:1
+msgid "Copied!"
 msgstr ""
 
-#: components/Panel/getPanelText.js:9
-msgid "Error:"
-msgstr ""
-
-#: components/Panel/getPanelText.js:11
-msgid "A general overview of your %s hosting plan and your site's performance."
-msgstr ""
-
-#: components/Panel/getPanelText.js:12
-msgid "A general overview of your hosting and your site's performance."
-msgstr ""
-
-#: components/Panel/getPanelText.js:13
-msgid "PLAN_NAME"
-msgstr ""
-
-#: components/Panel/getPanelText.js:14
-msgid "Manage Hosting"
-msgstr ""
-
-#: components/PHPVersionCard/getPHPVersionText.js:7
+#: build/hosting/hosting.min.js:1
 msgid "PHP Version"
 msgstr ""
 
-#: components/PHPVersionCard/getPHPVersionText.js:8
+#: build/hosting/hosting.min.js:1
 msgid "Could not determine the PHP version"
 msgstr ""
 
 #. translators: 1: Current PHP version, 2: Recommended PHP version
-#: components/PHPVersionCard/getPHPVersionText.js:15
+#: build/hosting/hosting.min.js:2
 msgid "%1$s (%2$s Recommended)"
 msgstr ""
 
-#: components/PHPVersionCard/getPHPVersionText.js:21
+#: build/hosting/hosting.min.js:2
 msgid "Update"
 msgstr ""
 
-#: components/PHPVersionCard/getPHPVersionText.js:22
+#: build/hosting/hosting.min.js:2
 msgid "Manage"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:5
+#: build/hosting/hosting.min.js:2
+msgid "Malware Check"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Partial Scan Completed"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Scan Status Unknown"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Your site’s safe from malware!"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Possible malware detected. Contact support for help resolving potential issues."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "The current malware scan status could not be determined."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Run a Full Scan"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "see details"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Scanning for malware…"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Contact Support"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Could not determine scan status. Please try again."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Scan status API failed"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Nameservers"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "No name servers found"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "COPY"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Name servers work as a directory that translates domain names into IP addresses. Helps you to connect your website to different services."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
 msgid "SSH Login Info"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:6
+#: build/hosting/hosting.min.js:2
 msgid "SSH Keys"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:7
+#: build/hosting/hosting.min.js:2
 msgid "SSH provides a secure way to access the web server over CLI to run server commands through a terminal."
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:11
+#: build/hosting/hosting.min.js:2
 msgid "Manage keys"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:12
+#: build/hosting/hosting.min.js:2
 msgid "SSH Login:"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:13
+#: build/hosting/hosting.min.js:2
 msgid "SSH info unavailable"
 msgstr ""
 
-#: components/SSHLoginInfoCard/getSSHLoginText.js:14
+#: build/hosting/hosting.min.js:2
 msgid "Copy"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "CDN"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "CDN is enabled"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "CDN is NOT enabled"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Your site's static content is being cached."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Your site's static content is NOT being cached."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Clear Cache"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Disable Cache"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Enable CDN"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "CDN Cache Cleared"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "Static content cache has been successfully cleared."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "CDN Purge Failed"
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "We were unable to clear the CDN cache. Please try again."
+msgstr ""
+
+#: build/hosting/hosting.min.js:2
+msgid "just now"
+msgstr ""
+
+#. translators: %d is the number of minutes ago
+#: build/hosting/hosting.min.js:5
+msgid "%d minute(s) ago"
+msgstr ""
+
+#. translators: %d is the number of hours ago
+#: build/hosting/hosting.min.js:8
+msgid "%d hour(s) ago"
+msgstr ""
+
+#. translators: %d is the number of days ago
+#: build/hosting/hosting.min.js:11
+msgid "%d day(s) ago"
+msgstr ""
+
+#. translators: %s is the relative time since last refresh, like "5 minutes ago"
+#: build/hosting/hosting.min.js:12
+msgid "Last updated: %s"
+msgstr ""
+
+#: build/hosting/hosting.min.js:12
+msgid "Refresh"
+msgstr ""
+
+#: build/hosting/hosting.min.js:12
+msgid "Hang tight, we're gathering the latest info…"
+msgstr ""
+
+#: build/hosting/hosting.min.js:12
+msgid "Error:"
+msgstr ""
+
+#. translators: %s: hosting plan name
+#: build/hosting/hosting.min.js:13
+msgid "A general overview of your %s hosting plan and your site's performance."
+msgstr ""
+
+#: build/hosting/hosting.min.js:13
+msgid "A general overview of your hosting and your site's performance."
+msgstr ""
+
+#: build/hosting/hosting.min.js:13
+msgid "PLAN_NAME"
+msgstr ""
+
+#: build/hosting/hosting.min.js:13
+msgid "Manage Hosting"
 msgstr ""
