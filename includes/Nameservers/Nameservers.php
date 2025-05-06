@@ -56,7 +56,7 @@ class Nameservers {
 				'records' => array(),
 			);
 		}
-		
+
 		$response     = json_decode( wp_remote_retrieve_body( $response ), true );
 		$name_servers = array();
 
