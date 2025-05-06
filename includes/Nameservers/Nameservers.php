@@ -15,6 +15,13 @@ class Nameservers {
 	protected $container;
 
 	/**
+	 * API endpoint for name servers.
+	 *
+	 * @var string
+	 */
+	protected $huapi_endpoint = 'https://hosting.uapi.newfold.com/v2/hosting/hosting-id/nameservers';
+
+	/**
 	 * Nameservers constructor.
 	 *
 	 * @param mixed $container The dependency container instance.
@@ -29,30 +36,40 @@ class Nameservers {
 	 * @return array Name server data.
 	 */
 	public function get_data() {
-		$site_url     = wp_parse_url( get_site_url(), PHP_URL_HOST );
-		$name_servers = $this->get_name_servers( $site_url );
+		$response = wp_remote_get(
+			str_replace( 'hosting-id', 'WN.HP.xxxxxxxx', $this->huapi_endpoint ),
+			array(
+				'headers' => array( // the token will need to be get dynamically
+					'Authorization' => 'Bearer xxx',
+				),
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return array(
+				'records' => array(),
+			);
+		}
+
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return array(
+				'records' => array(),
+			);
+		}
+		
+		$response     = json_decode( wp_remote_retrieve_body( $response ), true );
+		$name_servers = array();
+
+		if ( ! empty( $response['hosts'] ) ) {
+			foreach ( $response['hosts'] as $index => $values ) {
+				if ( ! empty( $values['host'] ) ) {
+					$name_servers[] = $values['host'];
+				}
+			}
+		}
 
 		return array(
 			'records' => $name_servers,
 		);
-	}
-
-	/**
-	 * Retrieves the name servers for a given domain.
-	 *
-	 * @param string $domain The domain to check.
-	 * @return array List of name servers.
-	 */
-	private function get_name_servers( $domain ) {
-		$records      = dns_get_record( $domain, DNS_NS );
-		$name_servers = array();
-
-		if ( ! empty( $records ) ) {
-			foreach ( $records as $record ) {
-				$name_servers[] = $record['target'];
-			}
-		}
-
-		return $name_servers;
 	}
 }
