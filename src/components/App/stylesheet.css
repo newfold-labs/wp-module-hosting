@@ -1,3 +1,40 @@
 .nfd-hosting-container {
 	margin-top: 20px;
 }
+
+.nfd-disk-space-card .nfd-disk-space-level.high-capacity .nfd-progress-bar__progress{
+	background-color: #4caf50;
+}
+
+.nfd-disk-space-card .nfd-disk-space-level.medium-capacity .nfd-progress-bar__progress{
+	background-color: #f59e0b;
+}
+
+.nfd-disk-space-card  .nfd-disk-space-level.low-capacity .nfd-progress-bar__progress{
+	background-color: #f44336;
+}
+
+.nfd-root .nfd-disk-space-card .nfd-progress-bar__progress{
+	height: 1.175rem;
+}
+
+.nfd-disk-space-card .nfd-change-plan{
+	color: #0e3e80;
+}
+
+.nfd-disk-space-card .nfd-alert{
+	width: 100%;
+}
+
+.nfd-root .nfd-disk-space-card .nfd-alert--success {
+	background-color: transparent;
+	padding: 0;
+}
+
+.nfd-root .nfd-disk-space-card .nfd-alert--success svg {
+	display: none;
+}
+
+.nfd-root .nfd-disk-space-card .nfd-validation-message.nfd-validation-message--success.nfd-alert__message {
+	color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
