@@ -16,6 +16,7 @@ import SSHLoginInfoCard from '../SSHLoginInfoCard';
 import CDNCard from '../CDNCard';
 import DataRefreshInfo from '../DataRefreshInfo';
 import NotificationFeed from '../../components/NotificationFeed';
+import PerformanceHealthCard from '../PerformanceHealthCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -128,6 +129,11 @@ const Panel = ( { constants, methods, Components } ) => {
 						<div className="nfd-grid nfd-grid-cols-1 md:nfd-grid-cols-2 nfd-gap-6">
 							{ /* Left Column */ }
 							<div className="nfd-flex nfd-flex-col nfd-gap-6">
+								<PerformanceHealthCard 
+									data={ hostingData[ 'performance-health' ] }
+									methods={ methods }
+									platformUrl={ platFormUrl }
+								/>
 								<MalwareCheckCard
 									data={ hostingData[ 'malware-check' ] }
 									methods={ methods }
