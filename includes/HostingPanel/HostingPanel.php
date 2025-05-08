@@ -14,6 +14,7 @@ use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 use NewfoldLabs\WP\Module\Hosting\Services\I18nService;
+use NewfoldLabs\WP\Module\Hosting\DataCenter\DataCenter;
 
 /**
  * Class HostingPanel
@@ -63,6 +64,7 @@ class HostingPanel {
 		'ssh-info'      => SSHInfo::class,
 		'cdn-info'      => CDNInfo::class,
 		'plan-info'     => PlanInfo::class,
+		'data-center'   => DataCenter::class,
 	);
 
 	/**
