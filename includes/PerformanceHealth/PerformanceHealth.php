@@ -92,7 +92,7 @@ class PerformanceHealth {
 			);
 			$cached_data['performance-health']['results'] = $performance_health_results;
 			set_transient( $transient_key, $cached_data, DAY_IN_SECONDS );
-			return true;
+			return $performance_health_results;
 		}
 
 		return false;
@@ -140,7 +140,7 @@ class PerformanceHealth {
 			return array(
 				'status'      => $status['warning'],
 				'description' => $description['warning'],
-
+				'color'       => $color['warning'],
 			);
 		} else {
 			return array(

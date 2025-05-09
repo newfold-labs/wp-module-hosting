@@ -10,15 +10,16 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 	const text = getPerformanceHealthText();
 	const [ isLoading, setIsLoading ] = useState( false );
 	const { pushNotification } = useDispatch( STORE_NAME );
-	const [ performanceValue, setPerformanceValue ] = useState( data?.results.value || 'unknown' );
+	const [results, setResults] = useState( data?.results || {} );
 
 	useEffect( () => {
-		if ( performanceValue === 'unknown' ) {
+		if ( results?.value === 'unknown' ) {
 			const updatePerformanceValue = async () => {
 				try {
 					setIsLoading( true );
 					const vl = Math.floor(Math.random() * (100 - 0 + 1) + 0); /* TODO: call a new api to retrieve the new value and so update it */
-					await methods.apiFetch( {
+					await new Promise( ( resolve ) => setTimeout( resolve, 1000 ) );
+					methods.apiFetch( {
 						url: methods.NewfoldRuntime.createApiUrl(
 							'/newfold-hosting/v1/panel/update'
 						),
@@ -30,10 +31,11 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 								value: vl,
 							},
 						},
+					} ).then( ( response ) => {
+						setResults( response );
 					} );
-					setPerformanceValue(vl);
 				} catch ( error ) {
-					setPerformanceValue(0);
+					setResults( {} );
 					pushNotification( 'performancehealth-error', {
 						title: text.title,
 						description: text.failToRetrieveData,
@@ -87,8 +89,7 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 				autoDismiss: 5000,
 			} );
 		} finally {
-			setIsLoading( false );
-			//window.location.href = data?.urls?.jetpackBoostPage || '';
+			window.location.href = data?.urls?.jetpackBoostPage || '';
 		}
 	}
 
@@ -96,8 +97,8 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 		<SiteStatusCard
 			testId="performancehealth-info-card"
 			title={ text.title }
-			status={ data?.results.status }
-			description={ data?.results.description }
+			status={ isLoading ? '' : results?.status }
+			description={ isLoading ? '' : results?.description }
 			primaryButtonText={ text.buttons.boost }
 			primaryButtonAction={ boostSite }
 			primaryButtonDisabled={ isLoading }
@@ -118,10 +119,10 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 					)
 			}
 			Illustration={ 
-				isLoading || performanceValue === 'unknown' ? (
+				isLoading || results.value === 'unknown' ? (
 					<Spinner data-testid="spinner" />
 				) : (
-					<CircularGauge value={ performanceValue } strokeFillColor={data?.results.color || '#000'}/>
+					<CircularGauge value={ results.value } strokeFillColor={results?.color || '#000'}/>
 				)
 			}
 		/>
