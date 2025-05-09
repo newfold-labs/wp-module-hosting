@@ -11,7 +11,8 @@ const getDiskSpaceText = ( spaceAvailable ) => {
             ),
         mediumCapacity: __( "You're nearing the storage limit that your plan is designed for.", 'wp-module-hosting' ),
         lowCapacity: __( "You're over the storage limit that your plan is designed for.", 'wp-module-hosting' ),
-        button:  __( 'Change plan', 'wp-module-hosting' )
+        button:  __( 'Change plan', 'wp-module-hosting' ),
+        noInfoAvailable: __( 'No information available on disk space.', 'wp-module-hosting' )
     };
 };
 

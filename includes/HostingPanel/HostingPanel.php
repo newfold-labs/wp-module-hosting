@@ -59,7 +59,7 @@ class HostingPanel {
 	protected $features = array(
 		'object-cache'  => ObjectCache::class,
 		'php-version'   => PHPVersion::class,
-        'disk-space'    => DiskSpace::class,
+		'disk-space'    => DiskSpace::class,
 		'malware-check' => MalwareCheck::class,
 		'nameservers'   => Nameservers::class,
 		'ssh-info'      => SSHInfo::class,

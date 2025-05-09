@@ -4,12 +4,12 @@ import getDiskSpaceText from './getDiskSpaceText';
 
 const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
     const {
-        diskused: diskUsed,
-        disklimit: diskLimit,
-    } = diskSpace;
+        diskused: diskUsed = 0,
+        disklimit: diskLimit = 0,
+    } = diskSpace || {};
 
 
-    let spaceAvailable = 4.65; //TODO set dynamic value.
+    let spaceAvailable = diskLimit - diskUsed;
 
     const text = getDiskSpaceText( spaceAvailable );
 
@@ -22,21 +22,29 @@ const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
         >
             <div className="nfd-flex nfd-justify-between nfd-items-center">
                 <h3 className="nfd-text-lg nfd-font-medium">{ text.title }</h3>
-                <p className="nfd-text-base nfd-font-normal">{ diskUsed } / {diskLimit} GB</p>
+                {diskSpace && (
+                    <p className="nfd-text-base nfd-font-normal">{diskUsed} / {diskLimit} GB</p>
+                )}
             </div>
-            <div className={`nfd-flex nfd-items-center nfd-gap-2 nfd-mt-7 nfd-disk-space-level ${progressBarLevel}`} >
-                <ProgressBar
-                    max={100}
-                    min={0}
-                    progress={usagePercentage}
-                />
-            </div>
-            <div className="nfd-flex nfd-items-center nfd-gap-2 nfd-mt-7" >
-                <Alert className="box-alert" variant={usagePercentage < 60 ? 'success' : usagePercentage < 95 ? 'warning' : 'error' }>
-                    {usagePercentage < 60 ? text.highCapacity : usagePercentage < 95 ? text.mediumCapacity : text.lowCapacity }
-                </Alert>
-            </div>
-            <a className="nfd-text-right nfd-change-plan">{text.button}</a>
+            {diskSpace ? (
+                <>
+                    <div className={`nfd-flex nfd-items-center nfd-gap-2 nfd-mt-7 nfd-disk-space-level ${progressBarLevel}`} >
+                        <ProgressBar
+                            max={100}
+                            min={0}
+                            progress={usagePercentage}
+                        />
+                    </div>
+                    <div className="nfd-flex nfd-items-center nfd-gap-2 nfd-mt-7" >
+                        <Alert className="box-alert" variant={usagePercentage < 60 ? 'success' : usagePercentage < 95 ? 'warning' : 'error' }>
+                            {usagePercentage < 60 ? text.highCapacity : usagePercentage < 95 ? text.mediumCapacity : text.lowCapacity }
+                        </Alert>
+                    </div>
+                    <a className="nfd-text-right nfd-change-plan">{text.button}</a>
+                </>
+            ) : (
+                <p className="nfd-text-sm nfd-text-gray-500">{text.noInfoAvailable}</p>
+            )}
         </Card>
     );
 };
