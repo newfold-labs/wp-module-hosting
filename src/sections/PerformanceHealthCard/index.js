@@ -64,6 +64,20 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 				headers: { 'X-NFD-INSTALLER': INSTALL_TOKEN },
 				data: { plugin, activate: true, queue: false },
 			} );
+
+			await methods.apiFetch( {
+				url: methods.NewfoldRuntime.createApiUrl(
+					'/newfold-hosting/v1/panel/update'
+				),
+				method: 'POST',
+				data: {
+					identifier: 'performance-health',
+					action: 'update_performance_health',
+					data: {
+						value: 'unknown',
+					},
+				},
+			} );
 		} catch ( error ) {
 			setIsLoading( false );
 			pushNotification( 'performancehealth-error', {
