@@ -6,6 +6,7 @@ const getPerformanceHealthText = () => {
 		jetpackBoost: {
 			installationFailed: __( 'Jetpack boost Installation Failed', 'wp-module-hosting' ),
 		},
+		failToRetrieveData: __( 'Failed to retrieve data', 'wp-module-hosting' ),
 		buttons: {
 			boost: __( 'Boost Your Site', 'wp-module-hosting' ),
 			learnMore: __( 'Learn More', 'wp-module-hosting' ),

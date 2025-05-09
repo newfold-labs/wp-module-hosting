@@ -2,6 +2,10 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\PerformanceHealth;
 
+use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
+use NewfoldLabs\WP\Module\Hosting\Helpers\APIHelper;
+use NewfoldLabs\WP\Module\Hosting\HostingPanel\HostingPanel;
+
 /**
  * Handles Performance & Health info retrieval.
  */
@@ -29,15 +33,71 @@ class PerformanceHealth {
 	 * @return array results.
 	 */
 	public function get_data() {
-		$result_value = 80;
+		$plugin_basename = $this->container->plugin()->brand;
 
-		return array_merge(
-			$this->get_datas_by_result_value( $result_value ),
+		// Get existing panel transient
+		$transient_key     = HostingPanel::$transient_key;
+		$cached_data       = get_transient( $transient_key );
+		$performance_value = 'unknown';
+
+		if ( ! empty( $cached_data ) && isset( $cached_data['performance-health']['resultValue'] ) ) {
+			$performance_value = $cached_data['performance-health']['resultValue'];
+		}
+
+		$base_values = array(
+			'install_token'      => PluginInstaller::rest_get_plugin_install_hash(),
+			'plugin'             => 'jetpack-boost',
+			'urls'               => array(
+				'jetpackBoostPage' => admin_url( 'admin.php?page=jetpack-boost' ),
+				'supportPage' => admin_url( "admin.php?page={$plugin_basename}#/help" ),
+			),
+		);
+
+		$performance_health = array_merge(
+			$this->get_datas_by_result_value( $performance_value ),
 			array(
-				'resultValue' => $result_value,
+				'value' => $performance_value,
 			)
 		);
+
+		return array_merge(
+			$base_values,
+			array(
+				'results' => $performance_health
+			),
+		);
 	}
+
+	/**
+	 * Updates the performance health results.
+	 *
+	 * @param array $data The data to update.
+	 * @return bool True on success, false on failure.
+	 */
+	public function update_performance_health( $data) {
+		if ( empty( $data['value'] ) ) {
+			return false;
+		}
+
+		$value        = sanitize_text_field( $data['value'] );
+		$transient_key = HostingPanel::$transient_key;
+		$cached_data   = get_transient( $transient_key );
+
+		if ( ! empty( $cached_data ) && is_array( $cached_data ) ) {
+			$performance_health_results = array_merge(
+				$this->get_datas_by_result_value( $value ),
+				array(
+					'value' => $value,
+				)
+			);
+			$cached_data['performance-health']['results'] = $performance_health_results;
+			set_transient( $transient_key, $cached_data, DAY_IN_SECONDS );
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Retrieves the performance health status.
 	 *
