@@ -38,13 +38,39 @@ class SSHInfo {
 			);
 		}
 
-		$ip       = $this->get_host_ip_from_hostname();
-		$username = $this->get_server_username();
-		$ssh_info = $username && $ip ? "{$username}@{$ip}" : '';
+        $hosting_id = 'xx';
+        $token = 'xx';
+        // Inserted code for remote SSH info retrieval
+        $response = wp_remote_get(
+            "https://hosting.uapi.newfold.com/v1/hosting/{$hosting_id}/ssh",
+            array(
+                'headers' => array(
+                    'Authorization' => 'Bearer ' . $token
+                ),
+            )
+        );
 
-		return array(
-			'ssh_info' => $ssh_info,
-		);
+        if ( is_wp_error( $response ) ) {
+            return array(
+                'ssh_info' => '',
+                'error'    => $response->get_error_message(),
+            );
+        }
+
+        $body = wp_remote_retrieve_body( $response );
+        $data = json_decode( $body, true );
+
+        if ( isset( $data['credential'] ) ) {
+            $ssh_info = $data['credential'];
+        }else{
+            $ip       = $this->get_host_ip_from_hostname();
+            $username = $this->get_server_username();
+            $ssh_info = $username && $ip ? "{$username}@{$ip}" : '';
+        }
+        return array(
+            'ssh_info' => $ssh_info,
+        );
+
 	}
 
 	/**
