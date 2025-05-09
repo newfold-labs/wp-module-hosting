@@ -45,11 +45,11 @@ class PerformanceHealth {
 		}
 
 		$base_values = array(
-			'install_token'      => PluginInstaller::rest_get_plugin_install_hash(),
-			'plugin'             => 'jetpack-boost',
-			'urls'               => array(
+			'install_token' => PluginInstaller::rest_get_plugin_install_hash(),
+			'plugin'        => 'jetpack-boost',
+			'urls'          => array(
 				'jetpackBoostPage' => admin_url( 'admin.php?page=jetpack-boost' ),
-				'supportPage' => admin_url( "admin.php?page={$plugin_basename}#/help" ),
+				'supportPage'      => admin_url( "admin.php?page={$plugin_basename}#/help" ),
 			),
 		);
 
@@ -63,7 +63,7 @@ class PerformanceHealth {
 		return array_merge(
 			$base_values,
 			array(
-				'results' => $performance_health
+				'results' => $performance_health,
 			),
 		);
 	}
@@ -74,17 +74,17 @@ class PerformanceHealth {
 	 * @param array $data The data to update.
 	 * @return bool True on success, false on failure.
 	 */
-	public function update_performance_health( $data) {
+	public function update_performance_health( $data ) {
 		if ( empty( $data['value'] ) ) {
 			return false;
 		}
 
-		$value        = sanitize_text_field( $data['value'] );
+		$value         = sanitize_text_field( $data['value'] );
 		$transient_key = HostingPanel::$transient_key;
 		$cached_data   = get_transient( $transient_key );
 
 		if ( ! empty( $cached_data ) && is_array( $cached_data ) ) {
-			$performance_health_results = array_merge(
+			$performance_health_results                   = array_merge(
 				$this->get_datas_by_result_value( $value ),
 				array(
 					'value' => $value,
