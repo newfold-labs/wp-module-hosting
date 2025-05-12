@@ -2,6 +2,8 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\Nameservers;
 
+use NewfoldLabs\WP\Module\Hosting\Helpers\HUAPIHelper;
+
 /**
  * Handles DNS name server retrieval.
  */
@@ -19,7 +21,7 @@ class Nameservers {
 	 *
 	 * @var string
 	 */
-	protected $huapi_endpoint = 'https://hosting.uapi.newfold.com/v2/hosting/hosting-id/nameservers';
+	protected $huapi_endpoint = '/v2/hosting/hosting-id/nameservers';
 
 	/**
 	 * Nameservers constructor.
@@ -36,22 +38,18 @@ class Nameservers {
 	 * @return array Name server data.
 	 */
 	public function get_data() {
-		$response = wp_remote_get(
-			str_replace( 'hosting-id', 'WN.HP.xxxxxxxx', $this->huapi_endpoint ),
-			array(
-				'headers' => array( // the token will need to be get dynamically
-					'Authorization' => 'Bearer xxx',
-				),
-			)
-		);
-
-		if ( is_wp_error( $response ) ) {
+		$customer_id = HUAPIHelper::get_customer_id();
+		if ( is_wp_error( $customer_id ) ) {
 			return array(
 				'records' => array(),
 			);
 		}
 
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		$endpoint = str_replace( 'hosting-id', $customer_id, $this->huapi_endpoint );
+		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
+		$response = $helper->send_request();
+
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return array(
 				'records' => array(),
 			);
