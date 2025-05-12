@@ -112,9 +112,9 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 			}
 			secondaryButtonText={ text.buttons.learnMore }
 			secondaryButtonAction={
-				() =>
+				() => 
 					window.open(
-						'',
+						data?.urls?.supportPage,
 						'_blank'
 					)
 			}
