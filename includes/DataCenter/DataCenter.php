@@ -3,6 +3,7 @@
 namespace NewfoldLabs\WP\Module\Hosting\DataCenter;
 
 use NewfoldLabs\WP\Module\Hosting\Helpers\PlatformHelper;
+use NewfoldLabs\WP\Module\Hosting\Helpers\HUAPIHelper;
 
 /**
  * Handles DataCenter info retrieval.
@@ -21,7 +22,7 @@ class DataCenter {
 	 *
 	 * @var string
 	 */
-	protected $huapi_endpoint = 'https://hosting.uapi.newfold.com/v1/sites/';
+	protected $huapi_endpoint = '/v1/sites/';
 
 	/**
 	 * DataCenter constructor.
@@ -42,6 +43,7 @@ class DataCenter {
 		if ( PlatformHelper::is_atomic() ) {
 			$data_center = $this->get_data_center();
 		}
+
 		return $data_center;
 	}
 
@@ -51,16 +53,14 @@ class DataCenter {
 	 * @return string Data center name or an empty string on error.
 	 */
 	public function get_data_center() {
-		$site_id  = 'xxxxxxx';
-		$endpoint = $this->huapi_endpoint . $site_id;
-		$response = wp_remote_get(
-			$endpoint,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer xxxxxxx',
-				),
-			)
-		);
+		$side_id = HUAPIHelper::get_site_id();
+		if ( is_wp_error( $side_id ) ) {
+			return '';
+		}
+
+		$endpoint = $this->huapi_endpoint . $side_id;
+		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
+		$response = $helper->send_request();
 
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return '';
