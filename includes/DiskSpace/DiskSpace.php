@@ -2,10 +2,19 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\DiskSpace;
 
+use NewfoldLabs\WP\Module\Hosting\Helpers\HUAPIHelper;
+
 /**
  * Handles Disk Space details.
  */
 class DiskSpace {
+
+    /**
+     * API endpoint for name servers.
+     *
+     * @var string
+     */
+    protected $huapi_endpoint = '/v1/hosting/hosting_id/info/diskusage';
 
 	/**
 	 * Retrieves Dish Space data.
@@ -13,20 +22,16 @@ class DiskSpace {
 	 * @return array Disk Space details.
 	 */
 	public function get_data() {
-		$hosting_id = 'xx';
-		$token      = 'xxx';
-		$api_url    = "https://hosting.uapi.newfold.com/v1/hosting/{$hosting_id}/info/diskusage";
 
-		$response = wp_remote_get(
-			$api_url,
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token,
-					'Content-Type'  => 'application/json',
-				),
-			)
-		);
+        $customer_id = HUAPIHelper::get_customer_id();
+        if ( is_wp_error( $customer_id ) ) {
+            return null;
+        }
 
+        $endpoint = str_replace( 'hosting-id', $customer_id, $this->huapi_endpoint );
+        $helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
+        $response = $helper->send_request();
+        
 		if ( is_wp_error( $response ) ) {
 			error_log( 'Error in the API call: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			return null;
