@@ -17,6 +17,20 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 			const updatePerformanceValue = async () => {
 				try {
 					setIsLoading( true );
+					methods.apiFetch({
+						url: data.api.lighthouse_service,
+						method: 'POST',
+						headers: {
+							'Authorization': `Bearer ${data.api.token}`,
+    						'Content-Type': 'application/json'
+						},
+						data:{
+							url: 'pepoe'
+						}
+
+					}).then( (response) => {
+						console.log('got response ', response)
+					});
 					const vl = Math.floor(Math.random() * (100 - 0 + 1) + 0); /* TODO: call a new api to retrieve the new value and so update it */
 					await new Promise( ( resolve ) => setTimeout( resolve, 1000 ) );
 					methods.apiFetch( {

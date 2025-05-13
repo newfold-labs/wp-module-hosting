@@ -47,6 +47,11 @@ class PerformanceHealth {
 		$base_values = array(
 			'install_token' => PluginInstaller::rest_get_plugin_install_hash(),
 			'plugin'        => 'jetpack-boost',
+			'api' => array(
+				'lighthouse_service' => 'http://127.0.0.1:3000/lh',
+				'lighthouse_health'  => 'http://127.0.0.1:3000/health',
+				'token'              => '',
+			),
 			'urls'          => array(
 				'jetpackBoostPage' => admin_url( 'admin.php?page=jetpack-boost' ),
 				'supportPage'      => admin_url( "admin.php?page={$plugin_basename}#/help" ),
