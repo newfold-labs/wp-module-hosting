@@ -3,13 +3,16 @@ import { ProgressBar } from "@newfold/ui-component-library";
 import getDiskSpaceText from './getDiskSpaceText';
 
 const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
-    const {
+    let {
         diskused: diskUsed = 0,
         disklimit: diskLimit = 0,
     } = diskSpace || {};
 
+    diskUsed = parseFloat( diskUsed.match(/[\d.]+/)[0]);
 
-    let spaceAvailable = diskLimit - diskUsed;
+    diskLimit = parseFloat( diskLimit.match(/[\d.]+/)[0]);
+
+    let spaceAvailable = diskLimit  - diskUsed ;
 
     const text = getDiskSpaceText( spaceAvailable );
 
