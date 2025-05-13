@@ -53,21 +53,21 @@ class DataCenter {
 	 * @return string Data center name or an empty string on error.
 	 */
 	public function get_data_center() {
-		$side_id = HUAPIHelper::get_site_id();
-		if ( is_wp_error( $side_id ) ) {
+		$site_id = HUAPIHelper::get_site_id();
+		if ( is_wp_error( $site_id ) ) {
 			return '';
 		}
 
-		$endpoint = $this->huapi_endpoint . $side_id;
+		$endpoint = $this->huapi_endpoint . $site_id;
 		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
 		$response = $helper->send_request();
 
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( is_wp_error( $response ) ) {
 			return '';
 		}
 
-		$response = json_decode( wp_remote_retrieve_body( $response ), true );
+		$data = json_decode( $response, true );
 
-		return ! empty( $response['datacenter'] ) ? $response['datacenter'] : '';
+		return ! empty( $data['datacenter'] ) ? $data['datacenter'] : '';
 	}
 }
