@@ -49,17 +49,17 @@ class Nameservers {
 		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
 		$response = $helper->send_request();
 
-		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( is_wp_error( $response ) ) {
 			return array(
 				'records' => array(),
 			);
 		}
 
-		$response     = json_decode( wp_remote_retrieve_body( $response ), true );
+		$data = json_decode( $response, true );
 		$name_servers = array();
 
-		if ( ! empty( $response['hosts'] ) ) {
-			foreach ( $response['hosts'] as $index => $values ) {
+		if ( ! empty( $data['hosts'] ) ) {
+			foreach ( $data['hosts'] as $index => $values ) {
 				if ( ! empty( $values['host'] ) ) {
 					$name_servers[] = $values['host'];
 				}
