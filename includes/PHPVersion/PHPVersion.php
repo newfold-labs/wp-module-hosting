@@ -35,8 +35,7 @@ class PHPVersion {
 			$response = $helper->send_request();
 
 			if ( ! is_wp_error( $response ) ) {
-				$body     = wp_remote_retrieve_body( $response );
-				$api_data = json_decode( $body, true );
+				$api_data = json_decode( $response, true );
 
 				if ( isset( $api_data['latest'] ) ) {
 					$current_version = $api_data['latest'];
