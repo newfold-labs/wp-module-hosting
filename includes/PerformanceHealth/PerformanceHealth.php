@@ -47,7 +47,8 @@ class PerformanceHealth {
 		$base_values = array(
 			'install_token' => PluginInstaller::rest_get_plugin_install_hash(),
 			'plugin'        => 'jetpack-boost',
-			'api' => array(
+			'website_url'   => get_site_url(),
+			'api'           => array(
 				'lighthouse_service' => 'http://127.0.0.1:3000/lh',
 				'lighthouse_health'  => 'http://127.0.0.1:3000/health',
 				'token'              => '',
@@ -89,12 +90,14 @@ class PerformanceHealth {
 		$cached_data   = get_transient( $transient_key );
 
 		if ( ! empty( $cached_data ) && is_array( $cached_data ) ) {
-			$performance_health_results                   = array_merge(
+			$performance_health_results = array_merge(
 				$this->get_datas_by_result_value( $value ),
 				array(
 					'value' => $value,
+					'time'  => current_time( 'Y-m-d H:i:s' ),
 				)
 			);
+
 			$cached_data['performance-health']['results'] = $performance_health_results;
 			set_transient( $transient_key, $cached_data, DAY_IN_SECONDS );
 			return $performance_health_results;

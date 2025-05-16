@@ -17,7 +17,7 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 			const updatePerformanceValue = async () => {
 				try {
 					setIsLoading( true );
-					methods.apiFetch({
+					await methods.apiFetch({
 						url: data.api.lighthouse_service,
 						method: 'POST',
 						headers: {
@@ -25,34 +25,35 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
     						'Content-Type': 'application/json'
 						},
 						data:{
-							url: 'pepoe'
+							url: data.website_url
 						}
 
-					}).then( (response) => {
-						console.log('got response ', response)
+					}).then( async (response) => {
+						const score = response?.score;
+						if ( score ) {
+							await methods.apiFetch( {
+								url: methods.NewfoldRuntime.createApiUrl(
+									'/newfold-hosting/v1/panel/update'
+								),
+								method: 'POST',
+								data: {
+									identifier: 'performance-health',
+									action: 'update_performance_health',
+									data: {
+										value: score,
+									},
+								},
+							} ).then( ( response ) => {
+								setResults( response );
+							} );
+						}
 					});
-					const vl = Math.floor(Math.random() * (100 - 0 + 1) + 0); /* TODO: call a new api to retrieve the new value and so update it */
-					await new Promise( ( resolve ) => setTimeout( resolve, 1000 ) );
-					methods.apiFetch( {
-						url: methods.NewfoldRuntime.createApiUrl(
-							'/newfold-hosting/v1/panel/update'
-						),
-						method: 'POST',
-						data: {
-							identifier: 'performance-health',
-							action: 'update_performance_health',
-							data: {
-								value: vl,
-							},
-						},
-					} ).then( ( response ) => {
-						setResults( response );
-					} );
+
 				} catch ( error ) {
 					setResults( {} );
 					pushNotification( 'performancehealth-error', {
 						title: text.title,
-						description: text.failToRetrieveData,
+						description: text.errors.failToRetrieveData,
 						variant: 'error',
 						autoDismiss: 5000,
 					} );
@@ -111,8 +112,8 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 		<SiteStatusCard
 			testId="performancehealth-info-card"
 			title={ text.title }
-			status={ isLoading ? '' : results?.status }
-			description={ isLoading ? '' : results?.description }
+			status={ isLoading ? text.loading : results?.status ? results?.status : text.errors.title }
+			description={ isLoading ? '' : results?.description ? results?.description : text.errors.description }
 			primaryButtonText={ text.buttons.boost }
 			primaryButtonAction={ boostSite }
 			primaryButtonDisabled={ isLoading }
@@ -136,7 +137,11 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 				isLoading || results.value === 'unknown' ? (
 					<Spinner data-testid="spinner" />
 				) : (
-					<CircularGauge value={ results.value } strokeFillColor={results?.color || '#000'}/>
+					results?.value ? (
+						<CircularGauge value={ results.value } strokeFillColor={results?.color || '#000'}/>
+					) : (
+						<CircularGauge value={ 0 } strokeFillColor={'#000'}/>
+					)
 				)
 			}
 		/>
