@@ -135,7 +135,7 @@ const PerformanceHealthCard = ( { data, methods, platformUrl, isAtomic } ) => {
 			}
 			Illustration={ 
 				isLoading || results.value === 'unknown' ? (
-					<Spinner data-testid="spinner" />
+					<Spinner size={5} data-testid="spinner" />
 				) : (
 					results?.value ? (
 						<CircularGauge value={ results.value } strokeFillColor={results?.color || '#000'}/>
