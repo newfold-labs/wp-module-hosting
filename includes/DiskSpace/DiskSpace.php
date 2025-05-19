@@ -35,7 +35,6 @@ class DiskSpace {
 		$response = $helper->send_request();
 
 		if ( is_wp_error( $response ) ) {
-			error_log( 'Error in the API call: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			return null;
 		}
 
