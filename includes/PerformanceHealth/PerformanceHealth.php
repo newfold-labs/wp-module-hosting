@@ -3,7 +3,6 @@
 namespace NewfoldLabs\WP\Module\Hosting\PerformanceHealth;
 
 use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
-use NewfoldLabs\WP\Module\Hosting\Helpers\APIHelper;
 use NewfoldLabs\WP\Module\Hosting\HostingPanel\HostingPanel;
 
 /**
