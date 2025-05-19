@@ -4,6 +4,8 @@ namespace NewfoldLabs\WP\Module\Hosting\SSHInfo;
 
 use NewfoldLabs\WP\Module\Hosting\Helpers\PlatformHelper;
 
+use NewfoldLabs\WP\Module\Hosting\Helpers\HUAPIHelper;
+
 /**
  * Handles SSH login information retrieval.
  */
@@ -15,6 +17,14 @@ class SSHInfo {
 	 * @var mixed
 	 */
 	protected $container;
+
+
+	/**
+	 * API endpoint for SSH Info.
+	 *
+	 * @var string
+	 */
+	protected $huapi_endpoint = '/v1/hosting/hosting_id/ssh';
 
 	/**
 	 * SSHInfo constructor.
@@ -31,6 +41,13 @@ class SSHInfo {
 	 * @return array SSH login data.
 	 */
 	public function get_data() {
+
+		$customer_id = HUAPIHelper::get_customer_id();
+
+		if ( is_wp_error( $customer_id ) ) {
+			return null;
+		}
+
 		// Use the helper to check if the platform is 'atomic'
 		if ( PlatformHelper::is_atomic() ) {
 			return array(
@@ -38,32 +55,22 @@ class SSHInfo {
 			);
 		}
 
-		$hosting_id = 'xx';
-		$token      = 'xx';
-		// Inserted code for remote SSH info retrieval
-		$response = wp_remote_get(
-			"https://hosting.uapi.newfold.com/v1/hosting/{$hosting_id}/ssh",
-			array(
-				'headers' => array(
-					'Authorization' => 'Bearer ' . $token,
-				),
-			)
-		);
+		$endpoint = str_replace( 'hosting_id', $customer_id, $this->huapi_endpoint );
+
+		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
+		$response = $helper->send_request();
 
 		if ( is_wp_error( $response ) ) {
-			return array(
-				'ssh_info' => '',
-				'error'    => $response->get_error_message(),
-			);
+			error_log( 'Error in the API call: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			return null;
 		}
 
-		$body = wp_remote_retrieve_body( $response );
-		$data = json_decode( $body, true );
+		$data = json_decode( $response, true );
 
 		if ( isset( $data['credential'] ) ) {
 			$ssh_info = $data['credential'];
 		} else {
-			$ip       = $this->get_host_ip_from_hostname();
+			$ip       = $data['ip'] ?? $this->get_host_ip_from_hostname();
 			$username = $this->get_server_username();
 			$ssh_info = $username && $ip ? "{$username}@{$ip}" : '';
 		}
@@ -81,7 +88,6 @@ class SSHInfo {
 		$hostname = gethostname();
 		$ip       = gethostbyname( $hostname );
 
-		// Fallback in case resolution fails or returns the hostname itself
 		if ( empty( $ip ) || $ip === $hostname ) {
 			return null;
 		}
