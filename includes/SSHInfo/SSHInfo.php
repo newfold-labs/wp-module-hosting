@@ -24,7 +24,10 @@ class SSHInfo {
 	 *
 	 * @var string
 	 */
-	protected $huapi_endpoint = '/v1/hosting/hosting_id/ssh';
+	protected $huapi_shared_endpoint = array(
+		'shared' => '/v1/hosting/hosting_id/ssh',
+		'cloud'  => '/v2/sites/15704106/ssh-users',
+	);
 
 	/**
 	 * SSHInfo constructor.
@@ -48,32 +51,36 @@ class SSHInfo {
 			return null;
 		}
 
-		// Use the helper to check if the platform is 'atomic'
-		if ( PlatformHelper::is_atomic() ) {
-			return array(
-				'ssh_info' => '',
-			);
-		}
+		$is_atomic = PlatformHelper::is_atomic();
 
-		$endpoint = str_replace( 'hosting_id', $customer_id, $this->huapi_endpoint );
+		$huapi_endpoint = PlatformHelper::is_atomic() ? $this->huapi_shared_endpoint['cloud'] : $this->huapi_shared_endpoint['shared'];
+
+		$endpoint = str_replace( 'hosting_id', $customer_id, $huapi_endpoint );
 
 		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
 		$response = $helper->send_request();
 
 		if ( is_wp_error( $response ) ) {
-			error_log( 'Error in the API call: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			// error_log( 'Error in the API call: ' . $response->get_error_message() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			return null;
 		}
 
 		$data = json_decode( $response, true );
 
-		if ( isset( $data['credential'] ) ) {
-			$ssh_info = $data['credential'];
+		if ( $is_atomic ) {
+			if ( isset( $data['users'] ) && is_array( $data['users'] ) && count( $data['users'] ) > 0 ) {
+				$ssh_info = $data['users'][0]['user'] . '@' . $data['users'][0]['ssh_hostname'];
+			} else {
+				$ssh_info = '';
+			}
+		} elseif ( isset( $data['credential'] ) ) {
+				$ssh_info = $data['credential'];
 		} else {
 			$ip       = $data['ip'] ?? $this->get_host_ip_from_hostname();
 			$username = $this->get_server_username();
 			$ssh_info = $username && $ip ? "{$username}@{$ip}" : '';
 		}
+
 		return array(
 			'ssh_info' => $ssh_info,
 		);
