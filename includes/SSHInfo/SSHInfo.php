@@ -26,7 +26,7 @@ class SSHInfo {
 	 */
 	protected $huapi_shared_endpoint = array(
 		'shared' => '/v1/hosting/hosting_id/ssh',
-		'cloud'  => '/v2/sites/15704106/ssh-users',
+		'cloud'  => '/v2/sites/site_id/ssh-users',
 	);
 
 	/**
@@ -47,15 +47,17 @@ class SSHInfo {
 
 		$customer_id = HUAPIHelper::get_customer_id();
 
-		if ( is_wp_error( $customer_id ) ) {
-			return null;
-		}
+		$site_id = HUAPIHelper::get_site_id();
 
 		$is_atomic = PlatformHelper::is_atomic();
 
+		if ( ( $is_atomic && is_wp_error( $customer_id ) ) || is_wp_error( $site_id ) ) {
+			return null;
+		}
+
 		$huapi_endpoint = PlatformHelper::is_atomic() ? $this->huapi_shared_endpoint['cloud'] : $this->huapi_shared_endpoint['shared'];
 
-		$endpoint = str_replace( 'hosting_id', $customer_id, $huapi_endpoint );
+		$endpoint = PlatformHelper::is_atomic() ? str_replace( 'site_id', $site_id, $huapi_endpoint ) : str_replace( 'hosting_id', $customer_id, $huapi_endpoint );
 
 		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
 		$response = $helper->send_request();
