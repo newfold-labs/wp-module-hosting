@@ -55,12 +55,12 @@ class Nameservers {
 			);
 		}
 
-		$data = json_decode( $response, true );
+		$data         = json_decode( $response, true );
 		$name_servers = array();
 
 		if ( ! empty( $data['detected']['ns'] ) ) {
 			foreach ( $data['detected']['ns'] as $index => $value ) {
-				$name_servers[] = $value;	
+				$name_servers[] = $value;
 			}
 		}
 
