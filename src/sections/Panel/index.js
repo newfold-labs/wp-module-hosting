@@ -18,6 +18,7 @@ import DiskSpaceCard from '../DiskSpaceCard';
 import DataRefreshInfo from '../DataRefreshInfo';
 import NotificationFeed from '../../components/NotificationFeed';
 import DataCenterCard from '../DataCenter';
+import ServerHitsCard from '../ServerHitsCard';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -89,6 +90,11 @@ const Panel = ( { constants, methods, Components } ) => {
 		fetchHostingData( true );
 	};
 
+	const serverHits = hostingData?.[ 'server-hits' ] || {};
+	const serverHitsData = serverHits.last_n_days || [];
+	const totalHits = serverHits.total_hits || 0;
+	const hitsAllotted = serverHits.hits_allotted || 0;
+	const percentageChange = serverHits.percentage_change || 0;
 	return (
 		<Root context={ { isRtl: false } }>
 			<NotificationFeed />
@@ -134,6 +140,13 @@ const Panel = ( { constants, methods, Components } ) => {
 									data={ hostingData[ 'malware-check' ] }
 									methods={ methods }
 								/>
+								<ServerHitsCard
+									data={ serverHitsData }
+									totalHits={ totalHits }
+									hitsAllotted={ hitsAllotted }
+									platFormUrl={ platFormUrl }
+									percentageChange={ percentageChange }
+								/>
 								<CDNCard
 									platformUrl={ platFormUrl }
 									isAtomic={ isAtomic }
@@ -167,7 +180,9 @@ const Panel = ( { constants, methods, Components } ) => {
 								{ isAtomic && (
 									<DataCenterCard
 										methods={ methods }
-										serverLocation={ hostingData['data-center'] }
+										serverLocation={
+											hostingData[ 'data-center' ]
+										}
 										platformUrl={ platFormUrl }
 									/>
 								) }
@@ -183,7 +198,6 @@ const Panel = ( { constants, methods, Components } ) => {
 							<div className="nfd-flex nfd-flex-col nfd-gap-6">
 								<DiskSpaceCard
 									diskSpace={ hostingData[ 'disk-space' ] }
-									methods={ methods }
 								/>
 							</div>
 						</div>

@@ -16,6 +16,7 @@ use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 use NewfoldLabs\WP\Module\Hosting\Services\I18nService;
 use NewfoldLabs\WP\Module\Hosting\DataCenter\DataCenter;
+use NewfoldLabs\WP\Module\Hosting\ServerHits\ServerHits;
 
 /**
  * Class HostingPanel
@@ -67,6 +68,7 @@ class HostingPanel {
 		'cdn-info'      => CDNInfo::class,
 		'plan-info'     => PlanInfo::class,
 		'data-center'   => DataCenter::class,
+		'server-hits'   => ServerHits::class,
 	);
 
 	/**
@@ -158,6 +160,11 @@ class HostingPanel {
 			$data = array();
 
 			foreach ( $this->instances as $identifier => $instance ) {
+				// If the feature has a clear_transients method, call it
+				if ( method_exists( $instance, 'clear_transients' ) && is_callable( array( $instance, 'clear_transients' ) ) ) {
+					$instance::clear_transients();
+				}
+
 				if ( method_exists( $instance, 'get_data' ) ) {
 					$data[ $identifier ] = $instance->get_data();
 				}
@@ -184,6 +191,7 @@ class HostingPanel {
 
 		return $cached;
 	}
+
 
 	/**
 	 * Flushes the cached hosting panel transient.
