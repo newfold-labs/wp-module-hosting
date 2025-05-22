@@ -50,7 +50,10 @@ const ServerHitsCard = ( {
 	}
 
 	return (
-		<Card className="nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg">
+		<Card
+			data-testid="server-hits-card"
+			className="nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+		>
 			<div className="nfd-flex nfd-justify-between nfd-items-center">
 				<div className="nfd-text-left">
 					<h3 className="nfd-text-lg nfd-font-medium">{ title }</h3>
