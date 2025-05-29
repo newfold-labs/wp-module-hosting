@@ -41,6 +41,10 @@ const SiteStatusCard = ( {
 							<span data-testid={ `${ testId }-status-icon` }>
 								<Illustration />
 							</span>
+						) : typeof Illustration === 'object' ? (
+							<>
+								{Illustration}
+							</>
 						) : (
 							<span data-testid={ `${ testId }-status-icon` }>
 								<Illustration width={ 48 } height={ 48 } />
