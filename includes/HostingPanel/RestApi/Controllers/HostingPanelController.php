@@ -128,6 +128,13 @@ class HostingPanelController {
 			return $result;
 		}
 
+		if ( 'update_performance_health' === $action ) {
+			return new \WP_REST_Response(
+				$result,
+				200
+			);
+		}
+
 		return new \WP_REST_Response(
 			array( 'message' => __( 'Action executed successfully', 'wp-module-hosting' ) ),
 			200

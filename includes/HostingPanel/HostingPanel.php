@@ -14,6 +14,7 @@ use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 use NewfoldLabs\WP\Module\Hosting\Services\I18nService;
+use NewfoldLabs\WP\Module\Hosting\PerformanceHealth\PerformanceHealth;
 
 /**
  * Class HostingPanel
@@ -56,13 +57,14 @@ class HostingPanel {
 	 * @var array
 	 */
 	protected $features = array(
-		'object-cache'  => ObjectCache::class,
-		'php-version'   => PHPVersion::class,
-		'malware-check' => MalwareCheck::class,
-		'nameservers'   => Nameservers::class,
-		'ssh-info'      => SSHInfo::class,
-		'cdn-info'      => CDNInfo::class,
-		'plan-info'     => PlanInfo::class,
+		'object-cache'       => ObjectCache::class,
+		'php-version'        => PHPVersion::class,
+		'malware-check'      => MalwareCheck::class,
+		'nameservers'        => Nameservers::class,
+		'ssh-info'           => SSHInfo::class,
+		'cdn-info'           => CDNInfo::class,
+		'plan-info'          => PlanInfo::class,
+		'performance-health' => PerformanceHealth::class,
 	);
 
 	/**
