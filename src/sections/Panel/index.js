@@ -8,6 +8,7 @@ import {
 } from '@newfold/ui-component-library';
 
 import getPanelText from './getPanelText';
+import { BrandLogo } from '../../components/BrandLogo';
 import ObjectCachingCard from '../ObjectCachingCard';
 import PHPVersionCard from '../PHPVersionCard';
 import MalwareCheckCard from '../MalwareCheckCard';
@@ -91,6 +92,7 @@ const Panel = ( { constants, methods, Components } ) => {
 
 	return (
 		<Root context={ { isRtl: false } }>
+			<BrandLogo width={ '160px' } className="nfd-mb-6" />
 			<NotificationFeed />
 			<Page title={ text.title }>
 				<Container>
