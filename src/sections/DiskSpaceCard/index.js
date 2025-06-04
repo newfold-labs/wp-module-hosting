@@ -22,7 +22,7 @@ const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
     return (
         <Card
             className={`nfd-disk-space-card nfd-min-h-[208px] nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg ${diskSpace ? 'nfd-disk-space-available' : 'nfd-disk-space-not-available'}`}
-            data-usagePercentage={usagePercentage}
+            data-usage-percentage={usagePercentage}
         >
             <div className="nfd-flex nfd-justify-between nfd-items-center">
                 <h3 className="nfd-text-lg nfd-font-medium">{ text.title }</h3>

@@ -31,7 +31,7 @@ describe('Disk Space Component', () => {
         it('Check elements in section', () => {
             cy.get('.nfd-disk-space-card')
                 .should('have.class', 'nfd-disk-space-available')
-                .invoke('attr', 'data-usagePercentage')
+                .invoke('attr', 'data-usage-percentage')
                 .then((val) => {
                     const usage = parseInt(val, 10);
                     expect(usage).to.be.lessThan(60);
@@ -68,7 +68,7 @@ describe('Disk Space Component', () => {
         it('Check elements in section', () => {
             cy.get('.nfd-disk-space-card')
                 .should('have.class', 'nfd-disk-space-available')
-                .invoke('attr', 'data-usagePercentage')
+                .invoke('attr', 'data-usage-percentage')
                 .then((val) => {
                     const usage = parseInt(val, 10);
                     expect(usage).to.be.gte(60).and.to.be.lt(95);
@@ -107,7 +107,7 @@ describe('Disk Space Component', () => {
         it('Check elements in section', () => {
             cy.get('.nfd-disk-space-card')
                 .should('have.class', 'nfd-disk-space-available')
-                .invoke('attr', 'data-usagePercentage')
+                .invoke('attr', 'data-usage-percentage')
                 .then((val) => {
                     const usage = parseInt(val, 10);
                     expect(usage).to.be.at.least(95);
