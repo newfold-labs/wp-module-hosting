@@ -2,11 +2,11 @@
 
 namespace NewfoldLabs\WP\Module\Hosting\PlanInfo;
 
-use NewfoldLabs\WP\Module\Hosting\Helpers\HUAPIHelper;
+use NewfoldLabs\WP\Module\Hosting\Helpers\HiiveHelper;
 use NewfoldLabs\WP\Module\Hosting\Helpers\PlatformHelper;
 
 /**
- * Handles Plan information retrieval.
+ * Handles Plan information retrieval from Hiive and maps it to display-friendly plan names.
  */
 class PlanInfo {
 	/**
@@ -31,18 +31,8 @@ class PlanInfo {
 	 * @return array
 	 */
 	public function get_data() {
-		// Fetch customer_id (used as hosting_id in HUAPI)
-		$customer_id = HUAPIHelper::get_customer_id();
-		if ( is_wp_error( $customer_id ) ) {
-			return array(
-				'is_atomic' => PlatformHelper::is_atomic(),
-			);
-		}
-
-		// Build and send the HUAPI request
-		$endpoint = sprintf( '/v1/hosting/%s', $customer_id );
-		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
-		$response = $helper->send_request();
+		$hiive    = new HiiveHelper( '/sites/v1/customer', array(), 'GET' );
+		$response = $hiive->send_request();
 
 		if ( is_wp_error( $response ) ) {
 			return array(
@@ -51,18 +41,28 @@ class PlanInfo {
 		}
 
 		$data = json_decode( $response, true );
-		if ( ! is_array( $data ) ) {
+
+		if ( empty( $data ) || ! is_array( $data ) ) {
 			return array(
 				'is_atomic' => PlatformHelper::is_atomic(),
 			);
 		}
 
-		// Extract the product_name as the plan_name
-		$plan_name = $data['billing']['product_name'] ?? null;
+		$plan_type    = $data['plan_type'] ?? '';
+		$plan_subtype = $data['plan_subtype'] ?? '';
+		$plan_name    = null;
 
-		return array(
-			'plan_name' => $plan_name,
-			'is_atomic' => PlatformHelper::is_atomic(),
+		if ( ! empty( $plan_type ) && ! empty( $plan_subtype ) ) {
+			$map       = HostingPlanMap::get();
+			$plan_name = $map[ $plan_subtype ] ?? null;
+		}
+
+		return array_merge(
+			$data,
+			array(
+				'plan_name' => $plan_name,
+				'is_atomic' => PlatformHelper::is_atomic(),
+			)
 		);
 	}
 }
