@@ -9,13 +9,11 @@ use NewfoldLabs\WP\Module\Hosting\HostingPanel\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Hosting\MalwareCheck\MalwareCheck;
 use NewfoldLabs\WP\Module\Hosting\ObjectCache\ObjectCache;
 use NewfoldLabs\WP\Module\Hosting\PHPVersion\PHPVersion;
-use NewfoldLabs\WP\Module\Hosting\DiskSpace\DiskSpace;
 use NewfoldLabs\WP\Module\Hosting\Nameservers\Nameservers;
 use NewfoldLabs\WP\Module\Hosting\Permissions;
 use NewfoldLabs\WP\Module\Hosting\PlanInfo\PlanInfo;
 use NewfoldLabs\WP\Module\Hosting\SSHInfo\SSHInfo;
 use NewfoldLabs\WP\Module\Hosting\Services\I18nService;
-use NewfoldLabs\WP\Module\Hosting\DataCenter\DataCenter;
 
 /**
  * Class HostingPanel
@@ -60,13 +58,11 @@ class HostingPanel {
 	protected $features = array(
 		'object-cache'  => ObjectCache::class,
 		'php-version'   => PHPVersion::class,
-		'disk-space'    => DiskSpace::class,
 		'malware-check' => MalwareCheck::class,
 		'nameservers'   => Nameservers::class,
 		'ssh-info'      => SSHInfo::class,
 		'cdn-info'      => CDNInfo::class,
 		'plan-info'     => PlanInfo::class,
-		'data-center'   => DataCenter::class,
 	);
 
 	/**
