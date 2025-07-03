@@ -3205,6 +3205,9 @@
 .nfd-root .nfd-text-field__validation {
 		margin-top: 0.5rem;
 }
+.nfd-root .nfd-text-field__input.nfd-text-field--input-with-icon {
+		padding-left: calc(1.25rem + 24px);
+}
 .nfd-root .nfd-textarea-field__label {}
 .nfd-root .nfd-textarea-field__description {
 		margin-top: 0.5rem;
@@ -3452,6 +3455,9 @@
 		white-space: nowrap !important;
 		border-width: 0 !important;
 }
+.nfd-pointer-events-none {
+		pointer-events: none !important;
+}
 .nfd-fixed {
 		position: fixed !important;
 }
@@ -3473,8 +3479,14 @@
 .nfd-right-0 {
 		left: 0px !important;
 }
+.nfd-right-3 {
+		left: 0.75rem !important;
+}
 .nfd-top-0 {
 		top: 0px !important;
+}
+.nfd-top-1\/2 {
+		top: 50% !important;
 }
 .nfd-top-full {
 		top: 100% !important;
@@ -3599,6 +3611,9 @@
 .nfd-h-8 {
 		height: 2rem !important;
 }
+.nfd-h-\[24px\] {
+		height: 24px !important;
+}
 .nfd-h-\[48px\] {
 		height: 48px !important;
 }
@@ -3641,6 +3656,9 @@
 .nfd-w-\[20px\] {
 		width: 20px !important;
 }
+.nfd-w-\[24px\] {
+		width: 24px !important;
+}
 .nfd-w-\[48px\] {
 		width: 48px !important;
 }
@@ -3678,6 +3696,10 @@
 }
 .nfd--translate-x-full {
 		--tw-translate-x: -100% !important;
+		transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+}
+.nfd--translate-y-1\/2 {
+		--tw-translate-y: -50% !important;
 		transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 .nfd--translate-y-full {
