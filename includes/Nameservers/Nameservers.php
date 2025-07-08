@@ -21,7 +21,7 @@ class Nameservers {
 	 *
 	 * @var string
 	 */
-	protected $huapi_endpoint = '/v2/hosting/hosting-id/nameservers';
+	protected $huapi_endpoint = 'v1/sites/site-id/domain';
 
 	/**
 	 * Nameservers constructor.
@@ -38,14 +38,14 @@ class Nameservers {
 	 * @return array Name server data.
 	 */
 	public function get_data() {
-		$customer_id = HUAPIHelper::get_customer_id();
-		if ( is_wp_error( $customer_id ) ) {
+		$site_id = HUAPIHelper::get_site_id();
+		if ( is_wp_error( $site_id ) ) {
 			return array(
 				'records' => array(),
 			);
 		}
 
-		$endpoint = str_replace( 'hosting-id', $customer_id, $this->huapi_endpoint );
+		$endpoint = str_replace( 'site-id', $site_id, $this->huapi_endpoint );
 		$helper   = new HUAPIHelper( $endpoint, array(), 'GET' );
 		$response = $helper->send_request();
 
@@ -55,14 +55,12 @@ class Nameservers {
 			);
 		}
 
-		$data = json_decode( $response, true );
+		$data         = json_decode( $response, true );
 		$name_servers = array();
 
-		if ( ! empty( $data['hosts'] ) ) {
-			foreach ( $data['hosts'] as $index => $values ) {
-				if ( ! empty( $values['host'] ) ) {
-					$name_servers[] = $values['host'];
-				}
+		if ( ! empty( $data['detected']['ns'] ) ) {
+			foreach ( $data['detected']['ns'] as $index => $value ) {
+				$name_servers[] = $value;
 			}
 		}
 
