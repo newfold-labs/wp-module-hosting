@@ -26,7 +26,7 @@ class DiskSpace {
 		$customer_id = HUAPIHelper::get_customer_id();
 
 		if ( is_wp_error( $customer_id ) ) {
-			return null;
+			return array();
 		}
 
 		$endpoint = str_replace( 'hosting_id', $customer_id, $this->huapi_endpoint );
@@ -35,7 +35,7 @@ class DiskSpace {
 		$response = $helper->send_request();
 
 		if ( is_wp_error( $response ) ) {
-			return null;
+			return array();
 		}
 
 		$data = json_decode( $response, true );
@@ -49,6 +49,6 @@ class DiskSpace {
 			);
 		}
 
-		return null;
+		return array();
 	}
 }
