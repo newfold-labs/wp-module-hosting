@@ -4,8 +4,8 @@ import getDiskSpaceText from './getDiskSpaceText';
 
 const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
     let {
-        diskused: diskUsed = 0,
-        disklimit: diskLimit = 0,
+        diskused: diskUsed = '0',
+        disklimit: diskLimit = '0',
     } = diskSpace || {};
 
     diskUsed = parseFloat( diskUsed.match(/[\d.]+/)[0]);
@@ -21,12 +21,13 @@ const DiskSpaceCard = ( { diskSpace = {}, methods } ) => {
 
     return (
         <Card
-            className="nfd-disk-space-card nfd-min-h-[208px] nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg"
+            className={`nfd-disk-space-card nfd-min-h-[208px] nfd-p-6 nfd-border nfd-border-gray-200 nfd-rounded-lg ${diskSpace ? 'nfd-disk-space-available' : 'nfd-disk-space-not-available'}`}
+            data-usagePercentage={usagePercentage}
         >
             <div className="nfd-flex nfd-justify-between nfd-items-center">
                 <h3 className="nfd-text-lg nfd-font-medium">{ text.title }</h3>
                 {diskSpace && (
-                    <p className="nfd-text-base nfd-font-normal">{diskUsed} / {diskLimit} GB</p>
+                    <p className="nfd-text-base nfd-font-normal nfd-disk-space-used">{diskUsed} / {diskLimit} GB</p>
                 )}
             </div>
             {diskSpace ? (
