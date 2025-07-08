@@ -89,6 +89,20 @@ describe( 'Server Hits Card', () => {
 		} );
 	} );
 
+	context( 'when there is an error in API response', () => {
+		beforeEach( () => {
+			interceptPanelAndReplaceKey( 'server-hits', {
+				error: 'API failed for server hits',
+			} );
+			cy.reload( true );
+			cy.wait( '@getPanelData' );
+		} );
+
+		it( 'does not render the server hits card', () => {
+			cy.get( '[data-testid="server-hits-card"]' ).should( 'not.exist' );
+		} );
+	} );
+
 	after( () => {
 		cleanupVisitHomePage();
 	} );
