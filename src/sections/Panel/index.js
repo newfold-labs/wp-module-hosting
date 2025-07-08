@@ -92,10 +92,10 @@ const Panel = ( { constants, methods, Components } ) => {
 	};
 
 	const serverHits = hostingData?.[ 'server-hits' ] || {};
-	const serverHitsData = serverHits.last_n_days || [];
-	const totalHits = serverHits.total_hits || 0;
-	const hitsAllotted = serverHits.hits_allotted || 0;
-	const percentageChange = serverHits.percentage_change || 0;
+	const serverHitsData = serverHits?.last_n_days || [];
+	const totalHits = serverHits?.total_hits || 0;
+	const hitsAllotted = serverHits?.hits_allotted || 0;
+	const percentageChange = serverHits?.percentage_change || 0;
 	return (
 		<Root context={ { isRtl: false } }>
 			<BrandLogo width={ '160px' } className="nfd-mb-6" />
@@ -142,13 +142,18 @@ const Panel = ( { constants, methods, Components } ) => {
 									data={ hostingData[ 'malware-check' ] }
 									methods={ methods }
 								/>
-								<ServerHitsCard
-									data={ serverHitsData }
-									totalHits={ totalHits }
-									hitsAllotted={ hitsAllotted }
-									platFormUrl={ platFormUrl }
-									percentageChange={ percentageChange }
-								/>
+								{ Array.isArray( serverHitsData ) &&
+									serverHitsData.length > 0 && (
+										<ServerHitsCard
+											data={ serverHitsData }
+											totalHits={ totalHits }
+											hitsAllotted={ hitsAllotted }
+											platFormUrl={ platFormUrl }
+											percentageChange={
+												percentageChange
+											}
+										/>
+									) }
 								<CDNCard
 									platformUrl={ platFormUrl }
 									isAtomic={ isAtomic }

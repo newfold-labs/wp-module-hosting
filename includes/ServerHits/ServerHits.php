@@ -38,7 +38,9 @@ class ServerHits {
 	public function get_data() {
 		$customer_id = HUAPIHelper::get_customer_id();
 		if ( is_wp_error( $customer_id ) ) {
-			return $customer_id;
+			return array(
+				'error' => __( 'Failed to fetch customer id.', 'wp-module-hosting' ),
+			);
 		}
 
 		$endpoint = sprintf( '/v1/hosting/%s/server-hits?interval=30', $customer_id );
