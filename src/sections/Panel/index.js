@@ -15,6 +15,7 @@ import MalwareCheckCard from '../MalwareCheckCard';
 import NameserversCard from '../NameserversCard';
 import SSHLoginInfoCard from '../SSHLoginInfoCard';
 import CDNCard from '../CDNCard';
+import DiskSpaceCard from '../DiskSpaceCard';
 import DataRefreshInfo from '../DataRefreshInfo';
 import NotificationFeed from '../../components/NotificationFeed';
 import DataCenterCard from '../DataCenter';
@@ -179,6 +180,12 @@ const Panel = ( { constants, methods, Components } ) => {
 									phpVersion={ hostingData[ 'php-version' ] }
 									methods={ methods }
 									platformUrl={ platFormUrl }
+								/>
+							</div>
+							<div className="nfd-flex nfd-flex-col nfd-gap-6">
+								<DiskSpaceCard
+									diskSpace={ hostingData[ 'disk-space' ] }
+									methods={ methods }
 								/>
 							</div>
 						</div>
