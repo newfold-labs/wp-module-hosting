@@ -17,6 +17,7 @@ import SSHLoginInfoCard from '../SSHLoginInfoCard';
 import CDNCard from '../CDNCard';
 import DataRefreshInfo from '../DataRefreshInfo';
 import NotificationFeed from '../../components/NotificationFeed';
+import DataCenterCard from '../DataCenter';
 
 const Panel = ( { constants, methods, Components } ) => {
 	const [ hostingData, setHostingData ] = methods.useState( null );
@@ -164,6 +165,13 @@ const Panel = ( { constants, methods, Components } ) => {
 									platformUrl={ platFormUrl }
 									isAtomic={ isAtomic }
 								/>
+								{ isAtomic && (
+									<DataCenterCard
+										methods={ methods }
+										serverLocation={ hostingData['data-center'] }
+										platformUrl={ platFormUrl }
+									/>
+								) }
 								<NameserversCard
 									nameservers={ hostingData?.nameservers }
 								/>
