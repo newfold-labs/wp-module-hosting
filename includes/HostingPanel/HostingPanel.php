@@ -120,6 +120,7 @@ class HostingPanel {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'initialize_hosting_app' ) );
 		add_action( 'wp_login', array( $this, 'handle_wp_login' ), 10, 2 );
 		add_action( 'newfold_sso_success', array( $this, 'handle_sso_login' ), 10, 2 );
+		add_action( 'update_option_permalink_structure', array( $this, 'flush_cache' ), 10, 2 );
 	}
 
 	/**
