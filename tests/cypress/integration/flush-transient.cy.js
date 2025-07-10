@@ -1,5 +1,4 @@
 import {
-	deleteTransient,
 	getTransient,
 } from '../support/serverHelpers';
 import constants from '../fixtures/constants.json';
