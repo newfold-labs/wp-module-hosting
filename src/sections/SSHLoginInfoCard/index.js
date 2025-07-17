@@ -1,6 +1,6 @@
 import InfoActionCard from '../InfoActionCard';
 import getSSHLoginText from './getSSHLoginText';
-import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 const SSHLoginInfoCard = ( {
 	sshLoginInfo,
@@ -26,7 +26,7 @@ const SSHLoginInfoCard = ( {
 			infoText: text.sshKeysInfo,
 			actionText: text.manageKeysAction,
 			actionType: 'redirect',
-			actionUrl: getDeepLinkedPlatformUrl( 'advanced' ),
+			actionUrl: getDeepLinkedPlatformUrl( 'files' ),
 			id: 'nfd-hosting-manage-keys',
 		},
 		{
@@ -41,9 +41,14 @@ const SSHLoginInfoCard = ( {
 		},
 	];
 
-
-
-	return <InfoActionCard title={ text.title } items={ items } testId="ssh-login-info-card" testSSHLoginInfoAvailable={ items.length > 0 } />;
+	return (
+		<InfoActionCard
+			title={ text.title }
+			items={ items }
+			testId="ssh-login-info-card"
+			testSSHLoginInfoAvailable={ items.length > 0 }
+		/>
+	);
 };
 
 export default SSHLoginInfoCard;

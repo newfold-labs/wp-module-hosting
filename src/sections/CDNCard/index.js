@@ -81,7 +81,7 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 					? handlePurge
 					: () =>
 							window.open(
-								getDeepLinkedPlatformUrl( 'speed' ),
+								getDeepLinkedPlatformUrl( 'performance' ),
 								'_blank'
 							)
 			}
@@ -92,7 +92,7 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 				isEnabled
 					? () =>
 							window.open(
-								getDeepLinkedPlatformUrl( 'speed' ),
+								getDeepLinkedPlatformUrl( 'performance' ),
 								'_blank'
 							)
 					: null
