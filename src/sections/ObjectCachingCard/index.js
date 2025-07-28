@@ -30,7 +30,7 @@ const ObjectCachingCard = ( {
 		const hasSiteId = /\d+$/.test( platformUrl );
 		const baseUrl =
 			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
-		return methods.addUtmParams( baseUrl );
+		return window.NewfoldRuntime?.linkTracker?.addUtmParams( baseUrl ) || methods.addUtmParams( baseUrl );
 	};
 
 	const handleObjectCachingAction = async ( action ) => {
