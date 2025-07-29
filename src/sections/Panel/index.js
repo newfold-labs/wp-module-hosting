@@ -116,7 +116,7 @@ const Panel = ( { constants, methods, Components } ) => {
 							<Button
 								onClick={ () =>
 									window.open(
-										methods.addUtmParams( platFormUrl ),
+                                        window.NewfoldRuntime?.linkTracker?.addUtmParams( platFormUrl ) ||  methods.addUtmParams( platFormUrl ),
 										'_blank'
 									)
 								}

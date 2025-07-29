@@ -22,12 +22,12 @@ const CDNCard = ( { data, methods, platformUrl, isAtomic } ) => {
 
 	const getDeepLinkedPlatformUrl = ( path = '' ) => {
 		if ( isAtomic ) {
-			return methods.addUtmParams( platformUrl );
+			return window.NewfoldRuntime?.linkTracker?.addUtmParams( platformUrl ) || methods.addUtmParams( platformUrl );
 		}
 		const hasSiteId = /\d+$/.test( platformUrl );
 		const baseUrl =
 			hasSiteId && path ? `${ platformUrl }/${ path }` : platformUrl;
-		return methods.addUtmParams( baseUrl );
+		return window.NewfoldRuntime?.linkTracker?.addUtmParams( baseUrl ) || methods.addUtmParams( baseUrl );
 	};
 
 	const handlePurge = async () => {
