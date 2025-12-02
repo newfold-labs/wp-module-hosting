@@ -32,7 +32,7 @@
         "wp-cli/wp-cli": "^2.12"
     },
     "require": {
-        "newfold-labs/wp-module-data": "^2.8"
+        "newfold-labs/wp-module-data": "^2.9"
     },
     "config": {
         "allow-plugins": {
