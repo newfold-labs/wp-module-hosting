@@ -20,7 +20,7 @@
     "recharts": "^3.5.1"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/forms": "^0.5.11",
     "@wordpress/scripts": "^31.1.0",
     "autoprefixer": "^10.4.22",
     "css-minimizer-webpack-plugin": "^7.0.2",
