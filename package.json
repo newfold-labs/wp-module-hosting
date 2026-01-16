@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.11",
-    "@wordpress/scripts": "^31.2.0",
+    "@wordpress/scripts": "^31.3.0",
     "autoprefixer": "^10.4.23",
     "css-minimizer-webpack-plugin": "^7.0.4",
     "postcss": "^8.5.6",
