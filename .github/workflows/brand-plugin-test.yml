@@ -26,7 +26,7 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> "$GITHUB_OUTPUT"
         id: extract_branch
 
   bluehost:
@@ -35,7 +35,6 @@ jobs:
     uses: newfold-labs/workflows/.github/workflows/module-plugin-test.yml@main
     permissions:
       contents: read # Required so the called workflow token can clone private plugin and module repos via checkout/composer (same org).
-    timeout-minutes: 120
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
