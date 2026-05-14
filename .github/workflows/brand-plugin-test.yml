@@ -19,6 +19,7 @@ jobs:
     name: Setup
     runs-on: ubuntu-latest
     permissions: {} # Runs only bash using env/context; no checkout or GitHub API token use.
+    timeout-minutes: 30
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
@@ -34,6 +35,7 @@ jobs:
     uses: newfold-labs/workflows/.github/workflows/module-plugin-test.yml@main
     permissions:
       contents: read # Required so the called workflow token can clone private plugin and module repos via checkout/composer (same org).
+    timeout-minutes: 120
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
