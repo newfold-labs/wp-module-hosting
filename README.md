@@ -6,6 +6,9 @@ height="42" />
 # WordPress Hosting Module
 A Newfold module that manages the Hosting panel on the plugin page and serves as middleware for interacting with hosting services.
 
+# Module ARCHIVED
+> [!CAUTION]
+> Note: This module served as a temporary solution to provide quick access to hosting settings while the updated hosting experience was under development. Following the release of the complete hosting portal, this module has been removed from the plugin and archived.
 
 ## Critical Paths
 
